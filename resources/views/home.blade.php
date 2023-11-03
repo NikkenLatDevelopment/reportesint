@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <a href="/getDataInactivos" target="_new" class="btn btn bg-gradient-success w-100 mt-4 mb-0">
+                        <a href="javascript:void(0)" target="_new" class="btn btn bg-gradient-success w-100 mt-4 mb-0" onclick="getReportInactivos()">
                             <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             Gnerar reporte
                         </a>
