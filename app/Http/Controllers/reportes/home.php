@@ -19,6 +19,12 @@ class home extends Controller{
         return view('home');
     }
 
+    public function getDataInactivosTable(){
+        $coreApp = new coreApp();
+        $data['data'] = $coreApp->execSQLQuery('EXEC PLAN_INFLUENCIA_MK.dbo.sgtPerfecto_ReporteInternoRegresaACasa;', 'SQL173');
+        return $data;
+    }
+
     public function getDataInactivos(){
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();

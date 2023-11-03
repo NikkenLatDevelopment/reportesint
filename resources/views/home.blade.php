@@ -125,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-md-12 mb-4">
+            <div class="col-md-12 mb-4">
                 <div class="card">
                     <div class="table-responsive pb-4 mt-3">
                         <table class="table align-items-center mb-0 text-center" id="inactivosTable">
@@ -145,7 +145,7 @@
                         </table>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>        
 
         <div class="row mt-4">
