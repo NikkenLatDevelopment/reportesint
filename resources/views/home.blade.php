@@ -127,7 +127,7 @@
             </div>
             <div class="col-md-12 mb-4">
                 <div class="card">
-                    <div class="table-responsive pb-4 mt-3">
+                    <div class="table-responsive pb-4 mt-3" id="inactivosDiv">
                         <table class="table align-items-center mb-0 text-center" id="inactivosTable">
                             <thead>
                                 <tr>

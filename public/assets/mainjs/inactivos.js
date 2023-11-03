@@ -1,5 +1,22 @@
 function getReportInactivos(){
     validateDomElement($("#inactivosTable"), function() {
+        $("#inactivosDiv").empty();
+        var html = '<table class="table align-items-center mb-0 text-center" id="inactivosTable">' +
+            '<thead>' +
+                '<tr>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Código</th>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Nombre</th>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Rango</th>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">País</th>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Telefono</th>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Correo</th>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">VP Noviembre</th>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Código Patrocinador</th>' +
+                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Nombre Patrocinador</th>' +
+                '</tr>' +
+            '</thead>' +
+        '</table>';
+        $("#inactivosDiv").html(html);
         $("#inactivosTable").DataTable({
             destroy: true,
             lengthChange: false,
