@@ -1,0 +1,51 @@
+.navbar-vertical.navbar-expand-xs .navbar-collapse {
+    height: auto !important;
+}
+
+.table-responsive .page-item.active .page-link {
+    background-color: #fd6060 !important;
+    border: 0 !important;
+    color: #000 !important;
+}
+
+.table-responsive ul.pagination li a:hover:not(.active) {
+    background-color: rgb(252, 44, 44) !important;
+    border: 0 !important;
+    color: #000;
+}
+
+.badgeError {
+    background-color: rgb(248, 59, 59);
+    color: rgb(0, 0, 0);
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.badgeSuccess {
+    background-color: rgb(4, 231, 106);
+    color: rgb(0, 0, 0);
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.badgeWarning {
+    background-color: rgb(255, 151, 32);
+    color: rgb(0, 0, 0);
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.br-25{
+    border-radius: 25px !important;
+}
+
+.myAccountForm .form-control{
+    padding: 10px !important;
+}
+
+.myAccountForm .form-control:focus, #myOrdersTable_filter input:focus {
+    border-color: #495057 !important;
+}
