@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <a href="javascript:;" class="btn btn bg-gradient-success w-100 mt-4 mb-0">
+                        <a href="javascript:;" class="btn btn bg-gradient-success w-100 mt-4 mb-0" onclick="getReportInactivos()">
                             <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                             Gnerar reporte
                         </a>
@@ -142,21 +142,6 @@
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Nombre Patrocinador</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @for ($i = 0; $i < 20; $i++)
-                                    <tr>
-                                        <td class="text-xxs">9008203</td>
-                                        <td class="text-xxs">AYALA RODRIGUEZ JULISSA</td>
-                                        <td class="text-xxs">DIR</td>
-                                        <td class="text-xxs">MEX</td>
-                                        <td class="text-xxs">4443314967</td>
-                                        <td class="text-xxs">julaayalar@gmail.com</td>
-                                        <td class="text-xxs">0</td>
-                                        <td class="text-xxs">469703</td>
-                                        <td class="text-xxs">SOLTERO CURIEL, JOSE ARTURO</td>
-                                    </tr>
-                                @endfor
-                            </tbody>
                         </table>
                     </div>
                 </div>

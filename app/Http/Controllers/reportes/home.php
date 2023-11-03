@@ -13,6 +13,7 @@ class home extends Controller{
 
     public function getDataInactivos(){
         $coreApp = new coreApp();
-        $data = $coreApp->execSQLQuery("SELECT 0 AS totales;", "SQL173");
+        $data['data'] = $coreApp->execSQLQuery("EXEC PLAN_INFLUENCIA_MK.dbo.sgtPerfecto_ReporteInternoRegresaACasa;", "SQL173");
+        return $data;
     }
 }
