@@ -4,7 +4,7 @@ function getReportInactivos(){
             destroy: true,
             lengthChange: false,
             info: false,
-            ajax: 'getDataInactivosTable',
+            ajax: 'https://services.nikken.com.mx/api_service?s=getDataInactivosTable',
             dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5 mb-md-0 mb-5"i><"col-md-7"p>>> >',
             columns: [
                 { data: 'codAsociado', className: 'text-xxs' },
