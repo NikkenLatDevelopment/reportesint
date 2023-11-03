@@ -13,7 +13,7 @@ function getReportInactivos(){
                 { data: 'pais', className: 'text-xxs' },
                 { data: 'telefono', className: 'text-xxs' },
                 { data: 'E_mail', className: 'text-xxs' },
-                { 
+                {  
                     data: 'vpNoviembre2023',
                     className: 'text-xxs',
                     render: function(data, type, row){
