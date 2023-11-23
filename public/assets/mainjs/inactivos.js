@@ -57,3 +57,51 @@ function getReportInactivos(){
         });
     });
 }
+
+function getMplinksData(){
+    var date_ini = $("#date_ini").val();
+    var date_end = $("#date_end").val();
+    if(date_end.trim() == "" || date_ini.trim() == ""){
+    alert('Ups', 'Fechas requeridas', 'error');
+    }
+    else{
+        $("#getMplinksTable").DataTable({
+            destroy: true,
+            lengthChange: false,
+            info: false,
+            ajax: '/getMplinksData?date_ini=' + date_ini + '&date_end=' + date_end,
+            dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5 mb-md-0 mb-5"i><"col-md-7"p>>> >',
+            columns: [
+                { data: 'id', className: 'text-xxs' },
+                { data: 'sale_id', className: 'text-xxs' },
+                { data: 'pais', className: 'text-xxs' },
+                { data: 'payment_method', className: 'text-xxs' },
+                { data: 'payment_provider', className: 'text-xxs' },
+                {  
+                    data: 'payment_amount',
+                    className: 'text-xxs',
+                    render: function(data, type, row){
+                        var payment_amount = row.payment_amount;
+                        return 's./ ' + formatMoney(payment_amount, 0);
+                    }
+                },
+                { data: 'status', className: 'text-xxs' },
+                { data: 'created_at', className: 'text-xxs' },
+                { data: 'updated_at', className: 'text-xxs' },
+            ],
+            language: {
+                url: window.location.pathname + 'assets/plugins/table/datatable/es-ES.json',
+            },
+            buttons: {
+                buttons: [
+                    { 
+                        extend: 'excel', 
+                        className: 'btn bg-gradient-primary', 
+                        text:"<img src='https://services.nikken.com.mx/retos/img/excel.png' width='15px'></img> Exportar a Excel",
+                        title: 'Links de Pago Generados con Mercado Pago Perú',
+                    },
+                ]
+            },
+        });
+    }
+}

@@ -86,4 +86,16 @@ class home extends Controller{
             ]
         );
     }
+
+    public function mplinks(){
+        return view('MercadoPago.mplinks');
+    }
+
+    public function getMplinksData(){
+        $coreApp = new coreApp();
+        $data['data'] = $coreApp->execMySQLQuery("SELECT id, sale_id, 'Perú' AS pais, payment_method, payment_provider, payment_amount, status, created_at, updated_at
+        FROM sales_information_payments
+        WHERE payment_method = 'MercadoPago - Link de Pago' AND created_at BETWEEN '2023-11-01' AND NOW();", 'TVMySQL');
+        return $data;
+    }
 }
