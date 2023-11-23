@@ -92,10 +92,12 @@ class home extends Controller{
     }
 
     public function getMplinksData(){
+        $date_ini = request()->date_ini;
+        $date_end = request()->date_end;
         $coreApp = new coreApp();
         $data['data'] = $coreApp->execMySQLQuery("SELECT id, sale_id, 'Perú' AS pais, payment_method, payment_provider, payment_amount, status, created_at, updated_at
         FROM sales_information_payments
-        WHERE payment_method = 'MercadoPago - Link de Pago' AND created_at BETWEEN '2023-11-01' AND NOW();", 'TVMySQL');
+        WHERE payment_method = 'MercadoPago - Link de Pago' AND created_at BETWEEN '$date_ini' AND '$date_end';", 'TVMySQL');
         return $data;
     }
 }
