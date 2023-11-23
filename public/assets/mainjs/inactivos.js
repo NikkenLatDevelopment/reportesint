@@ -90,7 +90,7 @@ function getMplinksData(){
                 { data: 'updated_at', className: 'text-xxs' },
             ],
             language: {
-                url: window.location.pathname + 'assets/plugins/table/datatable/es-ES.json',
+                url: window.location.pathname + '../assets/plugins/table/datatable/es-ES.json',
             },
             buttons: {
                 buttons: [
