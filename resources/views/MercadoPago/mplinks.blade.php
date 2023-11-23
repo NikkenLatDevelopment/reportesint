@@ -71,7 +71,7 @@
                         <div class="form-group">
                             <input class="form-control" type="date" id="date_end">
                         </div>
-                        <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0">
+                        <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0" onclick="getMplinksData()">
                             Generar Reporte
                             <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
                         </a>
