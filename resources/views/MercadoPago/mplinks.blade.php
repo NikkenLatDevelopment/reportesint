@@ -30,6 +30,14 @@
                         <span class="nav-link-text ms-1">Mercado Pago Perú</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="VP_VGP_Inactivos">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">VP_VGP_Inactivos</span>
+                    </a>
+                </li>
             </ul>
         </div>
         
@@ -39,12 +47,12 @@
 @section('content')
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="card">
                     <div class="card-header text-center pt-4 pb-3">
                         <span class="badge rounded-pill bg-light text-dark">Mercado Pago Links</span>
                         <h1 class="font-weight-bold mt-2">
-                            <img src="https://1000marcas.net/wp-content/uploads/2023/01/Mercado-Pago-Logo.png" width="90%">
+                            <img src="https://storage.googleapis.com/proyectos_latam/reportes/mercadopago-nuevo-logo-12208FF614-seeklogo_com.webp" width="90%">
                         </h1>
                     </div>
                     <div class="card-body text-lg-left text-center pt-0">

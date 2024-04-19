@@ -30,6 +30,14 @@
                         <span class="nav-link-text ms-1">Mercado Pago Perú</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="mplinks">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">VP_VGP_Inactivos</span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link " href="../pages/billing.html">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

@@ -105,3 +105,37 @@ function getMplinksData(){
         });
     }
 }
+
+
+function setMonthsSlct(slct, anios){
+    var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    $('#' + slct).empty(); // Asegúrate de que el select esté vacío antes de agregar opciones.
+    var today = new Date();
+    var currentYear = today.getFullYear();
+    var currentMonth = today.getMonth() + 1; // getMonth() es 0-index, por lo tanto +1.
+
+    var startYear = currentYear - parseInt(anios);
+    var currentValue = currentYear.toString() + (currentMonth < 10 ? '0' : '') + currentMonth.toString();
+
+    for (var year = currentYear; year >= startYear; year--) {
+        var startMonth = (year === currentYear) ? currentMonth : 12; // Comenzar en el mes actual si es el año en curso.
+        for (var month = startMonth; month > 0; month--) { // Decrementa el mes.
+            var formattedMonth = month < 10 ? '0' + month : month.toString();
+            var value = year.toString() + formattedMonth;
+            var text = monthNames[month - 1] + ' ' + year;
+            var option = $('<option>', {
+                value: value,
+                text: text
+            });
+
+            // Añade la opción al principio del select para que estén en orden descendente.
+            $('#' + slct).prepend(option);
+
+            // Si es el valor del mes y año actual, lo selecciona por defecto.
+            if (value === currentValue) {
+                option.prop('selected', true);
+            }
+        }
+    }
+}
