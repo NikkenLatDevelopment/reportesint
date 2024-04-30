@@ -102,15 +102,20 @@
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Distributor_Status</th>
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Email</th>
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Mobile_Number</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Pais</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Alternative_number</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Country</th>
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Addres_1</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">SignupDate</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">vp_202312</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">vgp_202312</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">vp_202401</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">vgp_202401</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">vp_202402</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">vgp_202402</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Addres_2</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Addres_3</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">State_ID</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Postal_Code</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">City</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VP_Dic</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VGP_DIC</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VP_Ene</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VGP_Ene</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VP_Feb</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VGP_Feb</th>
                                 </tr>
                             </thead>
                         </table>
