@@ -184,7 +184,7 @@
                         extend: 'excel', 
                         className: 'btn bg-gradient-primary', 
                         text:"<img src='https://services.nikken.com.mx/retos/img/excel.png' width='15px'></img> Exportar a Excel",
-                        title: 'Links de Pago Generados con Mercado Pago Perú',
+                        title: 'Inactivos VP y VGP',
                     },
                 ]
             },
