@@ -47,7 +47,7 @@
 @section('content')
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="card">
                     <div class="card-header text-center pt-4 pb-3">
                         <h1 class="font-weight-bold mt-2">
@@ -64,25 +64,6 @@
                             <select class="form-control " aria-label="Default select" id="periodSlct" name="periodSlct"></select>
                         </div>
                         <hr>
-                        <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                            <div>
-                                <span class="ps-3">País</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control " aria-label="Default select" id="countySlct" name="countySlct">
-                                <option value="1">Colombia </option>
-                                <option value="2">México</option>
-                                <option value="3">Perú</option>
-                                <option value="4">Ecuador</option>
-                                <option value="5">Panamá</option>
-                                <option value="6">Guatemala</option>
-                                <option value="7">El Salvador</option>
-                                <option value="8">Costa Rica</option>
-                                <option value="10">Chile</option>
-                                <option value="0">Nikken Latinoamérica</option>
-                            </select>
-                        </div>
                         <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0" onclick="VP_VGP_InactivosTable()">
                             Generar Reporte
                             <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
@@ -102,20 +83,15 @@
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Distributor_Status</th>
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Email</th>
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Mobile_Number</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Alternative_number</th>
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Country</th>
                                     <th class="text-uppercase text-xxs font-weight-bolder text-black">Addres_1</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Addres_2</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Addres_3</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">State_ID</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Postal_Code</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">City</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VP_Dic</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VGP_DIC</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VP_Ene</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VGP_Ene</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VP_Feb</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">VGP_Feb</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Signup_Date</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black" id="vp_1">___</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black" id="vgp_1">___</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black" id="vp_2">___</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black" id="vgp_2">___</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black" id="vp_3">___</th>
+                                    <th class="text-uppercase text-xxs font-weight-bolder text-black" id="vgp_3">___</th>
                                 </tr>
                             </thead>
                         </table>
@@ -133,12 +109,12 @@
 
     function VP_VGP_InactivosTable(){
         var periodSlct = $("#periodSlct").val();
-        var countySlct = $("#countySlct").val();
         $("#VP_VGP_Inactivosreport").DataTable({
             destroy: true,
             lengthChange: false,
             info: false,
-            ajax: '/VP_VGP_InactivosData?periodSlct=' + periodSlct + '&countySlct=' + countySlct,
+            deferRender: true,
+            ajax: '/VP_VGP_InactivosData?periodSlct=' + periodSlct,
             dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5 mb-md-0 mb-5"i><"col-md-7"p>>> >',
             columns: [
                 { data: 'AssociateID', className: 'text-xxs' },
@@ -150,12 +126,12 @@
                 { data: 'Pais', className: 'text-xxs' },
                 { data: 'Addres_1', className: 'text-xxs' },
                 { data: 'SignupDate', className: 'text-xxs' },
-                { data: 'vp_202312', className: 'text-xxs' },
-                { data: 'vgp_202312', className: 'text-xxs' },
-                { data: 'vp_202401', className: 'text-xxs' },
-                { data: 'vgp_202401', className: 'text-xxs' },
-                { data: 'vp_202402', className: 'text-xxs' },
-                { data: 'vgp_202402', className: 'text-xxs' },
+                { data: 'vp_1', className: 'text-xxs' },
+                { data: 'vgp_1', className: 'text-xxs' },
+                { data: 'vp_2', className: 'text-xxs' },
+                { data: 'vgp_2', className: 'text-xxs' },
+                { data: 'vp_3', className: 'text-xxs' },
+                { data: 'vgp_3', className: 'text-xxs' },
             ],
             language: {
                 url: 'https://reportesint.nikkenlatam.com//assets/plugins/table/datatable/es-ES.json',
@@ -171,6 +147,30 @@
                 ]
             },
         });
+        setPeriodsTable(periodSlct);
+    }
+
+    function setPeriodsTable(periodo){
+        var txtMeses = {
+            "01": "Enero",
+            "02": "Febrero",
+            "03": "Marzo",
+            "04": "Abril",
+            "05": "Mayo",
+            "06": "Junio",
+            "07": "Julio",
+            "08": "Agosto",
+            "09": "Septiembre",
+            "10": "Octubre",
+            "11": "Noviembre",
+            "12": "Diciembre",
+        }
+        var periodo = String(periodo);
+        var anio = periodo.substr(0,4);
+        var mes = periodo.substr(4,5);
+        $("#vp_1").text(txtMeses[mes] + " del " + anio);
+        $("#vp_2").text(txtMeses[mes] + " del " + anio);
+        $("#vp_3").text(txtMeses[mes] + " del " + anio);
     }
 </script>
 @stop

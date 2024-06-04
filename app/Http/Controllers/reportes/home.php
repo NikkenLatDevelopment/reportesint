@@ -44,10 +44,14 @@ class home extends Controller{
     }
 
     public function VP_VGP_InactivosData(){
-        $periodo = request()->periodSlct;
-        $pais = request()->countySlct;
         $coreApp = new coreApp();
-        $data['data'] = $coreApp->execMySQLQuery("EXEC LAT_MyNIKKEN.dbo.VP_VGP_Inactivos $periodo;", 'SQL73');
-        return $data;
+        $periodo = request()->periodSlct;
+        $key = sprintf('VP_VGP_Inactivos_%s', $periodo);
+        $timeCaching = 3600; ##86400 = 24 horas, 43200 = 12 horas, 21600 = 6 horas, 14400 = 4 horas, 7200 = 2 horas, 4680 = 1 hora 30 minutos, 3600 = 1 hora
+
+        return cache()->remember($key, $timeCaching, static function () use ($coreApp, $periodo) {
+            $data['data'] = $coreApp->execSQLQuery("EXEC LAT_MyNIKKEN.dbo.VP_VGP_Inactivos $periodo;", "SQL73");
+            return $data;
+        });
     }
 }
