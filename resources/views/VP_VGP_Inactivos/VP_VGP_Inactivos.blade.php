@@ -64,7 +64,7 @@
                             <select class="form-control " aria-label="Default select" id="periodSlct" name="periodSlct"></select>
                         </div>
                         <hr>
-                        <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0" onclick="VP_VGP_InactivosTable(); setPeriodsTable($('#periodSlct').val());">
+                        <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0" onclick="VP_VGP_InactivosTable();">
                             Generar Reporte
                             <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
                         </a>
@@ -126,12 +126,54 @@
                 { data: 'Pais', className: 'text-xxs' },
                 { data: 'Addres_1', className: 'text-xxs' },
                 { data: 'SignupDate', className: 'text-xxs' },
-                { data: 'vp_1', className: 'text-xxs' },
-                { data: 'vgp_1', className: 'text-xxs' },
-                { data: 'vp_2', className: 'text-xxs' },
-                { data: 'vgp_2', className: 'text-xxs' },
-                { data: 'vp_3', className: 'text-xxs' },
-                { data: 'vgp_3', className: 'text-xxs' },
+                { 
+                    data: 'vp_1',
+                    className: 'text-xxs',
+                    render: function(data, type, row){
+                        var vp_1 = row.vp_1;
+                        return "<b>" + formatMoney(vp_1, 0) + "</b>";
+                    }
+                },
+                { 
+                    data: 'vgp_1',
+                    className: 'text-xxs',
+                    render: function(data, type, row){
+                        var vgp_1 = row.vgp_1;
+                        return "<b>" + formatMoney(vgp_1, 0) + "</b>";
+                    }
+                },
+                { 
+                    data: 'vp_2',
+                    className: 'text-xxs',
+                    render: function(data, type, row){
+                        var vp_2 = row.vp_2;
+                        return "<b>" + formatMoney(vp_2, 0) + "</b>";
+                    }
+                },
+                { 
+                    data: 'vgp_2',
+                    className: 'text-xxs',
+                    render: function(data, type, row){
+                        var vgp_2 = row.vgp_2;
+                        return "<b>" + formatMoney(vgp_2, 0) + "</b>";
+                    }
+                },
+                { 
+                    data: 'vp_3',
+                    className: 'text-xxs',
+                    render: function(data, type, row){
+                        var vp_3 = row.vp_3;
+                        return "<b>" + formatMoney(vp_3, 0) + "</b>";
+                    }
+                },
+                { 
+                    data: 'vgp_3',
+                    className: 'text-xxs',
+                    render: function(data, type, row){
+                        var vgp_3 = row.vgp_3;
+                        return "<b>" + formatMoney(vgp_3, 0) + "</b>";
+                    }
+                },
             ],
             language: {
                 url: 'https://reportesint.nikkenlatam.com//assets/plugins/table/datatable/es-ES.json',
@@ -146,6 +188,9 @@
                     },
                 ]
             },
+            drawCallback: function (settings) {
+                setPeriodsTable(periodSlct);
+            }
         });
     }
 
