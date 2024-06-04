@@ -64,7 +64,7 @@
                             <select class="form-control " aria-label="Default select" id="periodSlct" name="periodSlct"></select>
                         </div>
                         <hr>
-                        <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0" onclick="VP_VGP_InactivosTable()">
+                        <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0" onclick="VP_VGP_InactivosTable(); setPeriodsTable($('#periodSlct').val());">
                             Generar Reporte
                             <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
                         </a>
@@ -147,7 +147,6 @@
                 ]
             },
         });
-        setPeriodsTable(periodSlct);
     }
 
     function setPeriodsTable(periodo){
