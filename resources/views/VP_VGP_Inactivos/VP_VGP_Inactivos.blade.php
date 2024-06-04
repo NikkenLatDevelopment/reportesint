@@ -152,25 +152,49 @@
 
     function setPeriodsTable(periodo){
         var txtMeses = {
-            "01": "Enero",
-            "02": "Febrero",
-            "03": "Marzo",
-            "04": "Abril",
-            "05": "Mayo",
-            "06": "Junio",
-            "07": "Julio",
-            "08": "Agosto",
-            "09": "Septiembre",
-            "10": "Octubre",
-            "11": "Noviembre",
-            "12": "Diciembre",
+        "01": "Enero",
+        "02": "Febrero",
+        "03": "Marzo",
+        "04": "Abril",
+        "05": "Mayo",
+        "06": "Junio",
+        "07": "Julio",
+        "08": "Agosto",
+        "09": "Septiembre",
+        "10": "Octubre",
+        "11": "Noviembre",
+        "12": "Diciembre",
+        "1": "Enero",
+        "2": "Febrero",
+        "3": "Marzo",
+        "4": "Abril",
+        "5": "Mayo",
+        "6": "Junio",
+        "7": "Julio",
+        "8": "Agosto",
+        "9": "Septiembre",
         }
         var periodo = String(periodo);
         var anio = periodo.substr(0,4);
         var mes = periodo.substr(4,5);
-        $("#vp_1").text(txtMeses[mes] + " del " + anio);
-        $("#vp_2").text(txtMeses[mes] + " del " + anio);
-        $("#vp_3").text(txtMeses[mes] + " del " + anio);
+        $("#vp_1").text("VP " + txtMeses[mes] + " del " + anio);
+        $("#vgp_1").text("VGP " + txtMeses[mes] + " del " + anio);
+
+        var date = new Date(anio, mes - 1);
+        date.setMonth(date.getMonth() - 1);
+        var previousYear = date.getFullYear();
+        var previousMonth = date.getMonth() + 1;
+
+        $("#vp_2").text("VP " + txtMeses[previousMonth] + " del " + previousYear);
+        $("#vgp_2").text("VGP " + txtMeses[previousMonth] + " del " + previousYear);
+
+        var date = new Date(anio, mes - 1);
+        date.setMonth(date.getMonth() - 2);
+        var previousYear = date.getFullYear();
+        var previousMonth = date.getMonth() + 1;
+
+        $("#vp_3").text("VP " + txtMeses[previousMonth] + " del " + previousYear);
+        $("#vgp_3").text("VGP " + txtMeses[previousMonth] + " del " + previousYear);
     }
 </script>
 @stop
