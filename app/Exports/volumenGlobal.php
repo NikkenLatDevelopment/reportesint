@@ -24,7 +24,7 @@ class volumenGlobal implements WithMultipleSheets, Responsable{
     use Exportable;
 
     private $fileName = "Reconocimientos | Volumen LATAM";
-    private $writerType = \Maatwebsite\Excel\Excel::XLSX;
+    private $writerType = \Maatwebsite\Excel\Excel::CSV;
     private $headers = [
         'Content-Type' => 'text/csv',
     ];
