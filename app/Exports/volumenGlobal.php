@@ -94,11 +94,9 @@ class MyFirstSheet implements FromCollection, WithTitle, WithHeadings, WithStyle
             AfterSheet::class => function(AfterSheet $event) {
                 $event->sheet->setCellValue('A1', 'Reconocimientos | Volumen LATAM | Fecha de actualización: ' . Date('Y-m-d H:i:s'));
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
-                $event->sheet->mergeCells('A1:L1');
 
                 $event->sheet->setCellValue('A2', 'Solo contiene volumen de la unidad de mercado LATINOAMÉRICA');
                 $event->sheet->getStyle('A2')->getFont()->setBold(true);
-                $event->sheet->mergeCells('A2:L2');
             },
         ];
     }

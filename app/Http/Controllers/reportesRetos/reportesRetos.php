@@ -25,6 +25,7 @@ class reportesRetos extends Controller{
         $coreApp = new coreApp();
 
         $data = $coreApp->execSQLQuery("SELECT Associateid, AssociateName,Rango, Pais, PV AS 'VP' ,GV AS 'VGP' ,OV AS 'VO',QOVOPL AS 'VO_LDP',QOVOPSL AS 'VO_LDPyS',Period AS 'Periodo',Sponsorid, SponsorName,SponsorPais, AssociateType, Estatus, estado FROM [LAT_MyNIKKEN].dbo.VolumeGlob with(nolock) WHERE Period = $periodo AND ltrim(rtrim(associateid)) LIKE '%03' AND associatetype=100", 'SQL173');
-        return new volumenGlobal($data);
+        // return new volumenGlobal($data);
+        return Excel::streamDownload(new volumenGlobal($data), 'volumen_global.csv');
     }
 }
