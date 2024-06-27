@@ -16,3 +16,6 @@ Route::get('VP_VGP_InactivosData', "reportes\home@VP_VGP_InactivosData");
 
 ## Reportes Retos Especiales Carolina
 Route::get('reportesRetos', 'reportesRetos\reportesRetos@reportesRetos');
+
+Route::get('reportVolGlobal', 'reportesRetos\reportesRetos@reportVolGlobal');
+
