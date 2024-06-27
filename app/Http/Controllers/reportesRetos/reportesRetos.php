@@ -23,7 +23,8 @@ class reportesRetos extends Controller{
     public function reportVolGlobal(){
         $periodo = request()->periodo;
         $coreApp = new coreApp();
-        $data = $coreApp->execSQLQuery("SELECT top 130000 Associateid, AssociateName,Rango, Pais, PV AS 'VP' ,GV AS 'VGP' ,OV AS 'VO',QOVOPL AS 'VO_LDP',QOVOPSL AS 'VO_LDPyS',Period AS 'Periodo',Sponsorid, SponsorName,SponsorPais, AssociateType, Estatus,estado FROM [LAT_MyNIKKEN].dbo.VolumeGlob with(nolock) WHERE Period=$periodo AND ltrim(rtrim(associateid)) LIKE '%03' AND associatetype=100", 'SQL173');
+        $data = $coreApp->execSQLQuery("SELECT top 130000 Associateid, AssociateName,Rango, Pais, PV AS 'VP' ,GV AS 'VGP' ,OV AS 'VO',QOVOPL AS 'VO_LDP',QOVOPSL AS 'VO_LDPyS',Period AS 'Periodo',Sponsorid, SponsorName,SponsorPais, AssociateType, Estatus, estado FROM [LAT_MyNIKKEN].dbo.VolumeGlob with(nolock) WHERE Period=$periodo AND ltrim(rtrim(associateid)) LIKE '%03' AND associatetype=100", 'SQL173');
+        return $data;
         return new volumenGlobal($data);
     }
 }
