@@ -51,13 +51,10 @@ class MyFirstSheet implements FromIterator, WithTitle, WithHeadings, WithStyles,
         $this->data = $data;
     }
 
-    public function iterator(): \Traversable
+    public function iterator(): \Iterator
     {
-        return LazyCollection::make(function () {
-            foreach ($this->data as $row) {
-                yield $row;
-            }
-        });
+        // Using ArrayIterator to ensure compatibility with FromIterator
+        return new \ArrayIterator($this->data);
     }
 
     public function title(): string
