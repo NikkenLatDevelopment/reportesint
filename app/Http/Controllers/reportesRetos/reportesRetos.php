@@ -8,6 +8,7 @@ use App\Http\Controllers\coreApp;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\reportCVEmprendedor;
 use App\Exports\volumenGlobal;
+use App\Exports\posibleAvance;
 
 class reportesRetos extends Controller{
     public function reportesRetos(){
@@ -28,7 +29,7 @@ class reportesRetos extends Controller{
         return Excel::download(new volumenGlobal($data), 'volumen_global.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function posibleAvance(){
+    public function posibleAvanceData(){
         // $periodo = request()->periodo;
         $coreApp = new coreApp();
         ini_set('memory_limit', '2048M');
