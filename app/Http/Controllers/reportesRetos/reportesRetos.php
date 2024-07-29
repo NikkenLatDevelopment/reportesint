@@ -52,6 +52,6 @@ class reportesRetos extends Controller{
         ini_set('memory_limit', '2048M');
         $data = $coreApp->execSQLQuery("SELECT Associateid, AssociateName, Rango, Email, Telefono, Estado, Pais, Fecha_Incorp, VP_Mes, Periodo, Unidades_VentaDirecta, Unidades_PorInfluencer, Transformado, TotalUnidades, Total_Transfor_Mokuteki, Total_Incorpo_Influencer, Cumple_Kinya, kinya_PorVenta, kinya_PorInfluencia, Sponsorid, SponsorName, SponsorPais, Estatus 
         FROM RETOS_ESPECIALES..Reporte_Kinya_Historic WHERE Periodo BETWEEN $periodo AND  $periodo2 ORDER BY Periodo DESC,TotalUnidades DESC", 'SQL173');
-        return Excel::download(new kinyaHistoricData($data), 'Reconocimientos | KinYa! (Histórico).csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new kinyaHistoric($data), 'Reconocimientos | KinYa! (Histórico).csv', \Maatwebsite\Excel\Excel::CSV);
     }
 }
