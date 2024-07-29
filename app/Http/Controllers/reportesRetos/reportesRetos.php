@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\reportCVEmprendedor;
 use App\Exports\volumenGlobal;
 use App\Exports\posibleAvance;
+use App\Exports\kinyaHistoric;
 
 class reportesRetos extends Controller{
     public function reportesRetos(){
@@ -39,10 +40,18 @@ class reportesRetos extends Controller{
 
         $coreApp = new coreApp();
         ini_set('memory_limit', '2048M');
-
-        return "SELECT Associateid,AssociateName, Rango,Pais,Period,QPV,QGV,QOV,QOVOPL,QOVOPSL,CASE WHEN Avance>0 THEN 'SI' ELSE 'NO' END as Avance,TipoAvance,QPV_Faltante,QGV_Faltante,QOV_Faltante,QOVOPL_Faltante,QOVOPSL_Faltante,Posible,Sponsorid, SponsorName, SponsorPais FROM LAT_MyNIKKEN.dbo.Posibles_AvancesLAT WHERE posible='$rango' AND period = $periodo $and";
-
         $data = $coreApp->execSQLQuery("SELECT Associateid,AssociateName, Rango,Pais,Period,QPV,QGV,QOV,QOVOPL,QOVOPSL,CASE WHEN Avance>0 THEN 'SI' ELSE 'NO' END as Avance,TipoAvance,QPV_Faltante,QGV_Faltante,QOV_Faltante,QOVOPL_Faltante,QOVOPSL_Faltante,Posible,Sponsorid, SponsorName, SponsorPais FROM LAT_MyNIKKEN.dbo.Posibles_AvancesLAT WHERE posible='$rango' AND period = $periodo $and", 'SQL173');
         return Excel::download(new posibleAvance($data), 'Reconocimientos - Posibles avances de rango.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function kinyaHistoricData(){
+        $periodo = request()->periodo;
+        $periodo2 = request()->periodo2;
+
+        $coreApp = new coreApp();
+        ini_set('memory_limit', '2048M');
+        $data = $coreApp->execSQLQuery("SELECT Associateid, AssociateName, Rango, Email, Telefono, Estado, Pais, Fecha_Incorp, VP_Mes, Periodo, Unidades_VentaDirecta, Unidades_PorInfluencer, Transformado, TotalUnidades, Total_Transfor_Mokuteki, Total_Incorpo_Influencer, Cumple_Kinya, kinya_PorVenta, kinya_PorInfluencia, Sponsorid, SponsorName, SponsorPais, Estatus 
+        FROM RETOS_ESPECIALES..Reporte_Kinya_Historic WHERE Periodo BETWEEN $periodo AND  $periodo2 ORDER BY Periodo DESC,TotalUnidades DESC", 'SQL173');
+        return Excel::download(new kinyaHistoricData($data), 'Reconocimientos | KinYa! (Histórico).csv', \Maatwebsite\Excel\Excel::CSV);
     }
 }
