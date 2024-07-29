@@ -18,4 +18,5 @@ Route::get('VP_VGP_InactivosData', "reportes\home@VP_VGP_InactivosData");
 Route::get('reportesRetos', 'reportesRetos\reportesRetos@reportesRetos');
 
 Route::get('reportVolGlobal', 'reportesRetos\reportesRetos@reportVolGlobal');
+Route::get('posibleAvance', 'reportesRetos\reportesRetos@posibleAvance');
 

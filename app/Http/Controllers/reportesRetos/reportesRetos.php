@@ -27,4 +27,12 @@ class reportesRetos extends Controller{
         $data = $coreApp->execSQLQuery("SELECT Associateid, AssociateName,Rango, Pais, PV AS 'VP' ,GV AS 'VGP' ,OV AS 'VO',QOVOPL AS 'VO_LDP',QOVOPSL AS 'VO_LDPyS',Period AS 'Periodo',Sponsorid, SponsorName,SponsorPais, AssociateType, Estatus, estado FROM [LAT_MyNIKKEN].dbo.VolumeGlob with(nolock) WHERE Period = $periodo AND ltrim(rtrim(associateid)) LIKE '%03' AND associatetype=100", 'SQL173');
         return Excel::download(new volumenGlobal($data), 'volumen_global.csv', \Maatwebsite\Excel\Excel::CSV);
     }
+
+    public function posibleAvance(){
+        // $periodo = request()->periodo;
+        $coreApp = new coreApp();
+        ini_set('memory_limit', '2048M');
+        $data = $coreApp->execSQLQuery("SELECT Associateid,AssociateName, Rango,Pais,Period,QPV,QGV,QOV,QOVOPL,QOVOPSL,CASE WHEN Avance>0 THEN 'SI' ELSE 'NO' END as Avance,TipoAvance,QPV_Faltante,QGV_Faltante,QOV_Faltante,QOVOPL_Faltante,QOVOPSL_Faltante,Posible,Sponsorid, SponsorName, SponsorPais FROM LAT_MyNIKKEN.dbo.Posibles_AvancesLAT WHERE posible='SUP' AND period = 202407", 'SQL173');
+        return Excel::download(new posibleAvance($data), 'Reconocimientos - Posibles avances de rango.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
 }
