@@ -1,0 +1,119 @@
+.form-control {
+    border: 1px solid #ccc;
+    color: #888ea8;
+    font-size: 15px;
+}
+code { color: #3862f5; }
+.form-control:disabled, .form-control[readonly] { background-color: #f1f3f9; border-color: #f1f3f1; }
+.btn-primary.disabled, .btn-primary:disabled { background-color: #3862f5; border-color: #3862f5; }
+label { color: #3b3f5c; margin-bottom: 14px; }
+.form-control::-webkit-input-placeholder { color: #888ea8; font-size: 15px; }
+.form-control::-ms-input-placeholder { color: #888ea8; font-size: 15px; }
+.form-control::-moz-placeholder { color: #888ea8; font-size: 15px; }
+.form-control:focus { border-color: #3862f5; }
+.input-group-text {
+    background-color: #f3f4f7;
+    border-color: #e9ecef;
+    color: #6156ce;
+}
+select.form-control {
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    vertical-align: middle;
+    background: #fff url(../../img/arrow-down.png) no-repeat right .75rem center;
+    background-size: 13px 14px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+select.form-control::-ms-expand { display: none; }
+
+.margin.border-dotted {
+    border: 1px dotted #ee3d50; border-radius: 6px;
+}
+.bg-p-blue {
+    background-color: #6156ce;
+    border-radius: 6px;
+    font-weight: 600;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.padding.border-dotted {
+    border: 1px dotted #3862f5;
+    border-radius: 6px;
+    color: #3862f5;
+    background-color: #f9f9f9;
+    font-weight: 600;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.floating.border-dotted {
+    border: 1px dotted #888ea8;
+    border-radius: 6px;
+    color: #e95f2b;
+    background-color: #f9f9f9;
+    font-weight: 600;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.border-dotted {
+    border: 1px dotted #ff3743;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+    border-radius: 6px;
+    color: #ff3743;
+    font-weight: 600;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.border-dashed {
+    border: 1px dashed #3232b7;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+    color: #3232b7;
+    font-weight: 600;
+    border-radius: 6px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.border-solid {
+    border: 1px solid #24ccda;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+    color: #24ccda;
+    font-weight: 600;
+    border-radius: 6px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.border-double {
+    border: 1px solid #e9b02b;
+    border-width: 4px;
+    border-style: double;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+    color: #e9b02b;
+    border-radius: 6px;
+    font-weight: 600;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.transform-position {
+    position: relative;
+    display: block;
+    width: 90px;
+    color: #ff3743;
+    font-weight: 600;
+}
+blockquote.blockquote {
+    color: #010407;
+    padding: 0.625rem 1.25rem 0.125rem 1.25rem;
+    font-size: 0.875rem;
+    border-left: 4px solid #3862f5;
+}
+
+.loader_div{
+    position: absolute;
+    top: 0;
+    bottom: 0%;
+    left: 0;
+    right: 0%;
+    z-index: 12000;
+    opacity:0.7;
+    display:none;
+    background: #fff url('../../img/abretuzona/loader.gif') center center no-repeat;
+}
