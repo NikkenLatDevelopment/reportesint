@@ -1,0 +1,192 @@
+@font-face {
+    font-family: "Contenido";
+    src: url("../../fonts/japon/Poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Títulos";
+    src: url("../../fonts/japon/Masmuseh_Demo_Version.otf");
+}
+
+@font-face {
+    font-family: "Títulos1";
+    src: url("../../fonts/japon/Shufen_Free_Trial.ttf");
+}
+
+body{
+    font-family: 'Contenido', Arial, sans-serif !important;
+}
+
+.fontJapon{
+    font-family: 'Títulos', Arial, sans-serif !important;
+}
+
+td .fontJapon, tr td .fontJapon b{
+    font-family: 'Contenido', Arial, sans-serif !important;
+    font-size: 13px !important;
+}
+
+.titulo_estatus{
+    font-family: 'Títulos1', Arial, sans-serif !important;
+}
+
+.fontJaponTitulo{
+    font-family: 'Títulos', Arial, sans-serif !important;
+}
+
+.blur-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    /*filter: blur(0.5px);
+    -webkit-filter: blur(0.5px);*/
+    background: #1b1c25 url('https://services.nikken.com.mx/img/nkknpoints/nikkpoints.jpg');
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    z-index: -1;
+    top: 0 !important;
+    left: 0;
+}
+
+.current {
+    background: #ffffffba;
+    border-radius: 25px;
+    color: #174073;
+}
+
+.btnModal {
+    border-radius: 25px !important;
+    background: #174073;
+    border: 0 !important;
+}
+
+table{
+    max-width: 100% !important;
+    overflow: auto;
+}
+
+.navHeadWrapperClubViajeros{
+    background: linear-gradient(0.5deg, #b6e1e0 0%, #33d5cd 100%) !important;
+}
+
+nav.navbar .navbar-nav .nav-item .nav-link.active {
+    color: #3b3b3b !important;
+}
+
+nav.navbar .navbar-nav .nav-link:hover {
+    color: #3b3b3b !important;
+}
+
+.bodyClviajeros{
+    background-image: unset !important;
+}
+
+.btn-gradient-primary {
+    border: 0 !important;
+    color: #fff;
+    background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+    background-color: #04befe;
+}
+
+.puntajeInput {
+    color: #174073 !important;
+}
+.text-black{
+    color: #000 !important;
+}
+.btnExcel {
+    background-image: linear-gradient(135deg, #174073 0%, #3232b7 100%);
+    color: white;
+  }
+.btnExcel:hover {
+    background-image: linear-gradient(135deg, #3232b7 0%, #174073 100%);
+    color: gray;
+}
+.page-item.active .page-link {
+    background-color: #33d5cd !important;
+    border-color: #33d5cd !important;
+    border-radius: 4px;
+    color: black
+}
+ul.pagination li a:hover:not(.active) {
+    background-color: #33d5cd !important;
+    color: #000 !important;
+}
+.estatus thead tr td{
+    padding: 20px !important;
+}
+
+.estatus tbody tr td {
+    padding: 10px !important;
+}
+.inputRango{
+    background-color: rgb(250, 200, 86) !important;
+}
+#chat-circle {
+    position: fixed;
+    bottom: 55px;
+    right: 15px;
+    background-color: transparent;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0;
+    z-index: 999;
+    cursor: pointer;
+    box-shadow: none;
+    outline: 0;
+    -webkit-transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1);
+    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1);
+    -o-transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1);
+    will-change: box-shadow, transform;
+}
+#chat-circle i {
+    font-size: 30px;
+    color: #fff;
+    padding: 16px;
+    background: #488e34;
+      background-image: none;
+    background-image: none;
+    background-image: none;
+    background-image: linear-gradient(to right, #174073 0%, #174073 100%);
+    border-radius: 50%;
+    letter-spacing: 0;
+}
+#chat-circle i {
+    background-image: linear-gradient(to right, #174073 0%, #174073 100%);
+    border: solid 1px #000;
+}
+
+.btn-flotante {
+	font-size: 16px;
+	/*text-transform: uppercase;*/
+	font-weight: bold;
+	color: #000;
+	border-radius: 5px;
+	letter-spacing: 2px;
+	background-color: #fac856 !important;
+	padding: 10px 30px;
+	position: fixed;
+	bottom: 40px;
+	right: 40px;
+	transition: all 300ms ease 0ms;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.8);
+	z-index: 99;
+}
+.btn-flotante:hover {
+	background-color: #2c2fa5;
+	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+	transform: translateY(-7px);
+}
+@media only screen and (max-width: 600px) {
+ 	.btn-flotante {
+		font-size: 14px;
+		padding: 12px 20px;
+		bottom: 20px;
+		right: 20px;
+	}
+} 

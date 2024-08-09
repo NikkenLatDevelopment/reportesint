@@ -1,0 +1,116 @@
+@font-face {
+    font-family: "Comfortaa";
+    src: url("../../fonts/comfortaa/Comfortaa-Regular.ttf");
+}
+
+body{
+    font-family: 'Comfortaa', Arial, sans-serif !important;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url('../../img/inc1USD/bg2.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.badge{
+    font-family: 'Comfortaa', Arial, sans-serif !important;
+}
+
+.menu{
+    color: black;
+}
+
+hr {
+    border-top: 3px solid #000 !important;
+}
+
+.miembros {
+    margin-top: -60px;
+    background-color: #fff;
+    border: 3px solid #000;
+    color: #000;
+    font-size: 20px;
+    cursor: context-menu !important;
+}
+
+.btnModal{
+    border-radius: 25px !important;
+    background: linear-gradient(90deg, #00a5e0 0%, #474b95 100%);
+    border: 0 !important;
+}
+
+.table-responsive {
+    border-radius: 20px !important;
+}
+
+.giftTab{
+    color: #fff !important;
+}
+
+.giftTab tbody tr:nth-of-type(2n+1) {
+    background-color: #d5bcf2 !important;
+    color: #fff !important;
+}
+
+.giftTab tbody tr:nth-of-type(2n+2) {
+    background-image: linear-gradient(to right, #a789a3 0%, #a280cc 100%) !important;
+    color: #fff !important;
+}
+
+svg { 
+    display: inline-block; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+} 
+
+.containerSVG { 
+    display: inline-block; 
+    position: absolute; 
+    width: 100%; 
+    padding-bottom: 100%; 
+    vertical-align: middle; 
+    overflow: hidden; 
+    top: 0; 
+    left: 0; 
+}
+
+.rotate{
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    transform: rotate(10deg);
+}
+
+.btnExcel {
+    background-image: linear-gradient(135deg, #2f5cf0 0%, #4535d4 100%);
+    border: none;
+    font-size: 14px;
+    padding: 9px 18px;
+    transition: 0.3s;
+    color: #fff;
+}
+
+.dt-buttons{
+    text-align: left !important;
+}
+
+.btnTermCond{
+    border: solid 3px #f9b233 !important;
+}
+
+.btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+    border: solid 3px #f9b233 !important;
+}
+
+.chlBtn{
+    border-radius: 25px !important;
+}
+
+table tbody tr td .btn-group .dropdown-menu .dropdown-item {
+    padding: 8.5px 10px;
+}
