@@ -21,3 +21,5 @@ Route::get('reportVolGlobal', 'reportesRetos\reportesRetos@reportVolGlobal');
 Route::get('posibleAvance', 'reportesRetos\reportesRetos@posibleAvanceData');
 Route::get('kinyaHistoric', 'reportesRetos\reportesRetos@kinyaHistoricData');
 
+Route::get('vReporteVEmprendedores','reportesRetos\reportesRetos@vReporteVEmprendedores');
+Route::get('reportCVEmprendedor','reportesRetos\reportesRetos@reportCVEmprendedor');
