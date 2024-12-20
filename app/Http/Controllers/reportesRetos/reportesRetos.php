@@ -1210,7 +1210,7 @@ class reportesRetos extends Controller{
             $sheet->setCellValue('Y3', "Requisito Faltante");
         }
         else{
-            $sheet->setCellValue('Y3', "Requisito Faltante");
+            $sheet->setCellValue('X3', "Requisito Faltante");
         }
 
         $color = '006600';
