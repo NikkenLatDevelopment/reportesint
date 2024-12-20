@@ -18,6 +18,9 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class reportesRetos extends Controller{
     public function reportesRetos(){
         $coreApp = new coreApp();
@@ -1135,5 +1138,145 @@ class reportesRetos extends Controller{
         foreach ($columns as $column) {
             $sheet->getColumnDimension($column)->setAutoSize(true);
         }
+    }
+
+    public function depuracion_lat_2025(){
+        $coreCms = new coreApp();
+        $anio = Date('Y');
+        
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle("Listado");
+
+        $sheet->mergeCells('B1:E1');
+
+        $sheet->getColumnDimension('A')->setAutoSize(true);
+        $sheet->setCellValue('A1', "Fecha de consulta");
+        $sheet->getStyle('A1')->getFont()->setBold(true);
+        $sheet->setCellValue('B1', Date('Y-m-d H:i:s'));
+
+        $sheet->getColumnDimension('A')->setAutoSize(true);
+        $sheet->getColumnDimension('B')->setAutoSize(true);
+        $sheet->getColumnDimension('C')->setAutoSize(true);
+        $sheet->getColumnDimension('D')->setAutoSize(true);
+        $sheet->getColumnDimension('E')->setAutoSize(true);
+        $sheet->getColumnDimension('F')->setAutoSize(true);
+        $sheet->getColumnDimension('G')->setAutoSize(true);
+        $sheet->getColumnDimension('H')->setAutoSize(true);
+        $sheet->getColumnDimension('I')->setAutoSize(true);
+        $sheet->getColumnDimension('J')->setAutoSize(true);
+        $sheet->getColumnDimension('K')->setAutoSize(true);
+        $sheet->getColumnDimension('L')->setAutoSize(true);
+        $sheet->getColumnDimension('M')->setAutoSize(true);
+        $sheet->getColumnDimension('N')->setAutoSize(true);
+        $sheet->getColumnDimension('O')->setAutoSize(true);
+        $sheet->getColumnDimension('P')->setAutoSize(true);
+        $sheet->getColumnDimension('Q')->setAutoSize(true);
+        $sheet->getColumnDimension('R')->setAutoSize(true);
+        $sheet->getColumnDimension('S')->setAutoSize(true);
+        $sheet->getColumnDimension('T')->setAutoSize(true);
+        $sheet->getColumnDimension('U')->setAutoSize(true);
+        $sheet->getColumnDimension('V')->setAutoSize(true);
+        $sheet->getColumnDimension('W')->setAutoSize(true);
+        $sheet->getColumnDimension('X')->setAutoSize(true);
+        if(intval($anio) === 2025){
+            $sheet->getColumnDimension('Y')->setAutoSize(true);
+        }
+
+        $sheet->getStyle('A3:X3')->getFont()->setBold(true);
+        $sheet->setCellValue('A3', "Codigo de Socio");
+        $sheet->setCellValue('B3', "Tipo Distribuidor");
+        $sheet->setCellValue('C3', "Nombre del Socio");
+        $sheet->setCellValue('D3', "Rango");
+        $sheet->setCellValue('E3', "Fecha Ingreso");
+        $sheet->setCellValue('F3', "Codigo del Patrocinador");
+        $sheet->setCellValue('G3', "Nombre del Patrocinador");
+        $sheet->setCellValue('H3', "Estado");
+        $sheet->setCellValue('I3', "Correo");
+        $sheet->setCellValue('J3', "Telefono");
+        $sheet->setCellValue('K3', "Pais");
+        $sheet->setCellValue('L3', "vp_ene_24");
+        $sheet->setCellValue('M3', "vp_feb_24");
+        $sheet->setCellValue('N3', "vp_mar_24");
+        $sheet->setCellValue('O3', "vp_abr_24");
+        $sheet->setCellValue('P3', "vp_may_24");
+        $sheet->setCellValue('Q3', "vp_jun_24");
+        $sheet->setCellValue('R3', "vp_jul_24");
+        $sheet->setCellValue('S3', "vp_ago_24");
+        $sheet->setCellValue('T3', "vp_sep_24");
+        $sheet->setCellValue('U3', "vp_oct_24");
+        $sheet->setCellValue('V3', "vp_nov_24");
+        $sheet->setCellValue('W3', "vp_dic_24");
+        $sheet->setCellValue('W3', "vp_dic_24");
+        if(intval($anio) === 2025){
+            $sheet->setCellValue('X3', "VP_ene_25");
+            $sheet->setCellValue('Y3', "Requisito Faltante");
+        }
+        else{
+            $sheet->setCellValue('Y3', "Requisito Faltante");
+        }
+
+        $color = '006600';
+        (intval($anio) === 2025) ? $range = "A3:Y3":$range = "A3:X3";
+        $sheet->getStyle("$range")->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+        $sheet->getStyle("$range")->getFill()->getStartColor()->setRGB($color);
+        $sheet->getStyle("$range")->getFont()->getColor()->setRGB ('ffffff');
+        $sheet->setAutoFilter("$range");
+
+        $data = $coreCms->execMySQLQuery("EXEC LAT_MyNIKKEN.dbo.depuracionLatam2024_interno", "SQL73");
+        $row = 4;
+        foreach ($data as $item) {
+            $sheet->setCellValue("A$row", $item->codigoSocio);
+            $sheet->setCellValue("B$row", $item->tipoDistribuidor);
+            $sheet->setCellValue("C$row", $item->nombreSocio);
+            $sheet->setCellValue("D$row", $item->rango);
+            $sheet->setCellValue("E$row", $item->fechaIngreso);
+            $sheet->setCellValue("F$row", $item->codigoPatrocinador);
+            $sheet->setCellValue("G$row", $item->nombrePatrocinador);
+            $sheet->setCellValue("H$row", $item->estado);
+            $sheet->setCellValue("I$row", $item->correo);
+            $sheet->setCellValue("J$row", $item->telefono);
+            $sheet->setCellValue("K$row", $item->pais);
+            $sheet->setCellValue("L$row", $item->vp_ene_24);
+            $sheet->setCellValue("M$row", $item->vp_feb_24);
+            $sheet->setCellValue("N$row", $item->vp_mar_24);
+            $sheet->setCellValue("O$row", $item->vp_abr_24);
+            $sheet->setCellValue("P$row", $item->vp_may_24);
+            $sheet->setCellValue("Q$row", $item->vp_jun_24);
+            $sheet->setCellValue("R$row", $item->vp_jul_24);
+            $sheet->setCellValue("S$row", $item->vp_ago_24);
+            $sheet->setCellValue("T$row", $item->vp_sep_24);
+            $sheet->setCellValue("U$row", $item->vp_oct_24);
+            $sheet->setCellValue("V$row", $item->vp_nov_24);
+            $sheet->setCellValue("W$row", $item->vp_dic_24);
+            if(intval($anio) === 2025){
+                $sheet->setCellValue("X$row", $item->vp_enero_25);
+                $sheet->setCellValue("Y$row", $item->requisitoFaltante);
+            }
+            else{
+                $sheet->setCellValue("X$row", $item->requisitoFaltante);
+            }
+            $row++;
+        }
+
+        $fileName = "Listado Renovación 2025 para fidelizaciones_" . Date('Y_m_d_H_i_s') . '.xlsx';
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
     }
 }

@@ -23,3 +23,5 @@ Route::get('kinyaHistoric', 'reportesRetos\reportesRetos@kinyaHistoricData');
 
 Route::get('vReporteVEmprendedores','reportesRetos\reportesRetos@vReporteVEmprendedores');
 Route::get('reportCVEmprendedor','reportesRetos\reportesRetos@reportCVEmprendedor');
+
+Route::get('depuracion_lat_2025','reportesRetos\reportesRetos@depuracion_lat_2025');
