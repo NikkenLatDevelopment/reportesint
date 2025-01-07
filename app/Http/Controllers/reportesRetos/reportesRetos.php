@@ -1176,11 +1176,11 @@ class reportesRetos extends Controller{
         $sheet->getColumnDimension('V')->setAutoSize(true);
         $sheet->getColumnDimension('W')->setAutoSize(true);
         $sheet->getColumnDimension('X')->setAutoSize(true);
-        if(intval($anio) === 2025){
-            $sheet->getColumnDimension('Y')->setAutoSize(true);
-        }
+        $sheet->getColumnDimension('Y')->setAutoSize(true);
+        $sheet->getColumnDimension('Z')->setAutoSize(true);
+        $sheet->getColumnDimension('AA')->setAutoSize(true);
 
-        $sheet->getStyle('A3:X3')->getFont()->setBold(true);
+        $sheet->getStyle('A3:AA3')->getFont()->setBold(true);
         $sheet->setCellValue('A3', "Codigo de Socio");
         $sheet->setCellValue('B3', "Tipo Distribuidor");
         $sheet->setCellValue('C3', "Nombre del Socio");
@@ -1205,16 +1205,13 @@ class reportesRetos extends Controller{
         $sheet->setCellValue('V3', "vp_nov_24");
         $sheet->setCellValue('W3', "vp_dic_24");
         $sheet->setCellValue('W3', "vp_dic_24");
-        if(intval($anio) === 2025){
-            $sheet->setCellValue('X3', "VP_ene_25");
-            $sheet->setCellValue('Y3', "Requisito Faltante");
-        }
-        else{
-            $sheet->setCellValue('X3', "Requisito Faltante");
-        }
+        $sheet->setCellValue('X3', "VP_ene_25");
+        $sheet->setCellValue('Y3', "Requisito Faltante");
+        $sheet->setCellValue('Y3', "Estatus SAP");
+        $sheet->setCellValue('Y3', "Salvado");
 
         $color = '006600';
-        (intval($anio) === 2025) ? $range = "A3:Y3":$range = "A3:X3";
+        $range = "A3:AA3";
         $sheet->getStyle("$range")->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
         $sheet->getStyle("$range")->getFill()->getStartColor()->setRGB($color);
         $sheet->getStyle("$range")->getFont()->getColor()->setRGB ('ffffff');
@@ -1246,13 +1243,10 @@ class reportesRetos extends Controller{
             $sheet->setCellValue("U$row", $item->vp_oct_24);
             $sheet->setCellValue("V$row", $item->vp_nov_24);
             $sheet->setCellValue("W$row", $item->vp_dic_24);
-            if(intval($anio) === 2025){
-                $sheet->setCellValue("X$row", $item->vp_enero_25);
-                $sheet->setCellValue("Y$row", $item->requisitoFaltante);
-            }
-            else{
-                $sheet->setCellValue("X$row", $item->requisitoFaltante);
-            }
+            $sheet->setCellValue("X$row", $item->vp_enero_25);
+            $sheet->setCellValue("Y$row", $item->requisitoFaltante);
+            $sheet->setCellValue("Z$row", $item->estatus_SAP);
+            $sheet->setCellValue("AA$row", $item->salvado);
             $row++;
         }
 
