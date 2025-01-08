@@ -1150,7 +1150,7 @@ class reportesRetos extends Controller{
         $sheet->getStyle('A1')->getFont()->setBold(true);
 
         $sheet->mergeCells('A2:E2');
-        $sheet->setCellValue('A1', "Socios posibles a depurar - Proceso Depuración 2025");
+        $sheet->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
         $sheet->getStyle('A2')->getFont()->setBold(true);
         
         $sheet->mergeCells('B3:E3');
