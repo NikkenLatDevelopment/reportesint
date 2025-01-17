@@ -1251,7 +1251,7 @@ class reportesRetos extends Controller{
             $sheet->setCellValue("V$row", $item->vp_nov_24);
             $sheet->setCellValue("W$row", $item->vp_dic_24);
             $sheet->setCellValue("X$row", $item->vp_enero_25);
-            $sheet->setCellValue("Y$row", $item->vp_enero_25);
+            $sheet->setCellValue("Y$row", $item->vp_enero_25_USA);
             $sheet->setCellValue("Z$row", $item->requisitoFaltante);
             $sheet->setCellValue("AA$row", $item->estatus_SAP);
             $sheet->setCellValue("AB$row", $item->salvado);
