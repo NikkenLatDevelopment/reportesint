@@ -1184,8 +1184,9 @@ class reportesRetos extends Controller{
         $sheet->getColumnDimension('Y')->setAutoSize(true);
         $sheet->getColumnDimension('Z')->setAutoSize(true);
         $sheet->getColumnDimension('AA')->setAutoSize(true);
+        $sheet->getColumnDimension('AB')->setAutoSize(true);
 
-        $sheet->getStyle('A5:AA5')->getFont()->setBold(true);
+        $sheet->getStyle('A5:AB5')->getFont()->setBold(true);
         $sheet->setCellValue('A5', "Codigo de Socio");
         $sheet->setCellValue('B5', "Tipo Distribuidor");
         $sheet->setCellValue('C5', "Nombre del Socio");
@@ -1211,12 +1212,13 @@ class reportesRetos extends Controller{
         $sheet->setCellValue('W5', "vp_dic_24");
         $sheet->setCellValue('W5', "vp_dic_24");
         $sheet->setCellValue('X5', "VP_ene_25");
-        $sheet->setCellValue('Y5', "Requisito Faltante");
-        $sheet->setCellValue('Z5', "Estatus SAP");
-        $sheet->setCellValue('AA5', "Salvado");
+        $sheet->setCellValue('Y5', "VP_ene_25_USA");
+        $sheet->setCellValue('Z5', "Requisito Faltante");
+        $sheet->setCellValue('AA5', "Estatus SAP");
+        $sheet->setCellValue('AB5', "Salvado");
 
         $color = '006600';
-        $range = "A5:AA5";
+        $range = "A5:AB5";
         $sheet->getStyle("$range")->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
         $sheet->getStyle("$range")->getFill()->getStartColor()->setRGB($color);
         $sheet->getStyle("$range")->getFont()->getColor()->setRGB ('ffffff');
@@ -1249,9 +1251,10 @@ class reportesRetos extends Controller{
             $sheet->setCellValue("V$row", $item->vp_nov_24);
             $sheet->setCellValue("W$row", $item->vp_dic_24);
             $sheet->setCellValue("X$row", $item->vp_enero_25);
-            $sheet->setCellValue("Y$row", $item->requisitoFaltante);
-            $sheet->setCellValue("Z$row", $item->estatus_SAP);
-            $sheet->setCellValue("AA$row", $item->salvado);
+            $sheet->setCellValue("Y$row", $item->vp_enero_25);
+            $sheet->setCellValue("Z$row", $item->requisitoFaltante);
+            $sheet->setCellValue("AA$row", $item->estatus_SAP);
+            $sheet->setCellValue("AB$row", $item->salvado);
             $row++;
         }
 
