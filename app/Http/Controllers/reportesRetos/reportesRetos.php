@@ -1224,7 +1224,7 @@ class reportesRetos extends Controller{
         $sheet->getStyle("$range")->getFont()->getColor()->setRGB ('ffffff');
         $sheet->setAutoFilter("$range");
 
-        $data = $coreCms->execMySQLQuery("EXEC LAT_MyNIKKEN.dbo.depuracionLatam2024_interno", "SQL73");
+        $data = $coreCms->execMySQLQuery("EXEC LAT_MyNIKKEN.dbo.depuracionLatam2024_interno ", "SQL73");
         $row = 6;
         foreach ($data as $item) {
             $sheet->setCellValue("A$row", $item->codigoSocio);
