@@ -545,40 +545,40 @@ class retos2025 extends Controller{
         # HOJA 3
         
         # HOJA 4
-        $hoja3 = $spreadsheet->createSheet();
-            $hoja3->setTitle("Emprendedores - Periodo 2");
+        $hoja4 = $spreadsheet->createSheet();
+            $hoja4->setTitle("Ganadores Cena Trimestral ");
 
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
-                $hoja3->getColumnDimension($letter)->setAutoSize(true);
+                $hoja4->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja3->getStyle('A7:I7')->getFont()->setBold(true);
-            $hoja3->setAutoFilter('A7:I7');
+            $hoja4->getStyle('A7:I7')->getFont()->setBold(true);
+            $hoja4->setAutoFilter('A7:I7');
 
-            $hoja3->mergeCells('A1:D1');
-            $hoja3->setCellValue('A1', "NIKKEN LATINOAMERICA");
-            $hoja3->getStyle('A1')->getFont()->setBold(true);
+            $hoja4->mergeCells('A1:D1');
+            $hoja4->setCellValue('A1', "NIKKEN LATINOAMERICA");
+            $hoja4->getStyle('A1')->getFont()->setBold(true);
 
-            $hoja3->mergeCells('A2:D2');
-            $hoja3->setCellValue('A2', "CLUB VIAJERO EMPRENDEDOR ");
-            $hoja3->getStyle('A2')->getFont()->setBold(true);
+            $hoja4->mergeCells('A2:D2');
+            $hoja4->setCellValue('A2', "CLUB VIAJERO EMPRENDEDOR ");
+            $hoja4->getStyle('A2')->getFont()->setBold(true);
 
-            $hoja3->mergeCells('A3:D3');
-            $hoja3->setCellValue('A3', "");
-            $hoja3->getStyle('A3')->getFont()->setBold(true);
+            $hoja4->mergeCells('A3:D3');
+            $hoja4->setCellValue('A3', "");
+            $hoja4->getStyle('A3')->getFont()->setBold(true);
 
-            $hoja3->mergeCells('A4:D4');
-            $hoja3->setCellValue('A4', "RANGOS: DIRECTO, SUPERIOR, EJECUTIVO Y PLATA");
-            $hoja3->getStyle('A4')->getFont()->setBold(true);
+            $hoja4->mergeCells('A4:D4');
+            $hoja4->setCellValue('A4', "RANGOS: DIRECTO, SUPERIOR, EJECUTIVO Y PLATA");
+            $hoja4->getStyle('A4')->getFont()->setBold(true);
 
-            $hoja3->mergeCells('E1:G1');
-            $hoja3->setCellValue('E1', "Fecha y hora de descarcarga del reporte: " . Date('Y-m-d H:i:s'));
-            $hoja3->getStyle('E1')->getFont()->setBold(true);
+            $hoja4->mergeCells('E1:G1');
+            $hoja4->setCellValue('E1', "Fecha y hora de descarcarga del reporte: " . Date('Y-m-d H:i:s'));
+            $hoja4->getStyle('E1')->getFont()->setBold(true);
 
             $color = 'DAE9F8';
             $range = "A7:I7";
-            $hoja3->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-            $hoja3->getStyle($range)->getFill()->getStartColor()->setRGB($color);
+            $hoja4->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+            $hoja4->getStyle($range)->getFill()->getStartColor()->setRGB($color);
             $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoDos;", "SQL173");
             $h = ['Código Socio','Nombre','Rango','Fecha del último rango','Estado','Correo electrónico','Teléfono Móvil','País','Trimestre Ganador'];
             $datos = [];
@@ -596,7 +596,7 @@ class retos2025 extends Controller{
                     $d[$x]->trimestreGanador,
                 ];
             }
-            $hoja3->fromArray($datos, null, 'A7', true);
+            $hoja4->fromArray($datos, null, 'A7', true);
         # HOJA 4
 
         // Guardar el archivo temporalmente
