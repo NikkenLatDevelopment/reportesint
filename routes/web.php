@@ -25,3 +25,4 @@ Route::get('vReporteVEmprendedores','reportesRetos\reportesRetos@vReporteVEmpren
 Route::get('reportCVEmprendedor','reportesRetos\reportesRetos@reportCVEmprendedor');
 
 Route::get('depuracion_lat_2025','reportesRetos\reportesRetos@depuracion_lat_2025');
+Route::get('reporteEmprendedor25','reportesRetos\retos2025@reporteEmprendedor25');
