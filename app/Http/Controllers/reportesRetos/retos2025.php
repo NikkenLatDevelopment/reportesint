@@ -25,16 +25,10 @@ class retos2025 extends Controller{
         # HOJA 1
             $hoja1 = $spreadsheet->getActiveSheet();
             $hoja1->setTitle("Tablero Principal");
-            $hoja1->getColumnDimension('A')->setAutoSize(true);
-            $hoja1->getColumnDimension('B')->setAutoSize(true);
-            $hoja1->getColumnDimension('C')->setAutoSize(true);
-            $hoja1->getColumnDimension('D')->setAutoSize(true);
-            $hoja1->getColumnDimension('E')->setAutoSize(true);
-            $hoja1->getColumnDimension('F')->setAutoSize(true);
-            $hoja1->getColumnDimension('G')->setAutoSize(true);
-            $hoja1->getColumnDimension('H')->setAutoSize(true);
-            $hoja1->getColumnDimension('I')->setAutoSize(true);
-            $hoja1->getColumnDimension('J')->setAutoSize(true);
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
 
             $hoja1->mergeCells('A1:F1');
             $hoja1->setCellValue('A1', "NIKKEN LATINOAMERICA");
@@ -77,23 +71,10 @@ class retos2025 extends Controller{
                     'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER]
                 ];
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSociosCal;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Trim1 Ene-Mar', 'Trim2 Abr-Jun', 'Trim3 Jul-Sep', 'Ganadores 1 Periodo'],
-                        [$d[0]->pais, $d[0]->trim1EneMarz, $d[0]->trim2AbrJun, $d[0]->trim3JulSep, $d[0]->gandores1period],
-                        [$d[1]->pais, $d[1]->trim1EneMarz, $d[1]->trim2AbrJun, $d[1]->trim3JulSep, $d[1]->gandores1period],
-                        [$d[2]->pais, $d[2]->trim1EneMarz, $d[2]->trim2AbrJun, $d[2]->trim3JulSep, $d[2]->gandores1period],
-                        [$d[3]->pais, $d[3]->trim1EneMarz, $d[3]->trim2AbrJun, $d[3]->trim3JulSep, $d[3]->gandores1period],
-                        [$d[4]->pais, $d[4]->trim1EneMarz, $d[4]->trim2AbrJun, $d[4]->trim3JulSep, $d[4]->gandores1period],
-                        [$d[5]->pais, $d[5]->trim1EneMarz, $d[5]->trim2AbrJun, $d[5]->trim3JulSep, $d[5]->gandores1period],
-                        [$d[6]->pais, $d[6]->trim1EneMarz, $d[6]->trim2AbrJun, $d[6]->trim3JulSep, $d[6]->gandores1period],
-                        [$d[7]->pais, $d[7]->trim1EneMarz, $d[7]->trim2AbrJun, $d[7]->trim3JulSep, $d[7]->gandores1period],
-                        [$d[8]->pais, $d[8]->trim1EneMarz, $d[8]->trim2AbrJun, $d[8]->trim3JulSep, $d[8]->gandores1period],
-                        ['Latinoamérica', '=SUM(B11:B19)', '=SUM(C11:C19)', '=SUM(D11:D19)', '=SUM(E11:E19)']
-                    ],
-                    null, 'A10', true
-                );
+                $h = ['País', 'Trim1 Ene-Mar', 'Trim2 Abr-Jun', 'Trim3 Jul-Sep', 'Ganadores 1 Periodo'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSociosCal;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B11:B19)', '=SUM(C11:C19)', '=SUM(D11:D19)', '=SUM(E11:E19)'];
+                $hoja1->fromArray($d, null, 'A10', true);
                 $hoja1->getStyle('A10:E20')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A10:E10')->applyFromArray($headerStyle);
                 $color = 'FBE2D5';
@@ -110,40 +91,16 @@ class retos2025 extends Controller{
                 $range = "A23:E23";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                $hoja1->fromArray(
-                    [
-                        ['Filtro por país', 'Latam'],
-                    ],
-                    null, 'A25', true
-                );
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSociosCalVarible;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['Variable', 'Enero',  'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
-                        [$d[0]->variable, $d[0]->enero, $d[0]->febrero, $d[0]->marzo, $d[0]->abril, $d[0]->mayo, $d[0]->junio, $d[0]->julio, $d[0]->agosto, $d[0]->septirmbre],
-                        [$d[1]->variable, $d[1]->enero, $d[1]->febrero, $d[1]->marzo, $d[1]->abril, $d[1]->mayo, $d[1]->junio, $d[1]->julio, $d[1]->agosto, $d[1]->septirmbre],
-                    ],
-                    null, 'A27', true
-                );
+                $hoja1->fromArray([['Filtro por país', 'Latam'],],null, 'A25', true);
+                $h = ['Variable', 'Enero',  'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSociosCalVarible;", "SQL173", $h);
+                $hoja1->fromArray($d,null, 'A27', true);
                 $hoja1->getStyle('A27:J29')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A27:J27')->applyFromArray($headerStyle);
-                $hoja1->fromArray(
-                    [
-                        ['Filtro por país', 'Latam'],
-                    ],
-                    null, 'A32', true
-                );
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSociosCalVarible_Trim;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['Variable', '1 Trimestre', '2 Trimestre', '3 Trimestre'],
-                        [$d[0]->variable, $d[0]->trimestreUno, $d[0]->trimestreDos, $d[0]->trimestreTres],
-                        [$d[1]->variable, $d[1]->trimestreUno, $d[1]->trimestreDos, $d[1]->trimestreTres],
-                        [$d[2]->variable, $d[2]->trimestreUno, $d[2]->trimestreDos, $d[2]->trimestreTres],
-                        [$d[3]->variable, $d[3]->trimestreUno, $d[3]->trimestreDos, $d[3]->trimestreTres],
-                    ],
-                    null, 'A34', true
-                );
+                $hoja1->fromArray([['Filtro por país', 'Latam'],],null, 'A32', true);
+                $h = ['Variable', '1 Trimestre', '2 Trimestre', '3 Trimestre'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSociosCalVarible_Trim;", "SQL173", $h);
+                $hoja1->fromArray($d, null, 'A34', true);
                 $hoja1->getStyle('A34:D38')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A34:D34')->applyFromArray($headerStyle);
             #TABLA 2
@@ -156,23 +113,10 @@ class retos2025 extends Controller{
                 $range = "A42";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSocios30000masVGPAnual;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Directo', 'Superior', 'Ejecutivo', 'Plata', 'VGP 30,000 o más'],
-                        [$d[0]->pais, $d[0]->directo, $d[0]->superior, $d[0]->ejecutivo, $d[0]->plata, $d[0]->vgp30000mas],
-                        [$d[1]->pais, $d[1]->directo, $d[1]->superior, $d[1]->ejecutivo, $d[1]->plata, $d[1]->vgp30000mas],
-                        [$d[2]->pais, $d[2]->directo, $d[2]->superior, $d[2]->ejecutivo, $d[2]->plata, $d[2]->vgp30000mas],
-                        [$d[3]->pais, $d[3]->directo, $d[3]->superior, $d[3]->ejecutivo, $d[3]->plata, $d[3]->vgp30000mas],
-                        [$d[4]->pais, $d[4]->directo, $d[4]->superior, $d[4]->ejecutivo, $d[4]->plata, $d[4]->vgp30000mas],
-                        [$d[5]->pais, $d[5]->directo, $d[5]->superior, $d[5]->ejecutivo, $d[5]->plata, $d[5]->vgp30000mas],
-                        [$d[6]->pais, $d[6]->directo, $d[6]->superior, $d[6]->ejecutivo, $d[6]->plata, $d[6]->vgp30000mas],
-                        [$d[7]->pais, $d[7]->directo, $d[7]->superior, $d[7]->ejecutivo, $d[7]->plata, $d[7]->vgp30000mas],
-                        [$d[8]->pais, $d[8]->directo, $d[8]->superior, $d[8]->ejecutivo, $d[8]->plata, $d[8]->vgp30000mas],
-                        ['Latinoamérica', '=SUM(B45:B53)', '=SUM(C45:C53)', '=SUM(D45:D53)', '=SUM(E45:E53)', '=SUM(F45:F53)'],
-                    ],
-                    null, 'A44', true
-                );
+                $h = ['País', 'Directo', 'Superior', 'Ejecutivo', 'Plata', 'VGP 30,000 o más'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSocios30000masVGPAnual;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B45:B53)', '=SUM(C45:C53)', '=SUM(D45:D53)', '=SUM(E45:E53)', '=SUM(F45:F53)'];
+                $hoja1->fromArray($d, null, 'A44', true);
                 $hoja1->getStyle('A44:F54')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A44:F44')->applyFromArray($headerStyle);
             #TABLA 3
@@ -185,23 +129,10 @@ class retos2025 extends Controller{
                 $range = "A57";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_VentaDolaresSocios2025;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
-                        [$d[0]->pais, $d[0]->enero, $d[0]->febrero, $d[0]->marzo, $d[0]->abril, $d[0]->mayo, $d[0]->junio, $d[0]->julio, $d[0]->agosto, $d[0]->septiembre],
-                        [$d[1]->pais, $d[1]->enero, $d[1]->febrero, $d[1]->marzo, $d[1]->abril, $d[1]->mayo, $d[1]->junio, $d[1]->julio, $d[1]->agosto, $d[1]->septiembre],
-                        [$d[2]->pais, $d[2]->enero, $d[2]->febrero, $d[2]->marzo, $d[2]->abril, $d[2]->mayo, $d[2]->junio, $d[2]->julio, $d[2]->agosto, $d[2]->septiembre],
-                        [$d[3]->pais, $d[3]->enero, $d[3]->febrero, $d[3]->marzo, $d[3]->abril, $d[3]->mayo, $d[3]->junio, $d[3]->julio, $d[3]->agosto, $d[3]->septiembre],
-                        [$d[4]->pais, $d[4]->enero, $d[4]->febrero, $d[4]->marzo, $d[4]->abril, $d[4]->mayo, $d[4]->junio, $d[4]->julio, $d[4]->agosto, $d[4]->septiembre],
-                        [$d[5]->pais, $d[5]->enero, $d[5]->febrero, $d[5]->marzo, $d[5]->abril, $d[5]->mayo, $d[5]->junio, $d[5]->julio, $d[5]->agosto, $d[5]->septiembre],
-                        [$d[6]->pais, $d[6]->enero, $d[6]->febrero, $d[6]->marzo, $d[6]->abril, $d[6]->mayo, $d[6]->junio, $d[6]->julio, $d[6]->agosto, $d[6]->septiembre],
-                        [$d[7]->pais, $d[7]->enero, $d[7]->febrero, $d[7]->marzo, $d[7]->abril, $d[7]->mayo, $d[7]->junio, $d[7]->julio, $d[7]->agosto, $d[7]->septiembre],
-                        [$d[8]->pais, $d[8]->enero, $d[8]->febrero, $d[8]->marzo, $d[8]->abril, $d[8]->mayo, $d[8]->junio, $d[8]->julio, $d[8]->agosto, $d[8]->septiembre],
-                        ['Latinoamérica', '=SUM(B60:B68)', '=SUM(C60:C68)', '=SUM(D60:D68)', '=SUM(E60:E68)', '=SUM(F60:F68)', '=SUM(G60:G68)', '=SUM(H60:H68)', '=SUM(I60:I68)', '=SUM(J60:J68)'],
-                    ],
-                    null, 'A59', true
-                );
+                $h = ['País', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_VentaDolaresSocios2025;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B60:B68)', '=SUM(C60:C68)', '=SUM(D60:D68)', '=SUM(E60:E68)', '=SUM(F60:F68)', '=SUM(G60:G68)', '=SUM(H60:H68)', '=SUM(I60:I68)', '=SUM(J60:J68)'];
+                $hoja1->fromArray($d, null, 'A59', true);
                 $hoja1->getStyle('A59:J69')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A59:J59')->applyFromArray($headerStyle);
             #TABLA 4
@@ -214,23 +145,10 @@ class retos2025 extends Controller{
                 $range = "A72";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_VentaDolaresPeriodo_Uno;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
-                        [$d[0]->pais, $d[0]->enero, $d[0]->febrero, $d[0]->marzo, $d[0]->abril, $d[0]->mayo, $d[0]->junio, $d[0]->julio, $d[0]->agosto, $d[0]->septiembre],
-                        [$d[1]->pais, $d[1]->enero, $d[1]->febrero, $d[1]->marzo, $d[1]->abril, $d[1]->mayo, $d[1]->junio, $d[1]->julio, $d[1]->agosto, $d[1]->septiembre],
-                        [$d[2]->pais, $d[2]->enero, $d[2]->febrero, $d[2]->marzo, $d[2]->abril, $d[2]->mayo, $d[2]->junio, $d[2]->julio, $d[2]->agosto, $d[2]->septiembre],
-                        [$d[3]->pais, $d[3]->enero, $d[3]->febrero, $d[3]->marzo, $d[3]->abril, $d[3]->mayo, $d[3]->junio, $d[3]->julio, $d[3]->agosto, $d[3]->septiembre],
-                        [$d[4]->pais, $d[4]->enero, $d[4]->febrero, $d[4]->marzo, $d[4]->abril, $d[4]->mayo, $d[4]->junio, $d[4]->julio, $d[4]->agosto, $d[4]->septiembre],
-                        [$d[5]->pais, $d[5]->enero, $d[5]->febrero, $d[5]->marzo, $d[5]->abril, $d[5]->mayo, $d[5]->junio, $d[5]->julio, $d[5]->agosto, $d[5]->septiembre],
-                        [$d[6]->pais, $d[6]->enero, $d[6]->febrero, $d[6]->marzo, $d[6]->abril, $d[6]->mayo, $d[6]->junio, $d[6]->julio, $d[6]->agosto, $d[6]->septiembre],
-                        [$d[7]->pais, $d[7]->enero, $d[7]->febrero, $d[7]->marzo, $d[7]->abril, $d[7]->mayo, $d[7]->junio, $d[7]->julio, $d[7]->agosto, $d[7]->septiembre],
-                        [$d[8]->pais, $d[8]->enero, $d[8]->febrero, $d[8]->marzo, $d[8]->abril, $d[8]->mayo, $d[8]->junio, $d[8]->julio, $d[8]->agosto, $d[8]->septiembre],
-                        ['Latinoamérica', '=SUM(B75:B83)', '=SUM(C75:C83)', '=SUM(D75:D83)', '=SUM(E75:E83)', '=SUM(F75:F83)', '=SUM(G75:G83)', '=SUM(H75:H83)', '=SUM(I75:I83)', '=SUM(J75:J83)'],
-                    ],
-                    null, 'A74', true
-                );
+                $h = ['País', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_VentaDolaresPeriodo_Uno;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B75:B83)', '=SUM(C75:C83)', '=SUM(D75:D83)', '=SUM(E75:E83)', '=SUM(F75:F83)', '=SUM(G75:G83)', '=SUM(H75:H83)', '=SUM(I75:I83)', '=SUM(J75:J83)'];
+                $hoja1->fromArray($d, null, 'A74', true);
                 $hoja1->getStyle('A74:J84')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A74:J74')->applyFromArray($headerStyle);
             #TABLA 5
@@ -243,23 +161,10 @@ class retos2025 extends Controller{
                 $range = "A87";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_porcentajeVentaCVE2025;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'],
-                        [$d[0]->pais, $d[0]->enero, $d[0]->febrero, $d[0]->marzo, $d[0]->abril, $d[0]->mayo, $d[0]->junio, $d[0]->julio, $d[0]->agosto, $d[0]->septiembre],
-                        [$d[1]->pais, $d[1]->enero, $d[1]->febrero, $d[1]->marzo, $d[1]->abril, $d[1]->mayo, $d[1]->junio, $d[1]->julio, $d[1]->agosto, $d[1]->septiembre],
-                        [$d[2]->pais, $d[2]->enero, $d[2]->febrero, $d[2]->marzo, $d[2]->abril, $d[2]->mayo, $d[2]->junio, $d[2]->julio, $d[2]->agosto, $d[2]->septiembre],
-                        [$d[3]->pais, $d[3]->enero, $d[3]->febrero, $d[3]->marzo, $d[3]->abril, $d[3]->mayo, $d[3]->junio, $d[3]->julio, $d[3]->agosto, $d[3]->septiembre],
-                        [$d[4]->pais, $d[4]->enero, $d[4]->febrero, $d[4]->marzo, $d[4]->abril, $d[4]->mayo, $d[4]->junio, $d[4]->julio, $d[4]->agosto, $d[4]->septiembre],
-                        [$d[5]->pais, $d[5]->enero, $d[5]->febrero, $d[5]->marzo, $d[5]->abril, $d[5]->mayo, $d[5]->junio, $d[5]->julio, $d[5]->agosto, $d[5]->septiembre],
-                        [$d[6]->pais, $d[6]->enero, $d[6]->febrero, $d[6]->marzo, $d[6]->abril, $d[6]->mayo, $d[6]->junio, $d[6]->julio, $d[6]->agosto, $d[6]->septiembre],
-                        [$d[7]->pais, $d[7]->enero, $d[7]->febrero, $d[7]->marzo, $d[7]->abril, $d[7]->mayo, $d[7]->junio, $d[7]->julio, $d[7]->agosto, $d[7]->septiembre],
-                        [$d[8]->pais, $d[8]->enero, $d[8]->febrero, $d[8]->marzo, $d[8]->abril, $d[8]->mayo, $d[8]->junio, $d[8]->julio, $d[8]->agosto, $d[8]->septiembre],
-                        ['Latinoamérica', '=SUM(B90:B98)', '=SUM(C90:C98)', '=SUM(D90:D98)', '=SUM(E90:E98)', '=SUM(F90:F98)', '=SUM(G90:G98)', '=SUM(H90:H98)', '=SUM(I90:I98)', '=SUM(J90:J98)'],
-                    ],
-                    null, 'A89', true
-                );
+                $h = ['País', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_porcentajeVentaCVE2025;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B90:B98)', '=SUM(C90:C98)', '=SUM(D90:D98)', '=SUM(E90:E98)', '=SUM(F90:F98)', '=SUM(G90:G98)', '=SUM(H90:H98)', '=SUM(I90:I98)', '=SUM(J90:J98)'];
+                $hoja1->fromArray($d, null, 'A89', true);
                 $hoja1->getStyle('A89:J99')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A89:J89')->applyFromArray($headerStyle);
             #TABLA 6
@@ -302,108 +207,10 @@ class retos2025 extends Controller{
             $range = "A7:CO7";
             $hoja2->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja2->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-            $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoUno;", "SQL173");
+
             $h = ['Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'VP Enero', 'VP Febrero', 'VP Marzo', 'VGP Enero', 'VGP Febrero', 'VGP Marzo', 'KinYa Enero', 'KinYa Febrero', 'KinYa Marzo', 'Inc Agua Enero', 'Inc Agua Febrero', 'Inc Agua Marzo', 'VP Enero', 'VP Febrero', 'VP Marzo', 'VGP Enero', 'VGP Febrero', 'VGP Marzo', 'Acumulado VP 1 Trim', 'Cumple Acumulado VP 1 Trim', 'Acumulado VGP 1 Trim', 'Cumple Acumulado VGP 1 Trim', 'Acumulado Kinya  1 Trim', 'Cumple Acumulado Kinya 1 Trim', 'Acumulado Inc Agua 1 Trim', 'Cumple Acumulado Inc Agua 1 Trim', 'Cumplimiento 1 Trim', 'VP Abril', 'VP Mayo', 'VP Junio', 'VGP Abril', 'VGP Mayo', 'VGP Junio', 'KinYa Abril', 'KinYa Mayo', 'KinYa Junio', 'Inc Agua Abril', 'Inc Agua Mayo', 'Inc Agua Junio', 'VP Abril', 'VP Mayo', 'VP Junio', 'VGP Abril', 'VGP Mayo', 'VGP Junio', 'Acumulado VP 2 Trim', 'Cumple Acumulado VP 2 Trim', 'Acumulado VGP 2 Trim', 'Cumple Acumulado VGP 2 Trim', 'Acumulado Kinya  2 Trim', 'Cumple Acumulado Kinya 2 Trim', 'Acumulado Inc Agua 2 Trim', 'Cumple Acumulado Inc Agua 2 Trim', 'Cumplimiento 2 Trim', 'VP Julio', 'VP Agosto', 'VP Septiembre', 'VGP Julio', 'VGP Agosto', 'VGP Septiembre', 'KinYa Julio', 'KinYa Agosto', 'KinYa Septiembre', 'Inc Agua Julio', 'Inc Agua Agosto', 'Inc Agua Septiembre', 'VP Julio', 'VP Agosto', 'VP Septiembre', 'VGP Julio', 'VGP Agosto', 'VGP Septiembre', 'Acumulado VP 3 Trim', 'Cumple Acumulado VP 3 Trim', 'Acumulado VGP 3 Trim', 'Cumple Acumulado VGP 3 Trim', 'Acumulado Kinya  3 Trim', 'Cumple Acumulado Kinya 3 Trim', 'Acumulado Inc Agua 3 Trim', 'Cumple Acumulado Inc Agua 3 Trim', 'Cumplimiento 3 Trim', 'VGP Acumulado 1 Periodo', 'Falta VGP para el 1 Periodo', 'Cumplimiento 1 Periodo', 'Aplica doble requisito 1 periodo'];
-            $datos = [];
-            $datos[] = $h;
-            for ($x=0; $x < sizeof($d); $x++) { 
-                $datos[] = [
-                    $d[$x]->codSocio,
-                    $d[$x]->nombre,
-                    $d[$x]->rango,
-                    $d[$x]->fecha_ultimo_avance,
-                    $d[$x]->estado,
-                    $d[$x]->correo_elect,
-                    $d[$x]->teléfono,
-                    $d[$x]->pais,
-                    $d[$x]->vpEnero,
-                    $d[$x]->vpFebrero,
-                    $d[$x]->vpMarzo,
-                    $d[$x]->vgpEnero,
-                    $d[$x]->vgpFebrero,
-                    $d[$x]->vgpMarzo,
-                    $d[$x]->kinyaEnero,
-                    $d[$x]->kinyaFebrero,
-                    $d[$x]->kinyaMarzo,
-                    $d[$x]->frontalesEnero,
-                    $d[$x]->frontalesFebrero,
-                    $d[$x]->frontalesMarzo,
-                    $d[$x]->vpEneroRequistos,
-                    $d[$x]->vpFebreroRequistos,
-                    $d[$x]->vpMarzoRequistos,
-                    $d[$x]->vgpEneroRequistos,
-                    $d[$x]->vgpFebreroRequistos,
-                    $d[$x]->vgpMarzoRequistos,
-                    $d[$x]->acumuladoVpTrimUno,
-                    $d[$x]->cumpleAcumuladoVpTrimUno,
-                    $d[$x]->acumuladoVgpTrimUno,
-                    $d[$x]->cumpleAcumuladoVgpTrimUno,
-                    $d[$x]->acumuladoKinyaTrimUno,
-                    $d[$x]->cumpleKinyaAcumTrimUno,
-                    $d[$x]->acumuladoIncorporacionTrimUno,
-                    $d[$x]->cumpleIncorporacionAcumTrimUno,
-                    $d[$x]->cumpleTrimestreUNO,
-                    $d[$x]->vpAbril,
-                    $d[$x]->vpMayo,
-                    $d[$x]->vpJunio,
-                    $d[$x]->vgpAbril,
-                    $d[$x]->vgpMayo,
-                    $d[$x]->vgpJunio,
-                    $d[$x]->kinyaAbril,
-                    $d[$x]->kinyaMayo,
-                    $d[$x]->kinyaJunio,
-                    $d[$x]->frontalesAbril,
-                    $d[$x]->frontalesMayo,
-                    $d[$x]->frontalesJunio,
-                    $d[$x]->vpAbrilRequistos,
-                    $d[$x]->vpMayoRequistos,
-                    $d[$x]->vpJunioRequistos,
-                    $d[$x]->vgpAbrilRequistos,
-                    $d[$x]->vgpMayoRequistos,
-                    $d[$x]->vgpJunioRequistos,
-                    $d[$x]->acumuladoVpTrimDos,
-                    $d[$x]->cumpleAcumuladoVpTrimDos,
-                    $d[$x]->acumuladoVgpTrimDos,
-                    $d[$x]->cumpleAcumuladoVgpTrimDos,
-                    $d[$x]->acumuladoKinyaTrimDos,
-                    $d[$x]->cumpleKinyaAcumTrimDos,
-                    $d[$x]->acumuladoIncorporacionTrimDos,
-                    $d[$x]->cumpleIncorporacionAcumTrimDos,
-                    $d[$x]->cumpleTrimestreDos,
-                    $d[$x]->vpJulio,
-                    $d[$x]->vpAgosto,
-                    $d[$x]->vpSeptiembre,
-                    $d[$x]->vgpJulio,
-                    $d[$x]->vgpAgosto,
-                    $d[$x]->vgpSeptiembre,
-                    $d[$x]->kinyaJulio,
-                    $d[$x]->kinyaAgosto,
-                    $d[$x]->kinyaSeptiembre,
-                    $d[$x]->frontalesJulio,
-                    $d[$x]->frontalesAgosto,
-                    $d[$x]->frontalesSeptiembre,
-                    $d[$x]->vpJulioRequistos,
-                    $d[$x]->vpAgostoRequistos,
-                    $d[$x]->vpSeptiembreRequistos,
-                    $d[$x]->vgpJulioRequistos,
-                    $d[$x]->vgpAgostoRequistos,
-                    $d[$x]->vgpSeptiembreRequistos,
-                    $d[$x]->acumuladoVpTrimTres,
-                    $d[$x]->cumpleAcumuladoVpTrimTres,
-                    $d[$x]->acumuladoVgpTrimTres,
-                    $d[$x]->cumpleAcumuladoVgpTrimTres,
-                    $d[$x]->acumuladoKinyaTrimTres,
-                    $d[$x]->cumpleKinyaAcumTrimTres,
-                    $d[$x]->acumuladoIncorporacionTrimTres,
-                    $d[$x]->cumpleIncorporacionAcumTrimTres,
-                    $d[$x]->cumpleTrimestreTres,
-                    $d[$x]->vgpAcumuladoPeriodoUno,
-                    $d[$x]->vgpRestantePeriodoUno,
-                    $d[$x]->cumplePeriodo1,
-                    $d[$x]->doble_Requisito_periodo1,
-                ];
-            }
-            $hoja2->fromArray($datos, null, 'A7', true);
+            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoUno;", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A7', true);
         # HOJA 2
         
         # HOJA 3
@@ -443,104 +250,10 @@ class retos2025 extends Controller{
             $range = "A7:CO7";
             $hoja3->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja3->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-            $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoDos;", "SQL173");
+
             $h = ['Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'VP Abril', 'VP Mayo', 'VP Junio', 'VGP Abril', 'VGP Mayo', 'VGP Junio', 'KinYa Abril', 'KinYa Mayo', 'KinYa Junio', 'Inc Agua Abril', 'Inc Agua Mayo', 'Inc Agua Junio', 'VP Abril', 'VP Mayo', 'VP Junio', 'VGP Abril', 'VGP Mayo', 'VGP Junio', 'Acumulado VP 1 Trim', 'Cumple Acumulado VP 1 Trim', 'Acumulado VGP 1 Trim', 'Cumple Acumulado VGP 1 Trim', 'Acumulado Kinya  1 Trim', 'Cumple Acumulado Kinya 1 Trim', 'Acumulado Inc Agua 1 Trim', 'Cumple Acumulado Inc Agua 1 Trim', 'Cumplimiento 1 Trim', 'VP Julio', 'VP Agosto', 'VP Septiembre', 'VGP Julio', 'VGP Agosto', 'VGP Septiembre', 'KinYa Julio', 'KinYa Agosto', 'KinYa Septiembre', 'Inc Agua Julio', 'Inc Agua Agosto', 'Inc Agua Septiembre', 'VP Julio', 'VP Agosto', 'VP Septiembre', 'VGP Julio', 'VGP Agosto', 'VGP Septiembre', 'Acumulado VP 2 Trim', 'Cumple Acumulado VP 2 Trim', 'Acumulado VGP 2 Trim', 'Cumple Acumulado VGP 2 Trim', 'Acumulado Kinya  2 Trim', 'Cumple Acumulado Kinya 2 Trim', 'Acumulado Inc Agua 2 Trim', 'Cumple Acumulado Inc Agua 2 Trim', 'Cumplimiento 2 Trim', 'VP Octubre', 'VP Noviembre', 'VP Diciembre', 'VGP Octubre', 'VGP Noviembre', 'VGP Diciembre', 'KinYa Octubre', 'KinYa Noviembre', 'KinYa Diciembre', 'Inc Agua Octubre', 'Inc Agua Noviembre', 'Inc Agua Diciembre', 'VP Octubre', 'VP Noviembre', 'VP Diciembre', 'VGP Octubre', 'VGP Noviembre', 'VGP Diciembre', 'Acumulado VP 3 Trim', 'Cumple Acumulado VP 3 Trim', 'Acumulado VGP 3 Trim', 'Cumple Acumulado VGP 3 Trim', 'Acumulado Kinya  3 Trim', 'Cumple Acumulado Kinya 3 Trim', 'Acumulado Inc Agua 3 Trim', 'Cumple Acumulado Inc Agua 3 Trim', 'Cumplimiento 3 Trim', 'VGP Acumulado 2 Periodo', 'Falta VGP para el 2 Periodo', 'Cumplimiento 2 Periodo', 'Aplica doble requisito 2 periodo'];
-            $datos = [];
-            $datos[] = $h;
-            for ($x=0; $x < sizeof($d); $x++) { 
-                $datos[] = [
-                    $d[$x]->codSocio,
-                    $d[$x]->nombre,
-                    $d[$x]->rango,
-                    $d[$x]->fecha_ultimo_avance,
-                    $d[$x]->estado,
-                    $d[$x]->correo_elect,
-                    $d[$x]->teléfono,
-                    $d[$x]->pais,
-                    $d[$x]->vpAbril,
-                    $d[$x]->vpMayo,
-                    $d[$x]->vpJunio,
-                    $d[$x]->vgpAbril,
-                    $d[$x]->vgpMayo,
-                    $d[$x]->vgpJunio,
-                    $d[$x]->kinyaAbril,
-                    $d[$x]->kinyaMayo,
-                    $d[$x]->kinyaJunio,
-                    $d[$x]->frontalesAbril,
-                    $d[$x]->frontalesMayo,
-                    $d[$x]->frontalesJunio,
-                    $d[$x]->vpAbrilRequistos,
-                    $d[$x]->vpMayoRequistos,
-                    $d[$x]->vpJunioRequistos,
-                    $d[$x]->vgpAbrilRequistos,
-                    $d[$x]->vgpMayoRequistos,
-                    $d[$x]->vgpJunioRequistos,
-                    $d[$x]->acumuladoVpTrimUno,
-                    $d[$x]->cumpleAcumuladoVpTrimUno,
-                    $d[$x]->acumuladoVgpTrimUno,
-                    $d[$x]->cumpleAcumuladoVgpTrimUno,
-                    $d[$x]->acumuladoKinyaTrimUno,
-                    $d[$x]->cumpleKinyaAcumTrimUno,
-                    $d[$x]->acumuladoIncorporacionTrimUno,
-                    $d[$x]->cumpleIncorporacionAcumTrimUno,
-                    $d[$x]->cumpleTrimestreUno,
-                    $d[$x]->vpJulio,
-                    $d[$x]->vpAgosto,
-                    $d[$x]->vpSeptiembre,
-                    $d[$x]->vgpJulio,
-                    $d[$x]->vgpAgosto,
-                    $d[$x]->vgpSeptiembre,
-                    $d[$x]->kinyaJulio,
-                    $d[$x]->kinyaAgosto,
-                    $d[$x]->kinyaSeptiembre,
-                    $d[$x]->frontalesJulio,
-                    $d[$x]->frontalesAgosto,
-                    $d[$x]->frontalesSeptiembre,
-                    $d[$x]->vpJulioRequistos,
-                    $d[$x]->vpAgostoRequistos,
-                    $d[$x]->vpSeptiembreRequistos,
-                    $d[$x]->vgpJulioRequistos,
-                    $d[$x]->vgpAgostoRequistos,
-                    $d[$x]->vgpSeptiembreRequistos,
-                    $d[$x]->acumuladoVpTrimDos,
-                    $d[$x]->cumpleAcumuladoVpTrimDos,
-                    $d[$x]->acumuladoVgpTrimDos,
-                    $d[$x]->cumpleAcumuladoVgpTrimDos,
-                    $d[$x]->acumuladoKinyaTrimDos,
-                    $d[$x]->cumpleKinyaAcumTrimDos,
-                    $d[$x]->acumuladoIncorporacionTrimDos,
-                    $d[$x]->cumpleIncorporacionAcumTrimDos,
-                    $d[$x]->cumpleTrimestreDos,
-                    $d[$x]->vpOctubre,
-                    $d[$x]->vpNoviembre,
-                    $d[$x]->vpDiciembre,
-                    $d[$x]->vgpOctubre,
-                    $d[$x]->vgpNoviembre,
-                    $d[$x]->vgpDiciembre,
-                    $d[$x]->kinyaOctubre,
-                    $d[$x]->kinyaNoviembre,
-                    $d[$x]->kinyaDiciembre,
-                    $d[$x]->frontalesOctubre,
-                    $d[$x]->frontalesNoviembre,
-                    $d[$x]->frontalesDiciembre,
-                    $d[$x]->vpOctubreRequistos,
-                    $d[$x]->vpNoviembreRequistos,
-                    $d[$x]->vpDiciembreRequistos,
-                    $d[$x]->vgpOctubreRequistos,
-                    $d[$x]->vgpNoviembreRequistos,
-                    $d[$x]->vgpDiciembreRequistos,
-                    $d[$x]->acumuladoVpTrimTres,
-                    $d[$x]->cumpleAcumuladoVpTrimTres,
-                    $d[$x]->acumuladoVgpTrimTres,
-                    $d[$x]->cumpleAcumuladoVgpTrimTres,
-                    $d[$x]->acumuladoKinyaTrimTres,
-                    $d[$x]->cumpleKinyaAcumTrimTres,
-                    $d[$x]->acumuladoIncorporacionTrimTres,
-                    $d[$x]->cumpleIncorporacionAcumTrimTres,
-                    $d[$x]->cumpleTrimestreTres,
-                ];
-            }
-            $hoja3->fromArray($datos, null, 'A7', true);
+            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoDos;", "SQL173", $h);
+            $hoja3->fromArray($d, null, 'A7', true);
         # HOJA 3
         
         # HOJA 4
@@ -578,24 +291,10 @@ class retos2025 extends Controller{
             $range = "A7:I7";
             $hoja4->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja4->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-            $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoDos;", "SQL173");
+            
             $h = ['Código Socio','Nombre','Rango','Fecha del último rango','Estado','Correo electrónico','Teléfono Móvil','País','Trimestre Ganador'];
-            $datos = [];
-            $datos[] = $h;
-            for ($x=0; $x < sizeof($d); $x++) { 
-                $datos[] = [
-                    $d[$x]->codSocio,
-                    $d[$x]->nombre,
-                    $d[$x]->rango,
-                    $d[$x]->fecha_ultimo_avance,
-                    $d[$x]->estado,
-                    $d[$x]->correo_elect,
-                    $d[$x]->teléfono,
-                    $d[$x]->pais,
-                    $d[$x]->trimestreGanador,
-                ];
-            }
-            $hoja4->fromArray($datos, null, 'A7', true);
+            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_GanadoresCenaTrimestral;", "SQL173", $h);
+            $hoja4->fromArray($d, null, 'A7', true);
         # HOJA 4
 
         // Guardar el archivo temporalmente
@@ -672,23 +371,11 @@ class retos2025 extends Controller{
                     'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER]
                 ];
-                // $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSociosCal;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Trim1 Ene-Mar', 'Trim2 Abr-Jun', 'Trim3 Jul-Sep', 'Trim4 Oct-Dic', 'Ganadores Club viajero '],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        ['Latinoamérica', '=SUM(B11:B19)', '=SUM(C11:C19)', '=SUM(D11:D19)', '=SUM(E11:E19)', '=SUM(F11:F19)']
-                    ],
-                    null, 'A10', true
-                );
+
+                $h = ['País', 'Trim1 Ene-Mar', 'Trim2 Abr-Jun', 'Trim3 Jul-Sep', 'Trim4 Oct-Dic', 'Ganadores Club viajero'];
+                $d = $core->getReportBody("exec RETOS_ESPECIALES.dbo.report_viajero_caro_porpaish1 1;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B11:B19)', '=SUM(C11:C19)', '=SUM(D11:D19)', '=SUM(E11:E19)', '=SUM(F11:F19)'];
+                $hoja1->fromArray($d, null, 'A10', true);
                 $hoja1->getStyle('A10:F20')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A10:F10')->applyFromArray($headerStyle);
                 $color = 'FBE2D5';
@@ -706,20 +393,10 @@ class retos2025 extends Controller{
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
                 $hoja1->fromArray(
-                    [
-                        ['Filtro por país', 'Latam'],
-                    ],
-                    null, 'A25', true
-                );
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.report_viajero_caro 'LAT', 2;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['Variable', 'Enero',  'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                        [$d[0]->variable, $d[0]->Enero, $d[0]->Febrero, $d[0]->Marzo, $d[0]->Abril, $d[0]->Mayo, $d[0]->Junio, $d[0]->Julio, $d[0]->Agosto, $d[0]->Septiembre, $d[0]->Octubre, $d[0]->Noviembre, $d[0]->Diciembre],
-                        [$d[1]->variable, $d[1]->Enero, $d[1]->Febrero, $d[1]->Marzo, $d[1]->Abril, $d[1]->Mayo, $d[1]->Junio, $d[1]->Julio, $d[1]->Agosto, $d[1]->Septiembre, $d[1]->Octubre, $d[1]->Noviembre, $d[1]->Diciembre],
-                    ],
-                    null, 'A27', true
-                );
+                    [['Filtro por país', 'Latam'],], null, 'A25', true);
+                $h = ['Variable', 'Enero',  'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_caro 'LAT', 2;", "SQL173", $h);
+                $hoja1->fromArray($d, null, 'A27', true);
                 $hoja1->getStyle('A27:M29')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A27:M27')->applyFromArray($headerStyle);
                 $hoja1->fromArray(
@@ -728,17 +405,9 @@ class retos2025 extends Controller{
                     ],
                     null, 'A32', true
                 );
-                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.report_viajero_caro 'LAT', 3;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['Variable', '1 Trimestre', '2 Trimestre', '3 Trimestre', '4 Trimestre'],
-                        [$d[0]->variable, $d[0]->Trimestre1, $d[0]->Trimestre2, $d[0]->Trimestre3, $d[0]->Trimestre4],
-                        [$d[1]->variable, $d[1]->Trimestre1, $d[1]->Trimestre2, $d[1]->Trimestre3, $d[1]->Trimestre4],
-                        [$d[2]->variable, $d[2]->Trimestre1, $d[2]->Trimestre2, $d[2]->Trimestre3, $d[2]->Trimestre4],
-                        [$d[3]->variable, $d[3]->Trimestre1, $d[3]->Trimestre2, $d[3]->Trimestre3, $d[3]->Trimestre4],
-                    ],
-                    null, 'A34', true
-                );
+                $h = ['Variable', '1 Trimestre', '2 Trimestre', '3 Trimestre', '4 Trimestre'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_caro 'LAT', 3;", "SQL173", $h);
+                $hoja1->fromArray($d, null, 'A34', true);
                 $hoja1->getStyle('A34:E38')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A34:E34')->applyFromArray($headerStyle);
             #TABLA 2
@@ -751,23 +420,10 @@ class retos2025 extends Controller{
                 $range = "A42";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                // $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSocios30000masVGPAnual;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Oro', 'Platino', 'Diamante', 'Diamante Real', 'VGP 53,000 o más'],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0],
-                        ['Latinoamérica', '=SUM(B45:B53)', '=SUM(C45:C53)', '=SUM(D45:D53)', '=SUM(E45:E53)', '=SUM(F45:F53)'],
-                    ],
-                    null, 'A44', true
-                );
+                $h = ['País', 'Oro', 'Platino', 'Diamante', 'Diamante Real', 'VGP 53,000 o más'];
+                $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.report_viajero_caro_porpaish1 2;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B45:B53)', '=SUM(C45:C53)', '=SUM(D45:D53)', '=SUM(E45:E53)', '=SUM(F45:F53)'];
+                $hoja1->fromArray($d, null, 'A44', true);
                 $hoja1->getStyle('A44:F54')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A44:F44')->applyFromArray($headerStyle);
             #TABLA 3

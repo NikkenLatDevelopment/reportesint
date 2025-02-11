@@ -131,4 +131,23 @@ class coreApp extends Controller{
 
         return $mesesLtr[$mes] . " " . $anio;
     }
+
+    public function getReportBody($stmt, $conn, $h){
+        $stmt = $this->execSQLQuery("$stmt", "$conn");
+        $filaData = [];
+        $data = [];
+        $data[] = $h;
+        if (!empty($stmt)) {
+            $primerRegistro = (array)$stmt[0];
+            $headers = array_keys($primerRegistro);
+            foreach ($stmt as $fila) {
+                $filaArray = (array)$fila;
+                foreach ($headers as $header) {
+                    $filaData[$header] = $filaArray[$header] ?? null;
+                }
+                $data[] = $filaData;
+            }
+        }
+        return $data;
+    }
 }
