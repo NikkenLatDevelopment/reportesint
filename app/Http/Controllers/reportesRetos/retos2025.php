@@ -568,10 +568,9 @@ class retos2025 extends Controller{
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja3->getColumnDimension($letter)->setAutoSize(true);
-                $hoja3->getColumnDimension('A' . $letter)->setAutoSize(true);
             }
-            $hoja3->getStyle('A7:I7')->getFont()->setBold(true);
-            $hoja3->setAutoFilter('A7:I7');
+            $hoja3->getStyle('A7:J7')->getFont()->setBold(true);
+            $hoja3->setAutoFilter('A7:J7');
 
             $hoja3->mergeCells('A1:D1');
             $hoja3->setCellValue('A1', "NIKKEN LATINOAMERICA");
