@@ -597,11 +597,9 @@ class retos2025 extends Controller{
             $range = "A7:I7";
             $hoja3->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja3->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-            // $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoUno;", "SQL173");
             $h = ['Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Trimestre Ganador'];
-            $datos = [];
-            $datos[] = $h;
-            $hoja3->fromArray($datos, null, 'A7', true);
+            $d = $core->getReportBody("exec RETOS_ESPECIALES.dbo.report_viajero_caro_ganadores;", "SQL173", $h);
+            $hoja3->fromArray($d, null, 'A7', true);
         # HOJA 3
 
         // Guardar el archivo temporalmente
