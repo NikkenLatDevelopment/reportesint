@@ -594,10 +594,10 @@ class retos2025 extends Controller{
             $hoja3->getStyle('E1')->getFont()->setBold(true);
 
             $color = 'DAE9F8';
-            $range = "A7:I7";
+            $range = "A7:J7";
             $hoja3->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja3->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-            $h = ['Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Trimestre Ganador'];
+            $h = ['Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Trimestre Ganador', 'Validación'];
             $d = $core->getReportBody("exec RETOS_ESPECIALES.dbo.report_viajero_caro_ganadores;", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A7', true);
         # HOJA 3
