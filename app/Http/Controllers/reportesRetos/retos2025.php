@@ -423,7 +423,7 @@ class retos2025 extends Controller{
                 $h = ['País', 'Oro', 'Platino', 'Diamante', 'Diamante Real', 'VGP 53,000 o más'];
                 $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.report_viajero_caro_porpaish1 2;", "SQL173", $h);
                 $d[] = ['Latinoamérica', '=SUM(B45:B53)', '=SUM(C45:C53)', '=SUM(D45:D53)', '=SUM(E45:E53)', '=SUM(F45:F53)'];
-                $hoja1->fromArray($d, null, 'A44', true);
+                $hoja1->fromArray($d, null, 'A45', true);
                 $hoja1->getStyle('A44:F54')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A44:F44')->applyFromArray($headerStyle);
             #TABLA 3
