@@ -528,7 +528,7 @@ class retos2025 extends Controller{
                 $hoja2->getColumnDimension('D' . $letter)->setAutoSize(true);
             }
             $hoja2->getStyle('A7:DTO7')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A7:DT7');
+            $hoja2->setAutoFilter('A7:CV7');
 
             $hoja2->mergeCells('A1:D1');
             $hoja2->setCellValue('A1', "NIKKEN LATINOAMERICA");
