@@ -30,5 +30,5 @@ Route::get('reporteEmprendedor25','reportesRetos\retos2025@reporteEmprendedor25'
 Route::get('reporteViajero25','reportesRetos\retos2025@reporteViajero25');
 Route::get('reporteVip25','reportesRetos\retos2025@reporteVip25');
 
-Route::get('estCHLexe','otros\otros@estCHLexe');
-Route::get('estVHLideres','otros\otros@estVHLideres');
+Route::get('estCHLexefixeed', 'otros\otros@estCHLexe');
+Route::get('estVHLideresfixeed', 'otros\otros@estVHLideres');
