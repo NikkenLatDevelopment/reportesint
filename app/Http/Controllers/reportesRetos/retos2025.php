@@ -912,11 +912,9 @@ class retos2025 extends Controller{
             $range = "A7:AA7";
             $hoja2->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja2->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-            // $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoUno;", "SQL173");
             $h = ['Ranking', 'Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Ganador Club Viajero', 'Cantidad de avances Plata- 1 Semestre', 'Cantidad de avances Plata- 2 Semestre', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'VGP Acumulado 2025', 'Cumple requisitos', 'Aplica a doble requisito'];
-            $datos = [];
-            $datos[] = $h;
-            $hoja2->fromArray($datos, null, 'A7', true);
+            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro_ganadores;", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A7', true);
         # HOJA 2
 
         # HOHJA 3
@@ -951,11 +949,9 @@ class retos2025 extends Controller{
             $range = "A7:M7";
             $hoja3->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja3->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-            // $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_PeriodoUno;", "SQL173");
-            $h = ['Ranking', 'Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Ganador Club viajero', 'Platas - 1 Sem', 'Platas - 2 Sem', 'VGP'];
-            $datos = [];
-            $datos[] = $h;
-            $hoja3->fromArray($datos, null, 'A7', true);
+            $h = ['Ranking', 'Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Ganador Club Viajero', 'Cantidad de avances Plata- 1 Semestre', 'Cantidad de avances Plata- 2 Semestre', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'VGP Acumulado 2025', 'Cumple requisitos', 'Aplica a doble requisito'];
+            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro_h2;", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A7', true);
         # HOJA 3
 
         // Guardar el archivo temporalmente
