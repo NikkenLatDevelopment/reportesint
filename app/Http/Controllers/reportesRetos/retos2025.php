@@ -913,7 +913,7 @@ class retos2025 extends Controller{
             $hoja2->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja2->getStyle($range)->getFill()->getStartColor()->setRGB($color);
             $h = ['Ranking', 'Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Ganador Club Viajero', 'Cantidad de avances Plata- 1 Semestre', 'Cantidad de avances Plata- 2 Semestre', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'VGP Acumulado 2025', 'Cumple requisitos', 'Aplica a doble requisito'];
-            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro_ganadores;", "SQL173", $h);
+            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro_h2;", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A7', true);
         # HOJA 2
 
@@ -949,8 +949,8 @@ class retos2025 extends Controller{
             $range = "A7:M7";
             $hoja3->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
             $hoja3->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-            $h = ['Ranking', 'Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Ganador Club Viajero', 'Cantidad de avances Plata- 1 Semestre', 'Cantidad de avances Plata- 2 Semestre', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'VGP Acumulado 2025', 'Cumple requisitos', 'Aplica a doble requisito'];
-            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro_h2;", "SQL173", $h);
+            $h = ['Ranking', 'Código Socio', 'Nombre', 'Rango', 'Fecha del último rango', 'Estado', 'Correo electrónico', 'Teléfono Móvil', 'País', 'Ganador Club viajero', 'Platas - 1 Sem', 'Platas - 2 Sem', 'VGP'];
+            $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro_ganadores;", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A7', true);
         # HOJA 3
 
