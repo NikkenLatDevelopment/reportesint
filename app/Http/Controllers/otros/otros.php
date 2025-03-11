@@ -162,7 +162,8 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja1->getStyle('A3:P3')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A3:P3');
 
             $hoja1->mergeCells('A1:M1');
             $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
@@ -174,14 +175,15 @@ class otros extends Controller{
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->getActiveSheet();
+            $hoja2 = $spreadsheet->createSheet();
 
             $hoja2->setTitle("fn_rebate_exigo");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja2->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja2->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja2->getStyle('A3:P3')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A3:P3');
 
             $hoja2->mergeCells('A1:M1');
             $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
@@ -193,33 +195,35 @@ class otros extends Controller{
         # hoja 2
         
         # hoja 3
-            $hoja3 = $spreadsheet->getActiveSheet();
+            $hoja3 = $spreadsheet->createSheet();
 
             $hoja3->setTitle("fn_override_exigo");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja3->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja3->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja3->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja3->setAutoFilter('A3:Q3');
 
             $hoja3->mergeCells('A1:M1');
             $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
             $hoja3->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Ownerid', 'vc_calculadoOrden', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'nombre_Socio', 'paisOrden', 'total', 'importeImpuesto', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
+            $h = ['bonus', 'Ownerid', 'vc_calculadoOrden', 'porcentaje', 'total_comision', 'rangoSocio', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'nombre_Socio', 'paisOrden', 'total', 'importeImpuesto', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
             $d = $core->getReportBody("SELECT * FROM diccionarioExigo.dbo.fn_override_exigo ($code, '$period');", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
-        
+
         # hoja 4
-            $hoja4 = $spreadsheet->getActiveSheet();
+            $hoja4 = $spreadsheet->createSheet();
 
             $hoja4->setTitle("fn_leadrship_exigo");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja4->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja4->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja4->getStyle('A3:P3')->getFont()->setBold(true);
+            $hoja4->setAutoFilter('A3:P3');
 
             $hoja4->mergeCells('A1:M1');
             $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
@@ -231,14 +235,15 @@ class otros extends Controller{
         # hoja 4
         
         # hoja 5
-            $hoja5 = $spreadsheet->getActiveSheet();
+            $hoja5 = $spreadsheet->createSheet();
 
             $hoja5->setTitle("fn_lifestyleBonus_exigo");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja5->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja5->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja5->getStyle('A3:P3')->getFont()->setBold(true);
+            $hoja5->setAutoFilter('A3:P3');
 
             $hoja5->mergeCells('A1:M1');
             $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
