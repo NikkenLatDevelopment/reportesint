@@ -162,8 +162,8 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja1->getStyle('A3:L3')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A3:L3');
+            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A3:N3');
 
             $hoja1->mergeCells('A1:M1');
             $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
@@ -183,8 +183,8 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja2->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja2->getStyle('A3:M3')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A3:M3');
+            $hoja2->getStyle('A3:O3')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A3:O3');
 
             $hoja2->mergeCells('A1:M1');
             $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
@@ -204,8 +204,8 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja3->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja3->getStyle('A3:N3')->getFont()->setBold(true);
-            $hoja3->setAutoFilter('A3:N3');
+            $hoja3->getStyle('A3:P3')->getFont()->setBold(true);
+            $hoja3->setAutoFilter('A3:P3');
 
             $hoja3->mergeCells('A1:M1');
             $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
@@ -225,8 +225,8 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja4->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja4->getStyle('A3:N3')->getFont()->setBold(true);
-            $hoja4->setAutoFilter('A3:N3');
+            $hoja4->getStyle('A3:P3')->getFont()->setBold(true);
+            $hoja4->setAutoFilter('A3:P3');
 
             $hoja4->mergeCells('A1:M1');
             $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
@@ -246,8 +246,8 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja5->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja5->getStyle('A3:M3')->getFont()->setBold(true);
-            $hoja5->setAutoFilter('A3:M3');
+            $hoja5->getStyle('A3:O3')->getFont()->setBold(true);
+            $hoja5->setAutoFilter('A3:O3');
 
             $hoja5->mergeCells('A1:M1');
             $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
