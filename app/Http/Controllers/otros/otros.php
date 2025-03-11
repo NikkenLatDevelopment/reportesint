@@ -168,8 +168,8 @@ class otros extends Controller{
             $hoja1->mergeCells('A1:M1');
             $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
-
-            $h = ['Ownerid', 'vc_calculadoOrden', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'nombre_Socio', 'paisOrden', 'total', 'importeImpuesto', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
+            
+            $h = ['Ownerid', 'retail', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'paisOrden', 'total', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
             $d = $core->getReportBody("SELECT * FROM diccionarioExigo.dbo.fn_retail_exigo ($code, '$period');", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
@@ -189,7 +189,7 @@ class otros extends Controller{
             $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
             $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Ownerid', 'vc_calculadoOrden', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'nombre_Socio', 'paisOrden', 'total', 'importeImpuesto', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
+            $h = ['Ownerid', 'rebate', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'paisOrden', 'total', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
             $d = $core->getReportBody("SELECT * FROM diccionarioExigo.dbo.fn_rebate_exigo ($code, '$period');", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
@@ -209,7 +209,7 @@ class otros extends Controller{
             $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
             $hoja3->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['bonus', 'Ownerid', 'vc_calculadoOrden', 'porcentaje', 'total_comision', 'rangoSocio', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'nombre_Socio', 'paisOrden', 'total', 'importeImpuesto', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
+            $h = ['Ownerid', 'comision', 'porcentaje', 'total_comision', 'rangoSocio', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'paisOrden', 'total', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
             $d = $core->getReportBody("SELECT * FROM diccionarioExigo.dbo.fn_override_exigo ($code, '$period');", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
@@ -229,7 +229,7 @@ class otros extends Controller{
             $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
             $hoja4->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Ownerid', 'vc_calculadoOrden', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'nombre_Socio', 'paisOrden', 'total', 'importeImpuesto', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
+            $h = ['Ownerid', 'comision', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'paisOrden', 'total', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
             $d = $core->getReportBody("SELECT * FROM diccionarioExigo.dbo.fn_leadrship_exigo ($code, '$period');", "SQL173", $h);
             $hoja4->fromArray($d, null, 'A3', true);
         # hoja 4
@@ -249,7 +249,7 @@ class otros extends Controller{
             $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
             $hoja5->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Ownerid', 'vc_calculadoOrden', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'nombre_Socio', 'paisOrden', 'total', 'importeImpuesto', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
+            $h = ['Ownerid', 'comision', 'porcentaje', 'total_comision', 'FromRankID', 'moneda', 'associateid', 'orderNum', 'fecha_Orden', 'paisOrden', 'total', 'vp_Orden', 'vc_Orden', 'PeriodOrden'];
             $d = $core->getReportBody("SELECT * FROM diccionarioExigo.dbo.fn_lifestyleBonus_exigo ($code, '$period');", "SQL173", $h);
             $hoja5->fromArray($d, null, 'A3', true);
         # hoja 5
