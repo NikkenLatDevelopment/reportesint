@@ -167,6 +167,7 @@ class otros extends Controller{
 
             $hoja1->mergeCells('A1:M1');
             $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja1->setCellValue('A2', "id socio: $code");
             $hoja1->getStyle('A1')->getFont()->setBold(true);
             
             $h = ['Ownerid', 'total_orden', 'retail', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'vp_Orden', 'vc_Orden', 'Periodo_Orden'];
@@ -187,6 +188,7 @@ class otros extends Controller{
 
             $hoja2->mergeCells('A1:M1');
             $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja2->setCellValue('A2', "id socio: $code");
             $hoja2->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['Ownerid', 'vc_orden', 'porcentaje', 'rebate', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden'];
@@ -207,6 +209,7 @@ class otros extends Controller{
 
             $hoja3->mergeCells('A1:M1');
             $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja3->setCellValue('A2', "id socio: $code");
             $hoja3->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden'];
@@ -227,6 +230,7 @@ class otros extends Controller{
 
             $hoja4->mergeCells('A1:M1');
             $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja4->setCellValue('A2', "id socio: $code");
             $hoja4->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden'];
@@ -246,7 +250,8 @@ class otros extends Controller{
             $hoja5->setAutoFilter('A3:M3');
 
             $hoja5->mergeCells('A1:M1');
-            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja5->setCellValue('A2', "id socio: $code");
             $hoja5->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden'];
