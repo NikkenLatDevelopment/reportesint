@@ -166,7 +166,7 @@ class otros extends Controller{
             $hoja1->setAutoFilter('A3:L3');
 
             $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
             $hoja1->getStyle('A1')->getFont()->setBold(true);
             
             $h = ['Ownerid', 'total_orden', 'retail', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'vp_Orden', 'vc_Orden', 'Periodo_Orden'];
@@ -186,7 +186,7 @@ class otros extends Controller{
             $hoja2->setAutoFilter('A3:M3');
 
             $hoja2->mergeCells('A1:M1');
-            $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
             $hoja2->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['Ownerid', 'vc_orden', 'porcentaje', 'rebate', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden'];
@@ -206,7 +206,7 @@ class otros extends Controller{
             $hoja3->setAutoFilter('A3:N3');
 
             $hoja3->mergeCells('A1:M1');
-            $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
             $hoja3->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden'];
@@ -226,7 +226,7 @@ class otros extends Controller{
             $hoja4->setAutoFilter('A3:N3');
 
             $hoja4->mergeCells('A1:M1');
-            $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
             $hoja4->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden'];
@@ -246,7 +246,7 @@ class otros extends Controller{
             $hoja5->setAutoFilter('A3:M3');
 
             $hoja5->mergeCells('A1:M1');
-            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
             $hoja5->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden'];
@@ -260,7 +260,7 @@ class otros extends Controller{
         $writer->save($tempFilePath);
 
         // Enviar la respuesta para forzar la descarga
-        $fileName = "Check de bonificaciones - " . Date('Y_m_d_H_i_s') . '.xlsx';
+        $fileName = "Check de bonificaciones $code - " . Date('Y_m_d_H_i_s') . '.xlsx';
         return response()->stream(
             function () use ($tempFilePath) {
                 readfile($tempFilePath);
