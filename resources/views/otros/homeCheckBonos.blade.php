@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="mplinks">
+                    <a class="nav-link" href="mplinks">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
                         </div>
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="homeCheckBonos">
+                    <a class="nav-link active" href="homeCheckBonos">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
                         </div>
@@ -58,67 +58,43 @@
             <div class="col-md-3 mb-4">
                 <div class="card">
                     <div class="card-header text-center pt-4 pb-3">
-                        <span class="badge rounded-pill bg-light text-dark">Mercado Pago Links</span>
-                        <h1 class="font-weight-bold mt-2">
-                            <img src="https://storage.googleapis.com/proyectos_latam/reportes/mercadopago-nuevo-logo-12208FF614-seeklogo_com.webp" width="90%">
-                        </h1>
+                        <span class="badge rounded-pill bg-light text-dark">Check de bonificaciones</span>
                     </div>
                     <div class="card-body text-lg-left text-center pt-0">
-                        <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                            <div class="icon icon-shape icon-xs rounded-circle bg-gradient-success shadow text-center">
-                                <i class="fas fa-calendar opacity-10" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <span class="ps-3">Fecha inicial</span>
-                            </div>
+                        <div class="form-group text-lg-left justify-content-lg-start justify-content-center">
+                            <span>Código de socio</span>
+                            <input type="text" class="form-control" id="socioCode" name="socioCode" placeholder="Código de socio">
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" type="date" id="date_ini">
+                        <div class="form-group text-lg-left justify-content-lg-start justify-content-center">
+                            <span>Periodo de medición:</span>
+                            <select class="form-control " aria-label="Default select" id="periodSlct" name="periodSlct">
+                                <option value="202502">Febrero 2025</option>
+                            </select>
                         </div>
                         <hr>
-                        <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                            <div class="icon icon-shape icon-xs rounded-circle bg-gradient-success shadow text-center">
-                                <i class="fas fa-calendar opacity-10" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <span class="ps-3">Fecha final</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="date" id="date_end">
-                        </div>
-                        <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0" onclick="getMplinksData()">
+                        <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0" onclick="reportCheckBonos();">
                             Generar Reporte
                             <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
-            </div>            
-            <div class="col-md-12 mb-4">
-                <div class="card">
-                    <div class="table-responsive pb-4 mt-3" id="inactivosDiv">
-                        <table class="table align-items-center mb-0 text-center" id="getMplinksTable">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">#</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Venta</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">País</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Metodo de pago</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Proveedor de pago</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Monto</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Estatus</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Fecha de creación</th>
-                                    <th class="text-uppercase text-xxs font-weight-bolder text-black">Fecha de actualización</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            </div> 
         </div>
     </div>
 @stop
 
 @section('mainjs')
 <script src="{{ asset('assets/mainjs/inactivos.js?v=' . Date('YmdHis')) }}"></script>
+<script>
+    function reportCheckBonos(){
+        var socioCode = document.getElementById('socioCode').value;
+        var periodSlct = document.getElementById('periodSlct').value;
+        if(socioCode != ''){
+            window.open('/reportCheckBonos?code=' + socioCode + '&period=' + periodSlct, '_blank');
+        }
+        else{
+            alert('Debe ingresar un código de socio');
+        }
+    }
+</script>
 @stop

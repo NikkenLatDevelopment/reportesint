@@ -32,3 +32,6 @@ Route::get('reporteVip25','reportesRetos\retos2025@reporteVip25');
 
 Route::get('estCHLexefixeed', 'otros\otros@estCHLexe');
 Route::get('estVHLideresfixeed', 'otros\otros@estVHLideres');
+
+Route::get('homeCheckBonos', 'otros\otros@homeCheckBonos');
+Route::get('reportCheckBonos', 'otros\otros@reportCheckBonos');
