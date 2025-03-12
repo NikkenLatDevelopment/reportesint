@@ -265,7 +265,7 @@ class otros extends Controller{
         $writer->save($tempFilePath);
 
         // Enviar la respuesta para forzar la descarga
-        $fileName = "Check de bonificaciones $code - " . Date('Y_m_d_H_i_s') . '.xlsx';
+        $fileName = "Check de bonificaciones $code - " . Date('Y_m_d_H_i_s') . '.csv';
         return response()->stream(
             function () use ($tempFilePath) {
                 readfile($tempFilePath);
