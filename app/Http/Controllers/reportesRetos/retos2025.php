@@ -673,23 +673,10 @@ class retos2025 extends Controller{
                     'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER]
                 ];
-                // $d = $core->execSQLQuery("EXEC RETOS_ESPECIALES.dbo.rn_CVE_2025_ReporteIntranet_CantidadSociosCal;", "SQL173");
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Platino', 'Diamante', 'Diamante Real', 'Ganadores Club viajero VIP'],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        ['Latinoamérica', '=SUM(B11:B19)', '=SUM(C11:C19)', '=SUM(D11:D19)', '=SUM(E11:E19)']
-                    ],
-                    null, 'A10', true
-                );
+                $h = ['País', 'Platino', 'Diamante', 'Diamante Real', 'Ganadores Club viajero VIP'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro 1;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B11:B19)', '=SUM(C11:C19)', '=SUM(D11:D19)', '=SUM(E11:E19)'];
+                $hoja1->fromArray($d, null, 'A10', true);
                 $hoja1->getStyle('A10:E20')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A10:E10')->applyFromArray($headerStyle);
                 $color = 'FBE2D5';
@@ -714,22 +701,12 @@ class retos2025 extends Controller{
                 $range = "A26:N26";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Platino', 'Diamante', 'Diamante Real', 'Ganadores Club viajero'],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0],
-                        ['Latinoamérica', '=SUM(B29:B37)', '=SUM(C29:C37)', '=SUM(D29:D37)', '=SUM(E29:E37)']
-                    ],
-                    null, 'A28', true
-                );
+
+                $h = ['País', 'Platino', 'Diamante', 'Diamante Real', 'Ganadores Club viajero VIP'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro 2;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B29:B37)', '=SUM(C29:C37)', '=SUM(D29:D37)', '=SUM(E29:E37)'];
+                $hoja1->fromArray($d, null, 'A28', true);
+
                 $hoja1->getStyle('A28:E38')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A28:E28')->applyFromArray($headerStyle);
             # TABLA 2
@@ -742,22 +719,12 @@ class retos2025 extends Controller{
                 $range = "A42:N42";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Enero ', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', '2025'],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        ['Latinoamérica', '=SUM(B45:B53)', '=SUM(C45:C53)', '=SUM(D45:D53)', '=SUM(E45:E53)', '=SUM(F45:F53)', '=SUM(G45:G53)', '=SUM(H45:H53)', '=SUM(I45:I53)', '=SUM(J45:J53)', '=SUM(K45:K53)', '=SUM(L45:L53)', '=SUM(M45:M53)', '=SUM(N45:N53)'],
-                    ],
-                    null, 'A44', true
-                );
+                
+                $h = ['País', 'Enero ', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', '2025'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro 3;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B45:B53)', '=SUM(C45:C53)', '=SUM(D45:D53)', '=SUM(E45:E53)', '=SUM(F45:F53)', '=SUM(G45:G53)', '=SUM(H45:H53)', '=SUM(I45:I53)', '=SUM(J45:J53)', '=SUM(K45:K53)', '=SUM(L45:L53)', '=SUM(M45:M53)', '=SUM(N45:N53)'];
+                $hoja1->fromArray($d, null, 'A44', true);
+
                 $hoja1->getStyle('A44:N54')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A44:N44')->applyFromArray($headerStyle);
             # TABLA 3
@@ -770,22 +737,12 @@ class retos2025 extends Controller{
                 $range = "A58:N58";
                 $hoja1->getStyle($range)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
                 $hoja1->getStyle($range)->getFill()->getStartColor()->setRGB($color);
-                $hoja1->fromArray(
-                    [
-                        ['País', 'Enero ', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', '2025'],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        ['Latinoamérica', '=SUM(B61:B69)', '=SUM(C61:C69)', '=SUM(D61:D69)', '=SUM(E61:E69)', '=SUM(F61:F69)', '=SUM(G61:G69)', '=SUM(H61:H69)', '=SUM(I61:I69)', '=SUM(J61:J69)', '=SUM(K61:K69)', '=SUM(L61:L69)', '=SUM(M61:M69)', '=SUM(N61:N69)'],
-                    ],
-                    null, 'A60', true
-                );
+                
+                $h = ['País', 'Enero ', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', '2025'];
+                $d = $core->getReportBody("EXEC RETOS_ESPECIALES.dbo.report_viajero_vip_caro 3;", "SQL173", $h);
+                $d[] = ['Latinoamérica', '=SUM(B61:B69)', '=SUM(C61:C69)', '=SUM(D61:D69)', '=SUM(E61:E69)', '=SUM(F61:F69)', '=SUM(G61:G69)', '=SUM(H61:H69)', '=SUM(I61:I69)', '=SUM(J61:J69)', '=SUM(K61:K69)', '=SUM(L61:L69)', '=SUM(M61:M69)', '=SUM(N61:N69)'];
+                $hoja1->fromArray($d, null, 'A60', true);
+
                 $hoja1->getStyle('A60:N70')->applyFromArray($bodyStyle);
                 $hoja1->getStyle('A60:N60')->applyFromArray($headerStyle);
             # TABLA 4
