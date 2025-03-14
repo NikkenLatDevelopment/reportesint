@@ -287,7 +287,7 @@ class otros extends Controller{
         # hoja 1
             $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("2024");
+            $hoja1->setTitle("Kueski");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
@@ -295,7 +295,7 @@ class otros extends Controller{
             $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
 
             $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Ventas rechazadas por Kueski TV | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+            $hoja1->setCellValue('A1', "Ventas rechazadas por Kueski TV | Fecha de descarga: " . Date("Y-m-d H:i:s"));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
 
             $h = ['codigo_usuario', 'nombre_usuario', 'id_venta', 'referencia_venta', 'metodo_de_pago', 'proveedor_de_pago', 'estatus_compra', 'total_compra', 'fecha_compra'];
@@ -317,7 +317,7 @@ class otros extends Controller{
                                         INNER JOIN users u ON u.id = s.user_id
                                         WHERE 
                                             sp.payment_provider = 'Kueski' AND 
-                                            sp.status IN ('cancelada', 'standby');", "TVMySQL", $h);
+                                            sp.status IN ('cancelada', 'standby', 'abierta');", "TVMySQL", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
@@ -357,11 +357,29 @@ class otros extends Controller{
             $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
 
             $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+            $hoja1->setCellValue('A1', "Ventas rechazadas Banorte 3DS TV | Fecha de descarga: " . Date("Y-m-d H:i:s"));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = [ 'Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Cumple Incorporaciones', 'Nombre patrocinador' ];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202401,202412);", "SQL173", $h);
+            $h = ['codigo_usuario', 'nombre_usuario', 'id_venta', 'referencia_venta', 'metodo_de_pago', 'proveedor_de_pago', 'estatus_compra', 'total_compra', 'fecha_compra'];
+            $d = $core->getReportBody("SELECT 
+                                            CASE
+                                                WHEN u.sap_code IS NULL THEN 'CLIENTE'
+                                                ELSE u.sap_code
+                                            END AS codigo_usuario,
+                                            CONCAT(u.`name`, ' ', u.last_name) AS nombre_usuario,
+                                            s.id AS id_venta,
+                                            s.reference_code AS referencia_venta,
+                                            sp.payment_method AS metodo_de_pago,
+                                            sp.payment_provider AS proveedor_de_pago,
+                                            s.status AS estatus_compra,
+                                            s.total AS total_compra,
+                                            s.created_at AS fecha_compra
+                                        FROM sales_information_payments sp
+                                        INNER JOIN sales s ON s.id = sp.sale_id
+                                        INNER JOIN users u ON u.id = s.user_id
+                                        WHERE 
+                                            sp.payment_provider = 'Kueski' AND 
+                                            sp.status IN ('cancelada', 'standby', 'abierta');", "TVMySQL", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
