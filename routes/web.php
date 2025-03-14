@@ -35,3 +35,6 @@ Route::get('estVHLideresfixeed', 'otros\otros@estVHLideres');
 
 Route::get('homeCheckBonos', 'otros\otros@homeCheckBonos');
 Route::get('reportCheckBonos', 'otros\otros@reportCheckBonos');
+
+Route::get('getReportSalesTvKueski', 'otros\otros@getReportSalesTvKueski');
+Route::get('getReportSalesTv3DS', 'otros\otros@getReportSalesTv3DS');
