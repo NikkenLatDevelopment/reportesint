@@ -300,7 +300,10 @@ class otros extends Controller{
 
             $h = ['codigo_usuario', 'nombre_usuario', 'id_venta', 'referencia_venta', 'metodo_de_pago', 'proveedor_de_pago', 'estatus_compra', 'total_compra', 'fecha_compra'];
             $d = $core->getReportBody("SELECT 
-                                            u.sap_code AS codigo_usuario,
+                                            CASE
+                                                WHEN u.sap_code IS NULL THEN 'CLIENTE'
+                                                ELSE u.sap_code
+                                            END AS codigo_usuario,
                                             CONCAT(u.`name`, ' ', u.last_name) AS nombre_usuario,
                                             s.id AS id_venta,
                                             s.reference_code AS referencia_venta,
