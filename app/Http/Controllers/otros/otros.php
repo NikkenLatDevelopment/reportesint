@@ -379,7 +379,8 @@ class otros extends Controller{
                                         INNER JOIN users u ON u.id = s.user_id
                                         WHERE 
                                             sp.payment_provider = 'Banorte 3d Secure' AND 
-                                            sp.status IN ('cancelada', 'standby', 'abierta');", "TVMySQL", $h);
+                                            sp.status IN ('cancelada', 'standby', 'abierta') AND
+                                            sp.created_at >= '2025-01-01';", "TVMySQL", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
