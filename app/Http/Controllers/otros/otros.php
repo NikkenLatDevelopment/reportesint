@@ -349,7 +349,7 @@ class otros extends Controller{
         # hoja 1
             $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("2024");
+            $hoja1->setTitle("Banorte 3d Secure");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
@@ -378,7 +378,7 @@ class otros extends Controller{
                                         INNER JOIN sales s ON s.id = sp.sale_id
                                         INNER JOIN users u ON u.id = s.user_id
                                         WHERE 
-                                            sp.payment_provider = 'Kueski' AND 
+                                            sp.payment_provider = 'Banorte 3d Secure' AND 
                                             sp.status IN ('cancelada', 'standby', 'abierta');", "TVMySQL", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
