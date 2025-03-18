@@ -403,4 +403,141 @@ class otros extends Controller{
             ]
         );
     }
+
+    public function homeCheckBonos_vcplus(){
+        return view('otros.homeCheckBonos_vcplus');
+    }
+
+    public function reportCheckBonos_vcplus(){
+        $code = request()->code;
+        $period = request()->period;
+
+        $core = new coreApp();
+
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("fn_retail_exigo");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A3:M3');
+
+            $hoja1->mergeCells('A1:M1');
+            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja1->setCellValue('A2', "id socio: $code");
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+            
+            $h = ['OWNERID', 'TOTAL_ORDEN', 'RETAIL', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'VP_ORDEN', 'VC_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_retail_exigo $code, '$period';", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A3', true);
+        # hoja 1
+
+        # hoja 2
+            $hoja2 = $spreadsheet->createSheet();
+
+            $hoja2->setTitle("fn_rebate_exigo");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja2->getStyle('A3:P3')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A3:P3');
+
+            $hoja2->mergeCells('A1:M1');
+            $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja2->setCellValue('A2', "id socio: $code");
+            $hoja2->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'REBATE', 'REBATE_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_rebate_exigo $code, '$period';", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A3', true);
+        # hoja 2
+        
+        # hoja 3
+            $hoja3 = $spreadsheet->createSheet();
+
+            $hoja3->setTitle("fn_override_exigo");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja3->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja3->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja3->setAutoFilter('A3:Q3');
+
+            $hoja3->mergeCells('A1:M1');
+            $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja3->setCellValue('A2', "id socio: $code");
+            $hoja3->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_override_exigo $code, '$period';", "SQL173", $h);
+            $hoja3->fromArray($d, null, 'A3', true);
+        # hoja 3
+
+        # hoja 4
+            $hoja4 = $spreadsheet->createSheet();
+
+            $hoja4->setTitle("fn_leadrship_exigo");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja4->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja4->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja4->setAutoFilter('A3:Q3');
+
+            $hoja4->mergeCells('A1:M1');
+            $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja4->setCellValue('A2', "id socio: $code");
+            $hoja4->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_leadership_exigo $code, '$period';", "SQL173", $h);
+            $hoja4->fromArray($d, null, 'A3', true);
+        # hoja 4
+        
+        # hoja 5
+            $hoja5 = $spreadsheet->createSheet();
+
+            $hoja5->setTitle("fn_lifestyleBonus_exigo");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja5->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja5->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja5->setAutoFilter('A3:Q3');
+
+            $hoja5->mergeCells('A1:M1');
+            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja5->setCellValue('A2', "id socio: $code");
+            $hoja5->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_lifestyleBonus_exigo $code, '$period';", "SQL173", $h);
+            $hoja5->fromArray($d, null, 'A3', true);
+        # hoja 5
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        $fileName = "Check de bonificaciones $code - " . Date('Y_m_d_H_i_s') . '.xlsx';
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
