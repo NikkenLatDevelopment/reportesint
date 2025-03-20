@@ -564,7 +564,7 @@ class otros extends Controller{
             $hoja1->setAutoFilter('A3:M3');
 
             $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
             // $hoja1->setCellValue('A2', "id socio: $code");
             $hoja1->getStyle('A1')->getFont()->setBold(true);
             
