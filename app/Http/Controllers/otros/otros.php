@@ -540,4 +540,66 @@ class otros extends Controller{
             ]
         );
     }
+
+    public function homeReportVolum(){
+        return view('otros.homeReportVolum');
+    }
+
+    public function reportVolum(){
+        $period = request()->period;
+
+        $core = new coreApp();
+
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("fn_retail_exigo");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A3:M3');
+
+            $hoja1->mergeCells('A1:M1');
+            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            // $hoja1->setCellValue('A2', "id socio: $code");
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+            
+            $h = ['PERIOD', 'ASSOCIATEID', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'FECHA ACTUALIZACION'];
+            $d = $core->getReportBody("SELECT 
+                                            Period
+                                            ,Associateid 
+                                            ,VP
+                                            ,VGP
+                                            ,VO
+                                            ,VOLDP
+                                            ,VOLDPYS
+                                            ,UltimaActualizacion
+                                        FROM diccionarioExigo.dbo.VolumeHistory WITH(NOLOCK)
+                                        WHERE Period = $period;", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A3', true);
+        # hoja 1
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Csv($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        $fileName = "Reporte de Volumen Exigo $code - " . Date('Y_m_d_H_i_s') . '.csv';
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
