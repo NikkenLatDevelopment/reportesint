@@ -603,4 +603,328 @@ class otros extends Controller{
             ]
         );
     }
+    public function ficha2(){
+        $code = request()->code;
+        $period = request()->period;
+        ini_set('max_execution_time', 500);
+        $core = new coreApp();
+
+        $spreadsheet = new Spreadsheet();
+
+        $styleMorado = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF']
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '800080'] // Morado
+            ]
+        ];
+        
+
+        # hoja 
+        
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("Tablero");
+/*
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A3:M3');
+
+            $hoja1->mergeCells('A1:M1');
+            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+            $hoja1->setCellValue('A2', "id socio: $code");
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+*/
+            
+//$h = ['OWNERID', 'TOTAL_ORDEN', 'RETAIL', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'VP_ORDEN', 'VC_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+          //  $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_retail_exigo $code, '$period';", "SQL173", $h);
+            //$hoja1->fromArray($d, null, 'A3', true);
+        # hoja 1
+
+
+
+// # hoja 2
+// Hoja 2
+$hoja2 = $spreadsheet->createSheet();
+$hoja2->setTitle("Lista_ganadores");
+
+// Estilo morado con texto blanco
+$styleMorado = [
+    'font' => [
+        'bold' => true,
+        'color' => ['rgb' => 'FFFFFF']
+    ],
+    'fill' => [
+        'fillType' => Fill::FILL_SOLID,
+        'startColor' => ['rgb' => '800080']
+    ]
+];
+
+// Autoajustar columnas de A a Z
+for ($i = 65; $i <= 90; $i++) {
+    $hoja2->getColumnDimension(chr($i))->setAutoSize(true);
+}
+
+// Títulos principales en parte superior
+$hoja2->mergeCells('A1:M1');
+$hoja2->setCellValue('A1', "NIKKEN LATINOAMERICA");
+
+$hoja2->mergeCells('A2:M2');
+$hoja2->setCellValue('A2', "LISTA DEFINITIVA PARA RECONOCIMIENTOS - FICHA # 2");
+
+$hoja2->mergeCells('A3:M3');
+$hoja2->setCellValue('A3', "MES DE MEDICIÓN: MARZO DE 2025");
+
+$hoja2->mergeCells('A4:M4');
+$hoja2->setCellValue('A4', "Elaborado por Procesos Comerciales : " . date("Y-m-d H:i:s"));
+
+// Aplicar fondo morado a los títulos
+$hoja2->getStyle('A1:M4')->applyFromArray($styleMorado);
+
+// CABECERAS (personalizadas)
+$headers = [
+    'Distribuidor', 'Tipo', 'Nombre', 'Telefono', 'Rango', 'Ciudad', 'Estado',
+    'E_mail', 'pais', 'VP_LATAM_Marzo', 'VP_GLOBAL_Marzo', 'numero_Ascensos', 'Ficha_No2'
+];
+
+// Pintar cabeceras en la fila 6
+$hoja2->fromArray($headers, null, 'A6');
+$hoja2->getStyle('A6:M6')->applyFromArray($styleMorado);
+$hoja2->setAutoFilter('A6:M6');
+
+// Obtener los datos desde SP (omitimos encabezado porque ya lo definimos)
+$h = []; // sin columnas forzadas
+$d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_ganadores]", "SQL73", $h);
+
+// Insertar datos en fila 7 hacia abajo
+$hoja2->fromArray($d, null, 'A7', true);
+# hoja 2
+// Hoja 3
+        $hoja3 = $spreadsheet->createSheet();
+        $hoja3->setTitle("Data_Socios");
+
+        // Estilo morado con texto blanco
+        $styleMorado = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF']
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '800080']
+            ]
+        ];
+
+        // Autoajustar columnas de A a Z
+        for ($i = 65; $i <= 90; $i++) {
+            $hoja3->getColumnDimension(chr($i))->setAutoSize(true);
+}
+
+        // Títulos institucionales en la parte superior
+        $hoja3->mergeCells('A1:W1');
+        $hoja3->setCellValue('A1', "NIKKEN LATINOAMERICA");
+
+        $hoja3->mergeCells('A2:W2');
+        $hoja3->setCellValue('A2', "LISTA DEFINITIVA PARA RECONOCIMIENTOS - FICHA # 2");
+
+        $hoja3->mergeCells('A3:W3');
+        $hoja3->setCellValue('A3', "MES DE MEDICIÓN: MARZO DE 2025");
+
+        $hoja3->mergeCells('A4:W4');
+        $hoja3->setCellValue('A4', "Elaborado por Procesos Comerciales : " . date("Y-m-d H:i:s"));
+
+        // Aplicar fondo morado a las cabeceras superiores
+        $hoja3->getStyle('A1:W4')->applyFromArray($styleMorado);
+
+        // CABECERAS de columna
+        $headers3 = [
+            'Distribuidor', 'Tipo', 'Estatus_SAP', 'Nombre', 'Telefono', 'Rango_inicial', 'Ciudad', 'Estado',
+            'E_mail', 'pais', 'VP_LATAM_Marzo', 'Falta_VP', 'VP_GLOBAL_Marzo', 'numero_Ascensos', 'Falta_Ascensos',
+            'Ficha_No2', 'VPde_1a100', 'VPde_101a200', 'VPde_201a299', 'VPde_300a400', 'VPde_401a499', 'VPde_500omás'
+        ];
+
+        // Escribir encabezados en fila 6
+        $hoja3->fromArray($headers3, null, 'A6');
+        $hoja3->getStyle('A6:W6')->applyFromArray($styleMorado);
+        $hoja3->setAutoFilter('A6:W6');
+
+        // Obtener datos desde SP (sin encabezados porque ya los definimos)
+        $h3 = []; // sin columnas forzadas
+        $d3 = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_dataSocios]", "SQL73", $h3);
+
+        // Insertar datos en fila 7 hacia abajo
+        $hoja3->fromArray($d3, null, 'A7', true);
+        # hoja 3
+        # hoja 4
+        $hoja4 = $spreadsheet->createSheet();
+        $hoja4->setTitle("Detalle_de_Ascensos");
+        
+        // Estilo morado con texto blanco
+        $styleMorado = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF']
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '800080']
+            ]
+        ];
+        
+        // Autoajustar columnas A-Z
+        for ($i = 65; $i <= 90; $i++) {
+            $hoja4->getColumnDimension(chr($i))->setAutoSize(true);
+        }
+        
+        // Títulos superiores institucionales
+        $hoja4->mergeCells('A1:S1');
+        $hoja4->setCellValue('A1', "NIKKEN LATINOAMERICA");
+        
+        $hoja4->mergeCells('A2:S2');
+        $hoja4->setCellValue('A2', "LISTA DEFINITIVA PARA RECONOCIMIENTOS - FICHA # 2");
+        
+        $hoja4->mergeCells('A3:S3');
+        $hoja4->setCellValue('A3', "MES DE MEDICIÓN: MARZO DE 2025");
+        
+        $hoja4->mergeCells('A4:S4');
+        $hoja4->setCellValue('A4', "Elaborado por Procesos Comerciales : " . date("Y-m-d H:i:s"));
+        
+        // Aplicar fondo morado a los títulos institucionales
+        $hoja4->getStyle('A1:S4')->applyFromArray($styleMorado);
+        
+        // Cabeceras personalizadas
+        $headers4 = [
+            'Distribuidor', 'Tipo', 'Nombre', 'Telefono', 'Rango_Inicial', 'Rango_Final', 'Ciudad', 'Estado',
+            'E_mail', 'pais', 'codigo_Patrocinador', 'nombre_patrocinador', 'ciudad_patrocinador',
+            'estado_patrocinador', 'E_mail_patrocinador', 'Pais_Patrocinador', 'VP', 'VGP_Cumple', 'avance'
+        ];
+        
+        // Escribir cabeceras en la fila 6
+        $hoja4->fromArray($headers4, null, 'A6');
+        $hoja4->getStyle('A6:S6')->applyFromArray($styleMorado);
+        $hoja4->setAutoFilter('A6:S6');
+        
+        // Ejecutar SP y traer los datos
+        $h4 = []; // sin columnas forzadas
+        $d4 = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_detalleAscensos]", "SQL73", $h4);
+        
+        // Insertar los datos a partir de fila 7
+        $hoja4->fromArray($d4, null, 'A7', true);
+        # hoja 4
+        
+        # hoja 5
+        $hoja5 = $spreadsheet->createSheet();
+        $hoja5->setTitle("OrdenesNA");
+        
+        // Estilo morado con letras blancas
+        $styleMorado = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF']
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '800080']
+            ]
+        ];
+        
+        // Autoajustar columnas A-Z
+        for ($i = 65; $i <= 90; $i++) {
+            $hoja5->getColumnDimension(chr($i))->setAutoSize(true);
+        }
+        
+        // Títulos institucionales superiores
+        $hoja5->mergeCells('A1:G1');
+        $hoja5->setCellValue('A1', "NIKKEN LATINOAMERICA");
+        
+        $hoja5->mergeCells('A2:G2');
+        $hoja5->setCellValue('A2', "LISTA DEFINITIVA PARA RECONOCIMIENTOS - FICHA # 2");
+        
+        $hoja5->mergeCells('A3:G3');
+        $hoja5->setCellValue('A3', "MES DE MEDICIÓN: MARZO DE 2025");
+        
+        $hoja5->mergeCells('A4:G4');
+        $hoja5->setCellValue('A4', "Elaborado por Procesos Comerciales : " . date("Y-m-d H:i:s"));
+        
+        // Aplicar fondo morado a los títulos institucionales
+        $hoja5->getStyle('A1:G4')->applyFromArray($styleMorado);
+        
+        // Cabeceras específicas de la hoja
+        $headers5 = [
+            'Distribuidor', 'numero_Orden', 'fecha_Orden', 'pais', 'valorOrden', 'puntos', 'sponsor'
+        ];
+        
+        // Escribir cabeceras en la fila 6
+        $hoja5->fromArray($headers5, null, 'A6');
+        $hoja5->getStyle('A6:G6')->applyFromArray($styleMorado);
+        $hoja5->setAutoFilter('A6:G6');
+        
+        // Obtener los datos desde el SP
+        $h5 = [];
+        $d5 = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_ordenNA]", "SQL73", $h5);
+        
+        // Insertar datos desde la fila 7
+        $hoja5->fromArray($d5, null, 'A7', true);
+        # hoja 5
+
+
+         // Hoja 6
+$hoja6 = $spreadsheet->createSheet();
+$hoja6->setTitle("requisitos");
+
+// Ajustar ancho de columna A para todo el texto
+        $hoja6->getColumnDimension('A')->setAutoSize(true);
+
+        // Contenido distribuido (sin cabeceras ni formatos morados)
+        $contenido = [
+            ['2da Ficha Congreso'],
+            ['Lanzamiento KO 3 de marzo'],
+            ['Vigencia:'],
+            ['1 al 31 de marzo'],
+            ['Requisito:'],
+            ['1.      VP mínimo: 500 puntos'],
+            ['2.      3 frontales que asciendan a rango superior (VP 100 VGP 500)'],
+            ['Ficha ganada:'],
+            ['Entrada al Congreso (Ficha obligatoria)'],
+            ['Términos y condiciones'],
+            ['·         Dirigido a todos los socios de NIKKEN Latinoamérica pueden ganar la ficha congreso.'],
+            ['·         Vigencia del 1 al 31 de enero del 2025.'],
+            ['·         El VP que se tendrá en cuenta será el generado en NIKKEN Latinoamérica.'],
+            ['·         Las compras de los clientes preferentes aplican para el cumplimiento del VP.'],
+            ['·         Para ganar ficha doble se deben cumplir los requisitos al doble.'],
+            ['·         Las fichas no son transferibles ni canjeables por dinero.'],
+            ['·         Para el requisito de ascensos los socios de rango directo que suben a superior deben ser frontales de origen NIKKEN Latinoamérica.'],
+            ['·         Para el ascenso de los superiores aplica el volumen de todas las unidades de mercado.'],
+            ['·         NIKKEN se reserva la interpretación de este incentivo.'],
+        ];
+
+        // Insertar contenido desde la celda A1 hacia abajo
+        $hoja6->fromArray($contenido, null, 'A1', true);
+        # hoja 6
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        $fileName = "Reconocimientos ficha 2 $code - " . Date('Y_m_d_H_i_s') . '.xlsx';
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
+    
 }
