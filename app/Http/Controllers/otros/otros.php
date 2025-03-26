@@ -703,7 +703,7 @@ $h = []; // sin columnas forzadas
 $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_ganadores]", "SQL73", $h);
 
 // Insertar datos en fila 7 hacia abajo
-$hoja2->fromArray($d, null, 'A7', true);
+$hoja2->fromArray($d, null, 'A6', true);
 # hoja 2
 // Hoja 3
         $hoja3 = $spreadsheet->createSheet();
@@ -759,7 +759,7 @@ $hoja2->fromArray($d, null, 'A7', true);
         $d3 = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_dataSocios]", "SQL73", $h3);
 
         // Insertar datos en fila 7 hacia abajo
-        $hoja3->fromArray($d3, null, 'A7', true);
+        $hoja3->fromArray($d3, null, 'A6', true);
         # hoja 3
         # hoja 4
         $hoja4 = $spreadsheet->createSheet();
@@ -815,7 +815,7 @@ $hoja2->fromArray($d, null, 'A7', true);
         $d4 = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_detalleAscensos]", "SQL73", $h4);
         
         // Insertar los datos a partir de fila 7
-        $hoja4->fromArray($d4, null, 'A7', true);
+        $hoja4->fromArray($d4, null, 'A6', true);
         # hoja 4
         
         # hoja 5
@@ -870,7 +870,7 @@ $hoja2->fromArray($d, null, 'A7', true);
         $d5 = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_ordenNA]", "SQL73", $h5);
         
         // Insertar datos desde la fila 7
-        $hoja5->fromArray($d5, null, 'A7', true);
+        $hoja5->fromArray($d5, null, 'A6', true);
         # hoja 5
 
 
