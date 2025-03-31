@@ -31,8 +31,9 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
+            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A1:M1');
+            $hoja1->mergeCells('A1:N1');
             $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
 
@@ -49,7 +50,7 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja2->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja2->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
 
             $hoja2->mergeCells('A1:M1');
             $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
@@ -93,7 +94,7 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
 
             $hoja1->mergeCells('A1:M1');
             $hoja1->setCellValue('A1', "Estrategia CHL Lideres | Fecha de actualización: " . Date("Y-m-d H:i:s"));
@@ -112,7 +113,7 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja2->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja2->getStyle('A3:M3')->getFont()->setBold(true);
+            $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
 
             $hoja2->mergeCells('A1:M1');
             $hoja2->setCellValue('A1', "Estrategia CHL Lideres | Fecha de actualización: " . Date("Y-m-d H:i:s"));
