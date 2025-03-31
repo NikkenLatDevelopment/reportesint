@@ -99,7 +99,7 @@ class otros extends Controller{
             $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = [ 'Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Cumple Incorporaciones', 'Nombre patrocinador' ];
+            $h = [ 'Código de Influencer', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Cumple Incorporaciones', 'Nombre patrocinador' ];
             $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202401,202412);", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
@@ -118,7 +118,7 @@ class otros extends Controller{
             $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
             $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = [ 'Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Cumple Incorporaciones', 'Nombre patrocinador' ];
+            $h = [ 'Código de Influencer', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Cumple Incorporaciones', 'Nombre patrocinador' ];
             $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202501,202512);", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
@@ -603,6 +603,7 @@ class otros extends Controller{
             ]
         );
     }
+
     public function ficha2(){
         $code = request()->code;
         $period = request()->period;
@@ -628,7 +629,7 @@ class otros extends Controller{
             $hoja1 = $spreadsheet->getActiveSheet();
 
             $hoja1->setTitle("Tablero");
-/*
+            /*
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
@@ -640,74 +641,19 @@ class otros extends Controller{
             $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
             $hoja1->setCellValue('A2', "id socio: $code");
             $hoja1->getStyle('A1')->getFont()->setBold(true);
-*/
+            */
             
-//$h = ['OWNERID', 'TOTAL_ORDEN', 'RETAIL', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'VP_ORDEN', 'VC_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
-          //  $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_retail_exigo $code, '$period';", "SQL173", $h);
+            //$h = ['OWNERID', 'TOTAL_ORDEN', 'RETAIL', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'VP_ORDEN', 'VC_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+            //  $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_retail_exigo $code, '$period';", "SQL173", $h);
             //$hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
 
 
-// # hoja 2
-// Hoja 2
-$hoja2 = $spreadsheet->createSheet();
-$hoja2->setTitle("Lista_ganadores");
-
-// Estilo morado con texto blanco
-$styleMorado = [
-    'font' => [
-        'bold' => true,
-        'color' => ['rgb' => 'FFFFFF']
-    ],
-    'fill' => [
-        'fillType' => Fill::FILL_SOLID,
-        'startColor' => ['rgb' => '800080']
-    ]
-];
-
-// Autoajustar columnas de A a Z
-for ($i = 65; $i <= 90; $i++) {
-    $hoja2->getColumnDimension(chr($i))->setAutoSize(true);
-}
-
-// Títulos principales en parte superior
-$hoja2->mergeCells('A1:M1');
-$hoja2->setCellValue('A1', "NIKKEN LATINOAMERICA");
-
-$hoja2->mergeCells('A2:M2');
-$hoja2->setCellValue('A2', "LISTA DEFINITIVA PARA RECONOCIMIENTOS - FICHA # 2");
-
-$hoja2->mergeCells('A3:M3');
-$hoja2->setCellValue('A3', "MES DE MEDICIÓN: MARZO DE 2025");
-
-$hoja2->mergeCells('A4:M4');
-$hoja2->setCellValue('A4', "Elaborado por Procesos Comerciales : " . date("Y-m-d H:i:s"));
-
-// Aplicar fondo morado a los títulos
-$hoja2->getStyle('A1:M4')->applyFromArray($styleMorado);
-
-// CABECERAS (personalizadas)
-$headers = [
-    'Distribuidor', 'Tipo', 'Nombre', 'Telefono', 'Rango', 'Ciudad', 'Estado',
-    'E_mail', 'pais', 'VP_LATAM_Marzo', 'VP_GLOBAL_Marzo', 'numero_Ascensos', 'Ficha_No2'
-];
-
-// Pintar cabeceras en la fila 6
-$hoja2->fromArray($headers, null, 'A6');
-$hoja2->getStyle('A6:M6')->applyFromArray($styleMorado);
-$hoja2->setAutoFilter('A6:M6');
-
-// Obtener los datos desde SP (omitimos encabezado porque ya lo definimos)
-$h = []; // sin columnas forzadas
-$d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_ganadores]", "SQL73", $h);
-
-// Insertar datos en fila 7 hacia abajo
-$hoja2->fromArray($d, null, 'A6', true);
-# hoja 2
-// Hoja 3
-        $hoja3 = $spreadsheet->createSheet();
-        $hoja3->setTitle("Data_Socios");
+        // # hoja 2
+        // Hoja 2
+        $hoja2 = $spreadsheet->createSheet();
+        $hoja2->setTitle("Lista_ganadores");
 
         // Estilo morado con texto blanco
         $styleMorado = [
@@ -723,8 +669,63 @@ $hoja2->fromArray($d, null, 'A6', true);
 
         // Autoajustar columnas de A a Z
         for ($i = 65; $i <= 90; $i++) {
-            $hoja3->getColumnDimension(chr($i))->setAutoSize(true);
-}
+            $hoja2->getColumnDimension(chr($i))->setAutoSize(true);
+        }
+
+        // Títulos principales en parte superior
+        $hoja2->mergeCells('A1:M1');
+        $hoja2->setCellValue('A1', "NIKKEN LATINOAMERICA");
+
+        $hoja2->mergeCells('A2:M2');
+        $hoja2->setCellValue('A2', "LISTA DEFINITIVA PARA RECONOCIMIENTOS - FICHA # 2");
+
+        $hoja2->mergeCells('A3:M3');
+        $hoja2->setCellValue('A3', "MES DE MEDICIÓN: MARZO DE 2025");
+
+        $hoja2->mergeCells('A4:M4');
+        $hoja2->setCellValue('A4', "Elaborado por Procesos Comerciales : " . date("Y-m-d H:i:s"));
+
+        // Aplicar fondo morado a los títulos
+        $hoja2->getStyle('A1:M4')->applyFromArray($styleMorado);
+
+        // CABECERAS (personalizadas)
+        $headers = [
+            'Distribuidor', 'Tipo', 'Nombre', 'Telefono', 'Rango', 'Ciudad', 'Estado',
+            'E_mail', 'pais', 'VP_LATAM_Marzo', 'VP_GLOBAL_Marzo', 'numero_Ascensos', 'Ficha_No2'
+        ];
+
+        // Pintar cabeceras en la fila 6
+        $hoja2->fromArray($headers, null, 'A6');
+        $hoja2->getStyle('A6:M6')->applyFromArray($styleMorado);
+        $hoja2->setAutoFilter('A6:M6');
+
+        // Obtener los datos desde SP (omitimos encabezado porque ya lo definimos)
+        $h = []; // sin columnas forzadas
+        $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_ganadores]", "SQL73", $h);
+
+        // Insertar datos en fila 7 hacia abajo
+        $hoja2->fromArray($d, null, 'A6', true);
+        # hoja 2
+        // Hoja 3
+                $hoja3 = $spreadsheet->createSheet();
+                $hoja3->setTitle("Data_Socios");
+
+                // Estilo morado con texto blanco
+                $styleMorado = [
+                    'font' => [
+                        'bold' => true,
+                        'color' => ['rgb' => 'FFFFFF']
+                    ],
+                    'fill' => [
+                        'fillType' => Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => '800080']
+                    ]
+                ];
+
+                // Autoajustar columnas de A a Z
+                for ($i = 65; $i <= 90; $i++) {
+                    $hoja3->getColumnDimension(chr($i))->setAutoSize(true);
+        }
 
         // Títulos institucionales en la parte superior
         $hoja3->mergeCells('A1:W1');
@@ -875,10 +876,10 @@ $hoja2->fromArray($d, null, 'A6', true);
 
 
          // Hoja 6
-$hoja6 = $spreadsheet->createSheet();
-$hoja6->setTitle("requisitos");
+        $hoja6 = $spreadsheet->createSheet();
+        $hoja6->setTitle("requisitos");
 
-// Ajustar ancho de columna A para todo el texto
+        // Ajustar ancho de columna A para todo el texto
         $hoja6->getColumnDimension('A')->setAutoSize(true);
 
         // Contenido distribuido (sin cabeceras ni formatos morados)
