@@ -36,7 +36,7 @@ class otros extends Controller{
             $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Cumple Incorporaciones', 'Nombre patrocinador'];
+            $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
             $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE_ganadores_chl_gtm (202401,202412);", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
@@ -55,7 +55,7 @@ class otros extends Controller{
             $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
             $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Cumple Incorporaciones', 'Nombre patrocinador'];
+            $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
             $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE_ganadores_chl_gtm (202501,202512);", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
@@ -96,10 +96,10 @@ class otros extends Controller{
             $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
 
             $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+            $hoja1->setCellValue('A1', "Estrategia CHL Lideres | Fecha de actualización: " . Date("Y-m-d H:i:s"));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = [ 'Código de Influencer', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Cumple Incorporaciones', 'Nombre patrocinador' ];
+            $h = [ 'Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
             $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202401,202412);", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
@@ -115,10 +115,10 @@ class otros extends Controller{
             $hoja2->getStyle('A3:M3')->getFont()->setBold(true);
 
             $hoja2->mergeCells('A1:M1');
-            $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+            $hoja2->setCellValue('A1', "Estrategia CHL Lideres | Fecha de actualización: " . Date("Y-m-d H:i:s"));
             $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = [ 'Código de Influencer', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Cumple Incorporaciones', 'Nombre patrocinador' ];
+            $h = [ 'Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
             $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202501,202512);", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
