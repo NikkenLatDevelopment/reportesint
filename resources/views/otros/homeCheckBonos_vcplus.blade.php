@@ -69,6 +69,7 @@
                             <span>Periodo de medición:</span>
                             <select class="form-control " aria-label="Default select" id="periodSlct" name="periodSlct">
                                 <option value="202502">Febrero 2025</option>
+                                <option value="202503">Marzo 2025</option>
                             </select>
                         </div>
                         <hr>
