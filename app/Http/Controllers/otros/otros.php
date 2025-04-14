@@ -612,7 +612,7 @@ class otros extends Controller{
         $core = new coreApp();
 
         $spreadsheet = new Spreadsheet();
-
+        $spreadsheet->removeSheetByIndex(0);
         $styleMorado = [
             'font' => [
                 'bold' => true,
@@ -625,28 +625,27 @@ class otros extends Controller{
         ];
         
 
-        # hoja 
-        
-           // $hoja1 = $spreadsheet->getActiveSheet();
+     // # hoja 1
+        /*
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            //$hoja1->setTitle("Tablero");
-            /*
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A3:M3');
+        $hoja1->setTitle("Tablero");
+        for($i=65; $i<=90; $i++) {  
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A3:M3');
 
-            $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja1->setCellValue('A2', "id socio: $code");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
-            */
-            
-            //$h = ['OWNERID', 'TOTAL_ORDEN', 'RETAIL', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'VP_ORDEN', 'VC_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
-            //  $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_retail_exigo $code, '$period';", "SQL173", $h);
-            //$hoja1->fromArray($d, null, 'A3', true);
+        $hoja1->mergeCells('A1:M1');
+        $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja1->setCellValue('A2', "id socio: $code");
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+        //$h = ['OWNERID', 'TOTAL_ORDEN', 'RETAIL', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'VP_ORDEN', 'VC_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+        //$d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_retail_exigo $code, '$period';", "SQL173", $h);
+        //$hoja1->fromArray($d, null, 'A3', true);
+        */
         # hoja 1
 
 
