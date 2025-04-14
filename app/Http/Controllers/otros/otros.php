@@ -627,9 +627,9 @@ class otros extends Controller{
 
         # hoja 
         
-            $hoja1 = $spreadsheet->getActiveSheet();
+           // $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("Tablero");
+            //$hoja1->setTitle("Tablero");
             /*
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
