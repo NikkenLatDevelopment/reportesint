@@ -570,18 +570,29 @@ class otros extends Controller{
             // $hoja1->setCellValue('A2', "id socio: $code");
             $hoja1->getStyle('A1')->getFont()->setBold(true);
             
-            $h = ['PERIOD', 'ASSOCIATEID', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'FECHA ACTUALIZACION'];
+            $h = ['PERIOD', 'CODIGO_SOCIO', 'TIPO_DISTRIBUIDOR', 'NOMBRE_SOCIO', 'ESTATUS', 'RANGO', 'PAIS', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'CODIGO_PATROCINADOR', 'NOMBRE_PATROCINADOR', 'PAIS_PATROCINADOR', 'ULTIMA_ACTUALIZACION'];
             $d = $core->getReportBody("SELECT 
-                                            Period
-                                            ,Associateid 
-                                            ,VP
-                                            ,VGP
-                                            ,VO
-                                            ,VOLDP
-                                            ,VOLDPYS
-                                            ,UltimaActualizacion
-                                        FROM diccionarioExigo.dbo.VolumeHistory WITH(NOLOCK)
-                                        WHERE Period = $period;", "SQL173", $h);
+                                            a.Period,
+                                            a.Associateid AS CodigoSocio,
+                                            b.AssociateName AS NombreDelSocio,
+                                            b.CustomerTypeID AS TipoDeDistribuidor,
+                                            b.Distributor_Status AS Estado,
+                                            a.RankID AS Rango,
+                                            b.Country AS Pais,
+                                            a.VP,
+                                            a.VGP,
+                                            a.VO,
+                                            a.VOLDP,
+                                            a.VOLDPYS,
+                                            b.Sponsor_id AS CodigoDePatrocinador,
+                                            d.AssociateID AS AssociateIDPatrocinador,
+                                            d.AssociateName AS NombreDePatrocinador,
+                                            d.Country AS PaisDePatrocinador,
+                                            a.UltimaActualizacion
+                                        FROM diccionarioExigo.dbo.VolumeHistory a WITH(NOLOCK)
+                                        LEFT JOIN diccionarioExigo.dbo.Distributors_MD b WITH(NOLOCK) on a.Associateid = b.AssociateID 
+                                        LEFT JOIN diccionarioExigo.dbo.Distributors_MD d WITH(NOLOCK) on b.Sponsor_id = d.Associateid
+                                        WHERE a.Period = $period;", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
