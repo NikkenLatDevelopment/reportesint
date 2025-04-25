@@ -984,7 +984,7 @@ class otros extends Controller{
                                     WHERE 
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
-                                        AND Tipo_Bonus = 1;", "SQL173", $h);
+                                        AND Tipo_Bonus IN (2, 3)", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
@@ -1026,14 +1026,14 @@ class otros extends Controller{
                                     WHERE 
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
-                                        AND Tipo_Bonus = 2;", "SQL173", $h);
+                                        AND Tipo_Bonus = 7;", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
         
         # hoja 3
             $hoja3 = $spreadsheet->createSheet();
 
-            $hoja3->setTitle("Liderazgo");
+            $hoja3->setTitle("Sugerido");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja3->getColumnDimension($letter)->setAutoSize(true);
@@ -1068,14 +1068,14 @@ class otros extends Controller{
                                     WHERE 
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
-                                        AND Tipo_Bonus = 3;", "SQL173", $h);
+                                        AND Tipo_Bonus = 6;", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
         
         # hoja 4
             $hoja4 = $spreadsheet->createSheet();
 
-            $hoja4->setTitle("Sugerido");
+            $hoja4->setTitle("Club De Compras");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja4->getColumnDimension($letter)->setAutoSize(true);
@@ -1110,14 +1110,14 @@ class otros extends Controller{
                                     WHERE 
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
-                                        AND Tipo_Bonus = 4;", "SQL173", $h);
+                                        AND Tipo_Bonus = 111;", "SQL173", $h);
             $hoja4->fromArray($d, null, 'A3', true);
         # hoja 4
 
         # hoja 5
             $hoja5 = $spreadsheet->createSheet();
 
-            $hoja5->setTitle("Sugerido");
+            $hoja5->setTitle("Estilo de Vida");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
                 $hoja5->getColumnDimension($letter)->setAutoSize(true);
@@ -1152,7 +1152,7 @@ class otros extends Controller{
                                     WHERE 
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
-                                        AND Tipo_Bonus = 5;", "SQL173", $h);
+                                        AND Tipo_Bonus = 8;", "SQL173", $h);
             $hoja5->fromArray($d, null, 'A3', true);
         # hoja 5
 
