@@ -938,4 +938,242 @@ class otros extends Controller{
         );
     }
     
+    public function downloadReportvc300(){
+        $coreCms = new coreCms();
+        $sap_code_user = request()->sap_code_user;
+        $periodSelect = request()->periodSelect;
+
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("Grupo Personal");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A3:Q3');
+
+            $hoja1->mergeCells('A1:Q1');
+            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            // $hoja1->setCellValue('A2', "id socio: $code");
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+            
+            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+            $d = $coreCms->getReportBody("SELECT 
+                                        OWNERID,
+                                        VC_REGULAR,
+                                        VC_PLUS,
+                                        PORCENTAJE,
+                                        TOTAL_COMISION_REGULAR,
+                                        TOTAL_COMISION_VC_PLUS,
+                                        RANGO_SOCIO,
+                                        MONEDA,
+                                        PROFUNDIDAD,
+                                        ASSOCIATEID,
+                                        ORDER_NUM,
+                                        FECHA_ORDEN,
+                                        TOTAL_ORDEN,
+                                        PERIODO_ORDEN,
+                                        OWNERID_NOMBRE,
+                                        ASSOCIATEID_NOMBRE,
+                                        TIPO_BONUS
+                                    FROM VCplus.dbo.vcplus_calculo WITH(NOLOCK)
+                                    WHERE 
+                                        PERIODO_ORDEN = '$periodSelect'
+                                        AND OWNERID = $sap_code_user
+                                        AND Tipo_Bonus = 1;", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A3', true);
+        # hoja 1
+
+        # hoja 2
+            $hoja2 = $spreadsheet->createSheet();
+
+            $hoja2->setTitle("Liderazgo");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja2->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A3:Q3');
+
+            $hoja2->mergeCells('A1:Q1');
+            $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja2->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+            $d = $coreCms->getReportBody("SELECT 
+                                        OWNERID,
+                                        VC_REGULAR,
+                                        VC_PLUS,
+                                        PORCENTAJE,
+                                        TOTAL_COMISION_REGULAR,
+                                        TOTAL_COMISION_VC_PLUS,
+                                        RANGO_SOCIO,
+                                        MONEDA,
+                                        PROFUNDIDAD,
+                                        ASSOCIATEID,
+                                        ORDER_NUM,
+                                        FECHA_ORDEN,
+                                        TOTAL_ORDEN,
+                                        PERIODO_ORDEN,
+                                        OWNERID_NOMBRE,
+                                        ASSOCIATEID_NOMBRE,
+                                        TIPO_BONUS
+                                    FROM VCplus.dbo.vcplus_calculo WITH(NOLOCK)
+                                    WHERE 
+                                        PERIODO_ORDEN = '$periodSelect'
+                                        AND OWNERID = $sap_code_user
+                                        AND Tipo_Bonus = 2;", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A3', true);
+        # hoja 2
+        
+        # hoja 3
+            $hoja3 = $spreadsheet->createSheet();
+
+            $hoja3->setTitle("Liderazgo");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja3->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja3->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja3->setAutoFilter('A3:Q3');
+
+            $hoja3->mergeCells('A1:Q1');
+            $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja3->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+            $d = $coreCms->getReportBody("SELECT 
+                                        OWNERID,
+                                        VC_REGULAR,
+                                        VC_PLUS,
+                                        PORCENTAJE,
+                                        TOTAL_COMISION_REGULAR,
+                                        TOTAL_COMISION_VC_PLUS,
+                                        RANGO_SOCIO,
+                                        MONEDA,
+                                        PROFUNDIDAD,
+                                        ASSOCIATEID,
+                                        ORDER_NUM,
+                                        FECHA_ORDEN,
+                                        TOTAL_ORDEN,
+                                        PERIODO_ORDEN,
+                                        OWNERID_NOMBRE,
+                                        ASSOCIATEID_NOMBRE,
+                                        TIPO_BONUS
+                                    FROM VCplus.dbo.vcplus_calculo WITH(NOLOCK)
+                                    WHERE 
+                                        PERIODO_ORDEN = '$periodSelect'
+                                        AND OWNERID = $sap_code_user
+                                        AND Tipo_Bonus = 3;", "SQL173", $h);
+            $hoja3->fromArray($d, null, 'A3', true);
+        # hoja 3
+        
+        # hoja 4
+            $hoja4 = $spreadsheet->createSheet();
+
+            $hoja4->setTitle("Sugerido");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja4->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja4->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja4->setAutoFilter('A3:Q3');
+
+            $hoja4->mergeCells('A1:Q1');
+            $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja4->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+            $d = $coreCms->getReportBody("SELECT 
+                                        OWNERID,
+                                        VC_REGULAR,
+                                        VC_PLUS,
+                                        PORCENTAJE,
+                                        TOTAL_COMISION_REGULAR,
+                                        TOTAL_COMISION_VC_PLUS,
+                                        RANGO_SOCIO,
+                                        MONEDA,
+                                        PROFUNDIDAD,
+                                        ASSOCIATEID,
+                                        ORDER_NUM,
+                                        FECHA_ORDEN,
+                                        TOTAL_ORDEN,
+                                        PERIODO_ORDEN,
+                                        OWNERID_NOMBRE,
+                                        ASSOCIATEID_NOMBRE,
+                                        TIPO_BONUS
+                                    FROM VCplus.dbo.vcplus_calculo WITH(NOLOCK)
+                                    WHERE 
+                                        PERIODO_ORDEN = '$periodSelect'
+                                        AND OWNERID = $sap_code_user
+                                        AND Tipo_Bonus = 4;", "SQL173", $h);
+            $hoja4->fromArray($d, null, 'A3', true);
+        # hoja 4
+
+        # hoja 5
+            $hoja5 = $spreadsheet->createSheet();
+
+            $hoja5->setTitle("Sugerido");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja5->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja5->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja5->setAutoFilter('A3:Q3');
+
+            $hoja5->mergeCells('A1:Q1');
+            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja5->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+            $d = $coreCms->getReportBody("SELECT 
+                                        OWNERID,
+                                        VC_REGULAR,
+                                        VC_PLUS,
+                                        PORCENTAJE,
+                                        TOTAL_COMISION_REGULAR,
+                                        TOTAL_COMISION_VC_PLUS,
+                                        RANGO_SOCIO,
+                                        MONEDA,
+                                        PROFUNDIDAD,
+                                        ASSOCIATEID,
+                                        ORDER_NUM,
+                                        FECHA_ORDEN,
+                                        TOTAL_ORDEN,
+                                        PERIODO_ORDEN,
+                                        OWNERID_NOMBRE,
+                                        ASSOCIATEID_NOMBRE,
+                                        TIPO_BONUS
+                                    FROM VCplus.dbo.vcplus_calculo WITH(NOLOCK)
+                                    WHERE 
+                                        PERIODO_ORDEN = '$periodSelect'
+                                        AND OWNERID = $sap_code_user
+                                        AND Tipo_Bonus = 5;", "SQL173", $h);
+            $hoja5->fromArray($d, null, 'A3', true);
+        # hoja 5
+
+        $fileName = "VC 300 $sap_code_user - $periodSelect - v" . Date('is') . '.xlsx';
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
