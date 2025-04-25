@@ -939,7 +939,7 @@ class otros extends Controller{
     }
     
     public function downloadReportvc300(){
-        $coreCms = new coreCms();
+        $coreCms = new coreApp();
         $sap_code_user = request()->sap_code_user;
         $periodSelect = request()->periodSelect;
 
