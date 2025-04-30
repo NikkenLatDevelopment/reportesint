@@ -1176,4 +1176,50 @@ class otros extends Controller{
             ]
         );
     }
+    
+    public function download_rep_volumenes_rec(){
+        $coreCms = new coreApp();
+
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("VOL");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A3:Q3')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A3:Q3');
+
+            $hoja1->mergeCells('A1:Q1');
+            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+            
+            $h = ['ASSOCIATEID', 'VP_ENERO', 'VGP_ENERO', 'VO_ENERO', 'VP_FEBRERO', 'VGP_FEBRERO', 'VO_FEBRERO', 'VP_MARZO', 'VGP_MARZO', 'VO_MARZO', 'VP_ABRIL', 'VGP_ABRIL', 'VO_ABRIL', 'VP_MAYO', 'VGP_MAYO', 'VO_MAYO', 'VP_JUNIO', 'VGP_JUNIO', 'VO_JUNIO', 'VP_JULIO', 'VGP_JULIO', 'VO_JULIO', 'VP_AGOSTO', 'VGP_AGOSTO', 'VO_AGOSTO', 'VP_SEPTIEMBRE', 'VGP_SEPTIEMBRE', 'VO_SEPTIEMBRE', 'VP_OCTUBRE', 'VGP_OCTUBRE', 'VO_OCTUBRE', 'VP_NOVIEMBRE', 'VGP_NOVIEMBRE', 'VO_NOVIEMBRE', 'VP_DICIEMBRE', 'VGP_DICIEMBRE', 'VO_DICIEMBRE', 'PAIS'];
+            $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.rep_volumenes_nikkenReconocimientos", "SQL73", $h);
+            $hoja1->fromArray($d, null, 'A3', true);
+        # hoja 1
+
+        $fileName = "VOL Reconocimientos - v" . Date('is') . '.csv';
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Csv($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
