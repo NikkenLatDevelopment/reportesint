@@ -45,5 +45,4 @@ Route::get('download_rep_volumenes_rec', 'otros\otros@download_rep_volumenes_rec
 Route::get('getReportSalesTvKueski', 'otros\otros@getReportSalesTvKueski');
 Route::get('getReportSalesTv3DS', 'otros\otros@getReportSalesTv3DS');
 
-
 Route::get('reporte_fichados', 'otros\otros@ficha2');

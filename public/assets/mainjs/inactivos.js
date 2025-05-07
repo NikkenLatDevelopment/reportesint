@@ -120,7 +120,7 @@ function setMonthsSlct(slct, anios){
 
     for (var year = currentYear; year >= startYear; year--) {
         var startMonth = (year === currentYear) ? currentMonth : 12; // Comenzar en el mes actual si es el año en curso.
-        for (var month = startMonth; month > 0; month--) { // Decrementa el mes.
+        for (var month = startMonth; month > 2; month--) { // Decrementa el mes.
             var formattedMonth = month < 10 ? '0' + month : month.toString();
             var value = year.toString() + formattedMonth;
             var text = monthNames[month - 1] + ' ' + year;

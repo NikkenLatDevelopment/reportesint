@@ -92,5 +92,6 @@
         var periodSlct = document.getElementById('periodSlct').value;
         window.open('/reportVolum?period=' + periodSlct, '_blank');
     }
+    setMonthsSlct('periodSlct', 0);
 </script>
 @stop
