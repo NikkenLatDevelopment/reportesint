@@ -144,6 +144,132 @@ class otros extends Controller{
         );
     }
 
+    public function estGTMSLVexe(){
+        $core = new coreApp();
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("2024");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A1:N1');
+            $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE(202401,202412) ORDER BY periodo ASC", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A3', true);
+        # hoja 1
+
+        # hoja 2
+            $hoja2 = $spreadsheet->createSheet();
+            $hoja2->setTitle("2025");
+
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
+
+            $hoja2->mergeCells('A1:M1');
+            $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+            $hoja2->getStyle('A1')->getFont()->setBold(true);
+
+            
+            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE(202501,202512) ORDER BY periodo ASC;", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A3', true);
+        # hoja 2
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Csv($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        $fileName = "Estrategia GTM y SLV Rangos Ejecutivos - " . Date('Y_m_d_H_i_s') . '.csv';
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
+
+    public function estGTMSLVLideres(){
+        $core = new coreApp();
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("2024");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A1:N1');
+            $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202401,202412) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A3', true);
+        # hoja 1
+
+        # hoja 2
+            $hoja2 = $spreadsheet->createSheet();
+            $hoja2->setTitle("2025");
+
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
+
+            $hoja2->mergeCells('A1:M1');
+            $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+            $hoja2->getStyle('A1')->getFont()->setBold(true);
+
+            
+            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202501,202512) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A3', true);
+        # hoja 2
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Csv($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        $fileName = "Estrategia GTM y SLV Rangos Lideres - " . Date('Y_m_d_H_i_s') . '.csv';
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
+
     public function homeCheckBonos(){
         return view('otros.homeCheckBonos');
     }
