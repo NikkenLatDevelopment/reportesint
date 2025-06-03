@@ -298,8 +298,31 @@ class otros extends Controller{
             $hoja1->setCellValue('A2', "id socio: $code");
             $hoja1->getStyle('A1')->getFont()->setBold(true);
             
-            $h = ['Ownerid', 'total_orden', 'retail', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'vp_Orden', 'vc_Orden', 'Periodo_Orden', 'numAtCardSAP', 'NumFacturaSAP'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_retail_exigo $code, '$period';", "SQL173", $h);
+           // $h = ['Ownerid', 'total_orden', 'retail', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'vp_Orden', 'vc_Orden', 'Periodo_Orden', 'numAtCardSAP', 'NumFacturaSAP'];
+           $h = [
+            'Ownerid',
+            'OwnerName',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'rango_Socio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'pais_Orden',
+            'total_Orden',
+            'vp_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'NumFactura',
+            'SponsorID',
+            'SponsorName'
+        ];
+        
+           $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_retail_exigo $code, '$period';", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
@@ -319,8 +342,31 @@ class otros extends Controller{
             $hoja2->setCellValue('A2', "id socio: $code");
             $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Ownerid', 'vc_orden', 'porcentaje', 'rebate', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_rebate_exigo $code, '$period';", "SQL173", $h);
+           // $h = ['Ownerid', 'vc_orden', 'porcentaje', 'rebate', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
+           $h = [
+            'Ownerid',
+            'OwnerName',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'rango_Socio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'pais_Orden',
+            'total_Orden',
+            'vp_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'NumFactura',
+            'SponsorID',
+            'SponsorName'
+        ];
+        
+           $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_rebate_exigo $code, '$period';", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
         
@@ -340,8 +386,31 @@ class otros extends Controller{
             $hoja3->setCellValue('A2', "id socio: $code");
             $hoja3->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_override_exigo $code, '$period';", "SQL173", $h);
+           // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
+           $h = [
+            'Ownerid',
+            'OwnerName',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'rango_Socio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'pais_Orden',
+            'total_Orden',
+            'vp_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'NumFactura',
+            'SponsorID',
+            'SponsorName'
+        ];
+        
+           $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_override_exigo $code, '$period';", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
 
@@ -361,8 +430,30 @@ class otros extends Controller{
             $hoja4->setCellValue('A2', "id socio: $code");
             $hoja4->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_leadership_exigo $code, '$period';", "SQL173", $h);
+           // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
+           $h = [
+            'Ownerid',
+            'OwnerName',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'rango_Socio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'pais_Orden',
+            'total_Orden',
+            'vp_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'NumFactura',
+            'SponsorID',
+            'SponsorName'
+        ];
+           $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_leadership_exigo $code, '$period';", "SQL173", $h);
             $hoja4->fromArray($d, null, 'A3', true);
         # hoja 4
         
@@ -382,8 +473,30 @@ class otros extends Controller{
             $hoja5->setCellValue('A2', "id socio: $code");
             $hoja5->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_lifestyleBonus_exigo $code, '$period';", "SQL173", $h);
+           // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
+           $h = [
+            'Ownerid',
+            'OwnerName',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'rango_Socio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'pais_Orden',
+            'total_Orden',
+            'vp_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'NumFactura',
+            'SponsorID',
+            'SponsorName'
+        ];
+           $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_lifestyleBonus_exigo $code, '$period';", "SQL173", $h);
             $hoja5->fromArray($d, null, 'A3', true);
         # hoja 5
 
