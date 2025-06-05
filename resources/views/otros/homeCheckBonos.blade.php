@@ -71,6 +71,7 @@
                                 <option value="202502">Febrero 2025</option>
                                 <option value="202503">Marzo 2025</option>
                                 <option value="202504">Abril 2025</option>
+                                <option value="202505">Mayo 2025 (Preliminar)</option>
                             </select>
                         </div>
                         <hr>
