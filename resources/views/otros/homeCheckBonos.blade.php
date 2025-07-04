@@ -90,6 +90,10 @@
 <script src="{{ asset('assets/mainjs/inactivos.js?v=' . Date('YmdHis')) }}"></script>
 <script>
     setMonthsSlct('periodSlct', 0);
+    window.onload = function() {
+        $("#periodSlct option:last").remove();
+    };
+    
     function reportCheckBonos(){
         var socioCode = document.getElementById('socioCode').value;
         var periodSlct = document.getElementById('periodSlct').value;
