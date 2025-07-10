@@ -43,6 +43,7 @@ Route::get('reportCheckBonos_vcplus', 'otros\otros@reportCheckBonos_vcplus');
 Route::get('homeReportVolum', 'otros\otros@homeReportVolum');
 Route::get('reportVolum', 'otros\otros@reportVolum');
 Route::get('download_rep_volumenes_rec', 'otros\otros@download_rep_volumenes_rec');
+Route::get('regresa_casa_report', 'otros\otros@regresa_casa_report');
 
 Route::get('getReportSalesTvKueski', 'otros\otros@getReportSalesTvKueski');
 Route::get('getReportSalesTv3DS', 'otros\otros@getReportSalesTv3DS');

@@ -1461,4 +1461,66 @@ class otros extends Controller{
             ]
         );
     }
+    
+    public function regresa_casa_report(){
+        $coreCms = new coreApp();
+
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("VOL");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A7:Q7')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A7:T7');
+
+            $hoja1->mergeCells('A1:E1');
+            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A2:E2');
+            $hoja1->setCellValue('A2', "Vuelve a casa");
+            $hoja1->getStyle('A2')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A3:E3');
+            $hoja1->setCellValue('A3', "Estrategia de Julio y Agosto de 2025");
+            $hoja1->getStyle('A3')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A4:E4');
+            $hoja1->setCellValue('A4', "Socios que se depuraron en el mes de Enero de 2025");
+            $hoja1->getStyle('A4')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A5:E5');
+            $hoja1->setCellValue('A5', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+            $hoja1->getStyle('A5')->getFont()->setBold(true);
+            
+            $h = ['Codigo de Socio', 'Estatus SAP', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'Código del Kit de vuelve a casa', 'Mes que vuelve a casa', 'VP Julio', 'VP Agosto', 'Salvado para Septiembre/2025', 'Codigo patrocinador actual', 'Nombre Patrocinador actual', 'Pais Patrocinador actual'];
+            $d = $coreCms->getReportBody("SELECT getDate() AS fecha", "SQL73", $h);
+            $hoja1->fromArray($d, null, 'A7', true);
+        # hoja 1
+
+        $fileName = "Vuelve a casa Julio y Agosto de 2025 - v" . Date('is') . '.csv';
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Csv($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
