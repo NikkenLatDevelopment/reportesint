@@ -1502,6 +1502,7 @@ class otros extends Controller{
             $d = $coreCms->getReportBody("SELECT getDate() AS fecha", "SQL73", $h);
             $hoja1->fromArray($d, null, 'A7', true);
             $hoja1->getStyle('A7:T7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('1F497D');
+            $hoja1->getStyle('A7:T7')->getFont()->getColor()->setRGB ('ffffff');
 
         # hoja 1
 
