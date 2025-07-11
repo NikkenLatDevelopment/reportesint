@@ -1476,7 +1476,7 @@ class otros extends Controller{
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
             $hoja1->getStyle('A7:Q7')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A7:T7');
+            $hoja1->setAutoFilter('A7:V7');
 
             $hoja1->mergeCells('A1:E1');
             $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
@@ -1501,8 +1501,8 @@ class otros extends Controller{
             $h = ['Codigo de Socio', 'Estatus SAP', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'Código nuevo', 'Nombre del socio - nuevo', 'Código del Kit de vuelve a casa', 'Mes que vuelve a casa', 'VP Julio', 'VP Agosto', 'Salvado para Septiembre/2025', 'Codigo patrocinador actual', 'Nombre Patrocinador actual', 'Pais Patrocinador actual'];
             $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.RegresaACasa_genealogia_2025_interno", "SQL73", $h);
             $hoja1->fromArray($d, null, 'A7', true);
-            $hoja1->getStyle('A7:T7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('1F497D');
-            $hoja1->getStyle('A7:T7')->getFont()->getColor()->setRGB ('ffffff');
+            $hoja1->getStyle('A7:V7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('1F497D');
+            $hoja1->getStyle('A7:V7')->getFont()->getColor()->setRGB ('ffffff');
 
         # hoja 1
 
