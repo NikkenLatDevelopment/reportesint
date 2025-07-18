@@ -1526,4 +1526,61 @@ class otros extends Controller{
             ]
         );
     }
+
+    public function impulsa_bd(){
+        $coreCms = new coreApp();
+
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("base");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A7:Q7')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A7:V7');
+
+            $hoja1->mergeCells('A1:E1');
+            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A2:E2');
+            $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
+            $hoja1->getStyle('A2')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A3:E3');
+            $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+            $hoja1->getStyle('A3')->getFont()->setBold(true);
+            
+            $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
+            $d = $coreCms->getReportBody("SELECT GETDATE()", "SQL73", $h);
+            $hoja1->fromArray($d, null, 'A7', true);
+            $hoja1->getStyle('A5:V5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+            $hoja1->getStyle('A5:V5')->getFont()->getColor()->setRGB ('ffffff');
+
+        # hoja 1
+
+        $fileName = "Impulsa la base - v" . Date('is') . '.xlsx';
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
