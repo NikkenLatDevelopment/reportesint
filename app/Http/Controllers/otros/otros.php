@@ -1540,8 +1540,8 @@ class otros extends Controller{
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja1->getStyle('A7:Q7')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A7:V7');
+            $hoja1->getStyle('A5:Q5')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A5:V5');
 
             $hoja1->mergeCells('A1:E1');
             $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
@@ -1557,7 +1557,7 @@ class otros extends Controller{
             
             $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
             $d = $coreCms->getReportBody("SELECT GETDATE()", "SQL73", $h);
-            $hoja1->fromArray($d, null, 'A7', true);
+            $hoja1->fromArray($d, null, 'A5', true);
             $hoja1->getStyle('A5:V5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
             $hoja1->getStyle('A5:V5')->getFont()->getColor()->setRGB ('ffffff');
 
