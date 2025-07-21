@@ -1556,7 +1556,7 @@ class otros extends Controller{
             $hoja1->getStyle('A3')->getFont()->setBold(true);
             
             $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
-            $d = $coreCms->getReportBody("SELECT GETDATE()", "SQL73", $h);
+            $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.impulsaLaBase_2025_reporte_Interno", "SQL73", $h);
             $hoja1->fromArray($d, null, 'A5', true);
 
             $hoja1->getStyle('A5:T5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
