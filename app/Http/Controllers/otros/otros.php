@@ -1571,31 +1571,31 @@ class otros extends Controller{
             $hoja2->setTitle("Incorporaciones");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja1->getStyle('A5:Z5')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A5:Z5');
+            $hoja2->getStyle('A5:Z5')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A5:Z5');
 
-            $hoja1->mergeCells('A1:E1');
-            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+            $hoja2->mergeCells('A1:E1');
+            $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A2:E2');
-            $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
-            $hoja1->getStyle('A2')->getFont()->setBold(true);
+            $hoja2->mergeCells('A2:E2');
+            $hoja2->setCellValue('A2', "Impulsa la base- Julio de 2025");
+            $hoja2->getStyle('A2')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A3:E3');
-            $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A3')->getFont()->setBold(true);
+            $hoja2->mergeCells('A3:E3');
+            $hoja2->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+            $hoja2->getStyle('A3')->getFont()->setBold(true);
 
             $h = ["Tipo", "Codigo", "Nombre", "Kit", "Nombre Kit", "Fecha", "Periodo", "Mes de incorporacion", "Pais", "Departamento", "Celular", "Correo electronico", "Cod. patrocinador", "Nombre patrocinador", "Rango patrocinador", "Telefeno patrocinador", "Celular patrocinador", "Pais patrocinador", "Status", "Usuario", "Segmentacion", "Factura SAP", "Valor", "VP julio ", "VP adicionales", "Cumple requisito"];
             $d = $coreCms->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A%', true);
 
-            $hoja1->getStyle('A5:Z5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
-            $hoja1->getStyle('A1:Z3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
-            $hoja1->getStyle('A5:Z5')->getFont()->getColor()->setRGB ('ffffff');
-            $hoja1->getStyle('A1:Z5')->getFont()->getColor()->setRGB ('ffffff');
+            $hoja2->getStyle('A5:Z5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+            $hoja2->getStyle('A1:Z3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+            $hoja2->getStyle('A5:Z5')->getFont()->getColor()->setRGB ('ffffff');
+            $hoja2->getStyle('A1:Z5')->getFont()->getColor()->setRGB ('ffffff');
             
         # hoja 2
 
