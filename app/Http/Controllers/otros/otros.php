@@ -1590,7 +1590,7 @@ class otros extends Controller{
 
             $h = ["Tipo", "Codigo", "Nombre", "Kit", "Nombre Kit", "Fecha", "Periodo", "Mes de incorporacion", "Pais", "Departamento", "Celular", "Correo electronico", "Cod. patrocinador", "Nombre patrocinador", "Rango patrocinador", "Telefeno patrocinador", "Celular patrocinador", "Pais patrocinador", "Status", "Usuario", "Segmentacion", "Factura SAP", "Valor", "VP julio ", "VP adicionales", "Cumple requisito"];
             $d = $coreCms->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
-            $hoja2->fromArray($d, null, 'A%', true);
+            $hoja2->fromArray($d, null, 'A5', true);
 
             $hoja2->getStyle('A5:Z5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
             $hoja2->getStyle('A1:Z3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
