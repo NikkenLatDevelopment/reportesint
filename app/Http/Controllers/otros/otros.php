@@ -1620,4 +1620,79 @@ class otros extends Controller{
             ]
         );
     }
+
+    public function impulsa_bd_csv(){
+        $core = new coreApp();
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("Impulsa la base");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->setAutoFilter('A5:T5');
+
+            $hoja1->mergeCells('A1:E1');
+            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+
+            $hoja1->mergeCells('A2:E2');
+            $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
+
+            $hoja1->mergeCells('A3:E3');
+            $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+            
+            $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
+            $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.impulsaLaBase_2025_reporte_Interno", "SQL73", $h);
+            $hoja1->fromArray($d, null, 'A5', true);
+        # hoja 1
+
+        # hoja 2
+            $hoja2 = $spreadsheet->createSheet();
+            $hoja2->setTitle("Incorporaciones");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja2->setAutoFilter('A5:Z5');
+
+            $hoja2->mergeCells('A1:E1');
+            $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
+
+            $hoja2->mergeCells('A2:E2');
+            $hoja2->setCellValue('A2', "Impulsa la base- Julio de 2025");
+
+            $hoja2->mergeCells('A3:E3');
+            $hoja2->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+
+            $h = ["Tipo", "Codigo", "Nombre", "Kit", "Nombre Kit", "Fecha", "Periodo", "Mes de incorporacion", "Pais", "Departamento", "Celular", "Correo electronico", "Cod. patrocinador", "Nombre patrocinador", "Rango patrocinador", "Telefeno patrocinador", "Celular patrocinador", "Pais patrocinador", "Status", "Usuario", "Segmentacion", "Factura SAP", "Valor", "VP julio ", "VP adicionales", "Cumple requisito"];
+            $d = $coreCms->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A5', true);
+        # hoja 2
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Csv($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        $fileName = "Impulsa la base - v" . Date('Y_m_d_H_i_s') . '.csv';
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
+
+    public function impulsa_bd_h2(){
+
+    }
 }
