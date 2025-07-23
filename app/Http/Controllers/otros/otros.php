@@ -1598,12 +1598,13 @@ class otros extends Controller{
             // $hoja2->getStyle('A1:Z5')->getFont()->getColor()->setRGB ('ffffff');
         # hoja 2
 
-        // $fileName = "Impulsa la base - v" . Date('is') . '.xlsx';
-        // $fileName = "Impulsa la base - v" . Date('is') . '.xlsx';
+        $fileName = "Impulsa la base - v" . Date('is') . '.xlsx';
+        // $fileName = "Impulsa la base - v" . Date('is') . '.csv';
 
         // Guardar el archivo temporalmente
         $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
         $writer = new Xlsx($spreadsheet);
+        // $writer = new Csv($spreadsheet);
         $writer->save($tempFilePath);
 
         // Enviar la respuesta para forzar la descarga
