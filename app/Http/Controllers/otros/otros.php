@@ -1645,7 +1645,7 @@ class otros extends Controller{
             $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
             
             $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
-            $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.impulsaLaBase_2025_reporte_Interno", "SQL73", $h);
+            $d = $core->getReportBody("EXEC LAT_MyNIKKEN.dbo.impulsaLaBase_2025_reporte_Interno", "SQL73", $h);
             $hoja1->fromArray($d, null, 'A5', true);
         # hoja 1
 
@@ -1668,7 +1668,7 @@ class otros extends Controller{
             $hoja2->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
 
             $h = ["Tipo", "Codigo", "Nombre", "Kit", "Nombre Kit", "Fecha", "Periodo", "Mes de incorporacion", "Pais", "Departamento", "Celular", "Correo electronico", "Cod. patrocinador", "Nombre patrocinador", "Rango patrocinador", "Telefeno patrocinador", "Celular patrocinador", "Pais patrocinador", "Status", "Usuario", "Segmentacion", "Factura SAP", "Valor", "VP julio ", "VP adicionales", "Cumple requisito"];
-            $d = $coreCms->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
+            $d = $core->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A5', true);
         # hoja 2
 
