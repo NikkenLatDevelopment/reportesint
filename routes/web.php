@@ -44,7 +44,7 @@ Route::get('homeReportVolum', 'otros\otros@homeReportVolum');
 Route::get('reportVolum', 'otros\otros@reportVolum');
 Route::get('download_rep_volumenes_rec', 'otros\otros@download_rep_volumenes_rec');
 Route::get('regresa_casa_report', 'otros\otros@regresa_casa_report');
-Route::get('impulsa_bd', 'otros\otros@impulsa_bd');
+// Route::get('impulsa_bd', 'otros\otros@impulsa_bd');
 Route::get('impulsa_bd_h1_csv', 'otros\otros@impulsa_bd_h1_csv');
 Route::get('impulsa_bd_h2_csv', 'otros\otros@impulsa_bd_h2_csv');
 
