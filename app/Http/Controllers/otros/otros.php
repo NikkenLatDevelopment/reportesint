@@ -809,11 +809,16 @@ class otros extends Controller{
             // $hoja1->setCellValue('A2', "id socio: $code");
             $hoja1->getStyle('A1')->getFont()->setBold(true);
             
-            $h = ['PERIOD', 'CODIGO_SOCIO', 'TIPO_DISTRIBUIDOR', 'NOMBRE_SOCIO', 'ESTATUS', 'RANGO', 'PAIS', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'CODIGO_PATROCINADOR', 'NOMBRE_PATROCINADOR', 'PAIS_PATROCINADOR', 'ULTIMA_ACTUALIZACION'];
+            $h = ['PERIODO', 'CODIGO_SOCIO', 'NOMBRE_SOCIO', 'TELÉFONO', 'CORREO', 'TIPO_DISTRIBUIDOR', 'ESTATUS', 'RANGO', 'PAIS', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'CODIGO_PATROCINADOR', 'NOMBRE_PATROCINADOR', 'PAIS_PATROCINADOR', 'ULTIMA_ACTUALIZACION'];
             $d = $core->getReportBody("SELECT 
                                             a.Period,
                                             a.Associateid AS CodigoSocio,
                                             b.AssociateName AS NombreDelSocio,
+                                            ISNULL(CASE
+                                                WHEN b.Country in ('US','CA') THEN IIF(b.Mobile_Number= '' or b.Mobile_Number is null,b.Alternative_number,b.Mobile_Number)
+                                                ELSE IIF(e.Phone1= '' or e.Phone1 is null,e.Phone2,e.Phone1)
+                                            END,'') AS Telefono,
+                                            ISNULL(e.E_Mail,'') AS CorreoElectronico,
                                             b.CustomerTypeID AS TipoDeDistribuidor,
                                             b.Distributor_Status AS Estado,
                                             a.RankID AS Rango,
@@ -830,6 +835,7 @@ class otros extends Controller{
                                         FROM diccionarioExigo.dbo.VolumeHistory a WITH(NOLOCK)
                                         LEFT JOIN diccionarioExigo.dbo.Distributors_MD b WITH(NOLOCK) on a.Associateid = b.AssociateID 
                                         LEFT JOIN diccionarioExigo.dbo.Distributors_MD d WITH(NOLOCK) on b.Sponsor_id = d.Associateid
+                                        LEFT JOIN CardCodeInfoDeSAP e WITH(NOLOCK) on a.Associateid = e.CardCode
                                         WHERE a.Period = $period;", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
