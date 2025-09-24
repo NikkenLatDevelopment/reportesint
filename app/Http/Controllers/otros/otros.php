@@ -835,7 +835,7 @@ class otros extends Controller{
                                         FROM diccionarioExigo.dbo.VolumeHistory a WITH(NOLOCK)
                                         LEFT JOIN diccionarioExigo.dbo.Distributors_MD b WITH(NOLOCK) on a.Associateid = b.AssociateID 
                                         LEFT JOIN diccionarioExigo.dbo.Distributors_MD d WITH(NOLOCK) on b.Sponsor_id = d.Associateid
-                                        LEFT JOIN CardCodeInfoDeSAP e WITH(NOLOCK) on a.Associateid = e.CardCode
+                                        LEFT JOIN diccionarioExigo.dbo.CardCodeInfoDeSAP e WITH(NOLOCK) on a.Associateid = e.CardCode
                                         WHERE a.Period = $period;", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
