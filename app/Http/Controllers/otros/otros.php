@@ -854,7 +854,7 @@ class otros extends Controller{
             },
             200,
             [
-                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8',
                 'Content-Disposition' => 'attachment; filename=' . $fileName,
             ]
         );
