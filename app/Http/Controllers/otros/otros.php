@@ -809,7 +809,7 @@ class otros extends Controller{
             // $hoja1->setCellValue('A2', "id socio: $code");
             $hoja1->getStyle('A1')->getFont()->setBold(true);
             
-            $h = ['PERIODO', 'CODIGO_SOCIO', 'NOMBRE_SOCIO', 'TELEFONO', 'CORREO', 'TIPO_DISTRIBUIDOR', 'ESTATUS', 'RANGO', 'PAIS', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'CODIGO_PATROCINADOR', 'NOMBRE_PATROCINADOR', 'PAIS_PATROCINADOR', 'ULTIMA_ACTUALIZACION'];
+            $h = ['PERIODO', 'CODIGO_SOCIO', 'NOMBRE_SOCIO', 'TELÉFONO', 'CORREO', 'TIPO_DISTRIBUIDOR', 'ESTATUS', 'RANGO', 'PAIS', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'CODIGO_PATROCINADOR', 'NOMBRE_PATROCINADOR', 'PAIS_PATROCINADOR', 'ULTIMA_ACTUALIZACION'];
             $d = $core->getReportBody("SELECT 
                                             a.Period,
                                             a.Associateid AS CodigoSocio,
