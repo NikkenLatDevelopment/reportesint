@@ -1722,4 +1722,150 @@ class otros extends Controller{
             ]
         );
     }
+
+    public function fichaCongreso(){
+        $core = new coreApp();
+        $spreadsheet = new Spreadsheet();
+        
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("1. Consolidado 3 fichas o menos");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+                $hoja1->getColumnDimension('A'.$letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A7:AB7')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A7:AB7');
+
+            $hoja1->mergeCells('A1:D1');
+            $hoja1->setCellValue('A1', "NIKKEN LATINOAMERICA");
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A2:D2');
+            $hoja1->setCellValue('A2', "Control de fichas congreso mes de Septiembre de 2025");
+            $hoja1->getStyle('A2')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A3:D3');
+            $hoja1->setCellValue('A3', "Elaborado por Procesos Comerciales ");
+            $hoja1->getStyle('A3')->getFont()->setBold(true);
+
+            $hoja1->mergeCells('A4:D4');
+            $hoja1->setCellValue('A4', "3 de septiembre de 2025 ");
+            $hoja1->getStyle('A4')->getFont()->setBold(true);
+
+            $hoja1->setCellValue('M6', "Enero VP >=500");
+            $hoja1->setCellValue('N6', "Marzo 3 SUP y VP >=500");
+            $hoja1->setCellValue('O6', "Abril: VP 500, 3450 VG y 1 Kinya");
+            $hoja1->setCellValue('P6', "Cumplimiento de las 4 semanas Junio/25");
+            $hoja1->setCellValue('R6', "1 = Si y 0 =No");
+            $hoja1->setCellValue('S6', "Fiesta de Celebración ");
+            $hoja1->setCellValue('U6', "Entrada al congreso ");
+            $hoja1->setCellValue('X6', "Hospedaje ");
+            
+            $h = ['codigo', 'grupo', 'Estatus', 'nombre', 'direccion3', 'telefono', 'telefono1', 'rango', 'ciudad', 'estado', 'correo', 'pais', 'Ficha #1 Ene', 'Fichas #2 Marz', 'Ficha # 3 Abril', 'Ficha # 4 Prox..', 'Ficha congreso ganadas', 'Recuperate', 'Compra Ficha # 1', 'Valor pagado Ficha #1 ML', 'Compra Ficha # 2 ', 'Recupera Ficha # 2', 'Valor pagado Ficha #2 ML', 'Recupera Ficha # 3', 'Valor canjeable Ficha # 4', 'Saldo Valor canejable ficha # 4', 'Paquete Completo', 'Valor pagado Paquete Completo ML'];
+            $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h1]", "SQL73", $h);
+            $hoja1->fromArray($d, null, 'A7', true);
+            $hoja1->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+            $hoja1->getStyle('A1:D2')->getFont()->getColor()->setRGB ('ffffff');
+            $hoja1->getStyle('A7:Q7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+            $hoja1->getStyle('R7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('F2CEEF');
+            $hoja1->getStyle('S7:AB7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+            $hoja1->getStyle('A7:AB7')->getFont()->getColor()->setRGB ('ffffff');
+        # hoja 1
+
+        # hoja 2
+            $hoja2 = $spreadsheet->createSheet();
+
+            $hoja2->setTitle("2. Recuperate Ficha #2 o 3");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja2->getStyle('A12:Z12')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A12:Z12');
+
+            $hoja2->mergeCells('A1:E1');
+            $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja2->getStyle('A1')->getFont()->setBold(true);
+
+            $hoja2->mergeCells('A2:E2');
+            $hoja2->setCellValue('A2', "Recuperate Ficha # 2 o 3 ");
+            $hoja2->getStyle('A2')->getFont()->setBold(true);
+
+            $hoja2->mergeCells('A3:D3');
+            $hoja2->setCellValue('A3', "Elaborado por Procesos Comerciales ");
+            $hoja2->getStyle('A3')->getFont()->setBold(true);
+            
+            $hoja2->mergeCells('A4:D4');
+            $hoja2->setCellValue('A4', "3 de septiembre de 2025 ");
+            $hoja2->getStyle('A4')->getFont()->setBold(true);
+
+            $h = ['codigo', 'grupo', 'Estatus', 'nombre', 'direccion3', 'telefono', 'telefono1', 'rango', 'ciudad', 'estado', 'correo', 'pais', 'Fichas #2 Marz', 'Ficha # 3 Abril', 'VP  Sep', 'VG  Sep', 'Avances Frontales', 'Unidades de agua', 'VP500 ', 'VG4500', '1 Sup Frontal ', '3 Unidades de agua', 'Gana que ficha ', ];
+            $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h2]", "SQL73", $h);
+            $hoja2->fromArray($d, null, 'A12', true);
+
+            $hoja2->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+            $hoja2->getStyle('A1:D2')->getFont()->getColor()->setRGB ('ffffff');
+            $hoja2->getStyle('A12:W12')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+            $hoja2->getStyle('A12:W12')->getFont()->getColor()->setRGB ('ffffff');
+        # hoja 2
+
+        # hoja 3
+            $hoja3 = $spreadsheet->createSheet();
+
+            $hoja3->setTitle("3. Facturación y NC ");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja3->getColumnDimension($letter)->setAutoSize(true);
+                $hoja3->getColumnDimension('A'.$letter)->setAutoSize(true);
+            }
+            $hoja3->getStyle('A7:AB7')->getFont()->setBold(true);
+            $hoja3->setAutoFilter('A7:AB7');
+
+            $hoja3->mergeCells('A1:E1');
+            $hoja3->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja3->getStyle('A1')->getFont()->setBold(true);
+
+            $hoja3->mergeCells('A2:E2');
+            $hoja3->setCellValue('A2', "Facturación y NC ");
+            $hoja3->getStyle('A2')->getFont()->setBold(true);
+
+            $hoja3->mergeCells('A3:D3');
+            $hoja3->setCellValue('A3', "Elaborado por Procesos Comerciales ");
+            $hoja3->getStyle('A3')->getFont()->setBold(true);
+            
+            $hoja3->mergeCells('A4:D4');
+            $hoja3->setCellValue('A4', "3 de septiembre de 2025 ");
+            $hoja3->getStyle('A4')->getFont()->setBold(true);
+
+            $h = ['PAIS', 'U_NAME', 'DocDate', 'DocNum', 'CardCode', 'CardName', 'U_ran_CI', 'U_Precio', 'VisOrder', 'Codigo', 'ItemName', 'ItmsGrpNam', 'Cantidad', 'LineTotal', 'U_menudeo_comis', 'U_vol_calc', 'U_Puntos', 'U_Flete_incluido', 'U_autoship', 'NumAtCard', 'Grupo', 'U_Marca', 'U_Periodo', 'InvntItem', 'U_Num_Patrocinador', 'tipo_CI', 'CI_Activo', 'Usuario', ];
+            $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h3]", "SQL73", $h);
+            $hoja3->fromArray($d, null, 'A7', true);
+
+            $hoja3->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+            $hoja3->getStyle('A1:D2')->getFont()->getColor()->setRGB ('ffffff');
+            $hoja3->getStyle('A7:AB7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+            $hoja3->getStyle('A7:AB7')->getFont()->getColor()->setRGB ('ffffff');
+        # hoja 3
+
+        $fileName = "Recupera Fichas - v" . Date('is') . '.xlsx';
+
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFilePath);
+
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
