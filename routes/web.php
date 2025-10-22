@@ -53,3 +53,5 @@ Route::get('getReportSalesTv3DS', 'otros\otros@getReportSalesTv3DS');
 
 Route::get('reporte_fichados', 'otros\otros@ficha2');
 Route::get('fichaCongreso', 'otros\otros@fichaCongreso');
+
+Route::get('/finAnioPlata', 'otros\otros@finAnioPlata');

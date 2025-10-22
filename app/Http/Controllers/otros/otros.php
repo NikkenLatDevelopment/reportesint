@@ -1868,4 +1868,52 @@ class otros extends Controller{
             ]
         );
     }
+
+    public function finAnioPlata(){
+        $coreCms = new coreApp();
+
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("Participantes");
+            for($i=65; $i<=90; $i++) {  
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A3:N3');
+
+            $hoja1->mergeCells('A1:E1');
+            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja1->getStyle('A1')->getFont()->setBold(true);
+            
+            $h = ['Código', 'Nombre', 'País', 'Rango Octubre', 'Rango Final', 'Periodo Inicio', 'VGP Octubre', 'VGP Noviembre', 'VGP Diciembre', 'Cumplio Requisito', 'VOLDP', 'VOLDPYS', 'VGP Total'];
+            $d = $coreCms->getReportBody("SELECT * FROM EXIGO_PROD.dbo.RANGO_OCT_META;", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A3', true);
+        # hoja 1
+
+        // $fileName = "Termina el año en plata - v" . Date('is') . '.xlsx';
+        $fileName = "Termina el año en plata - v" . Date('is') . '.csv';
+
+        // Guardar el archivo temporalmente
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        // $writer = new Xlsx($spreadsheet);
+        $writer = new Csv($spreadsheet);
+        $writer->save($tempFilePath);
+
+        // Enviar la respuesta para forzar la descarga
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
