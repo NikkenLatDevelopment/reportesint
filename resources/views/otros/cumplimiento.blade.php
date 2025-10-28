@@ -86,7 +86,10 @@
     function deleteColumnsMonths(){
         var table_tr = $("#cumplimientoTable thead tr");
         // Eliminar las columnas del mes si es que existen creadas
-        for(x = 20; x > 3; x--){
+        for(x = 14; x > 3; x--){
+            table_tr.children(`:eq(${x})`).remove();
+        }
+        for(x = 14; x > 3; x--){
             table_tr.children(`:eq(${x})`).remove();
         }
     }
