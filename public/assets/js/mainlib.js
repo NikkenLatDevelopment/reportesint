@@ -156,3 +156,14 @@ function validateDomElement(element, callback){
         callback();
     }
 }
+
+function agregarAnios($select) {
+    var anioActual = new Date().getFullYear();
+    $select.empty();
+    for (let anio = anioInicio; anio <= anioActual; anio++) {
+        $select.append($('<option>', {
+            value: anio,
+            text: anio
+        }));
+    }
+}

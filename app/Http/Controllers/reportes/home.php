@@ -54,4 +54,19 @@ class home extends Controller{
             return $data;
         });
     }
+
+    public function cumplimiento(){
+        return view('otros.cumplimiento');
+    }
+
+    public function getReportCheckBonos(){
+        $coreApp = new coreApp();
+        $anio = request()->year;
+        $pais = request()->pais;
+        $data['data'] = $coreApp->execSQLQuery("SELECT top 50 * 
+                                                FROM EXIGO_prod.dbo.RangosPivot_Local 
+                                                WHERE anio = '$anio' AND MainCountry = '$pais'
+                                                ORDER BY CustomerID;", "SQL173");
+        return $data;
+    }
 }
