@@ -1880,7 +1880,7 @@ class otros extends Controller{
             $hoja1->setTitle("Participantes");
             for($i=65; $i<=90; $i++) {  
                 $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+                // $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
             $hoja1->getStyle('A4:P4')->getFont()->setBold(true);
             $hoja1->setAutoFilter('A4:P4');
