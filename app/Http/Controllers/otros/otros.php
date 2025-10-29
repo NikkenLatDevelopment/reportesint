@@ -1886,7 +1886,8 @@ class otros extends Controller{
             $hoja1->setAutoFilter('A3:N3');
 
             $hoja1->mergeCells('A1:E1');
-            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica - Cierra el año en rango Plata en 3 meses");
+            $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
             
             $h = ['Código', 'Nombre', 'País', 'Rango Octubre', 'Rango Final', 'Periodo Inicio', 'VGP Octubre', 'VGP Noviembre', 'VGP Diciembre', 'Cumplio Requisito', 'VOLDP', 'VOLDPYS', 'VGP Total'];
