@@ -1890,7 +1890,7 @@ class otros extends Controller{
             $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
             
-            $h = ['Código', 'Nombre', 'País', 'Rango Octubre', 'Rango Final', 'Periodo Inicio', 'VP Octubre', 'VP Noviembre', 'VP Diciembre', 'VGP Octubre', 'VGP Noviembre', 'VGP Diciembre', 'VOLDP', 'VOLDPYS', 'VGP Total', 'Cumplio Requisito'];
+            $h = ['Código', 'Nombre', 'País', 'Estado', 'Correo', 'Teléfono', 'Rango Octubre', 'Rango Meta', 'Periodo Icio', 'VP Otubre', 'Cumple VP 100 Octubre', 'VP Noviembre', 'Cumple VP 100 Noviembre', 'VP Diciembre', 'Cumple VP 100 Diciembre', 'VGP Octubre', 'VGP Noviembre', 'VGP Diciembre', 'VOLDP', 'VOLDPYS', 'Total VGP', 'Mes de Avance', 'Cumplio Requisito'];
             $d = $coreCms->getReportBody("SELECT * FROM EXIGO_PROD.dbo.RANGO_OCT_META;", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A4', true);
         # hoja 1
