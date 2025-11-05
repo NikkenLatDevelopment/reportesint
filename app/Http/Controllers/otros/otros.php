@@ -1882,8 +1882,8 @@ class otros extends Controller{
                 $letter = chr($i);
                 // $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
-            $hoja1->getStyle('A4:P4')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A4:P4');
+            $hoja1->getStyle('A4:W4')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A4:W4');
 
             $hoja1->mergeCells('A1:E1');
             $hoja1->setCellValue('A1', "NIKKEN Latinoamérica - Cierra el año en rango Plata en 3 meses");
