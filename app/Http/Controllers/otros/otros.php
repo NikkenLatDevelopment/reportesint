@@ -1899,13 +1899,13 @@ class otros extends Controller{
             $hoja1->fromArray($d, null, 'A4', true);
         # hoja 1
 
-        // $fileName = "Termina el año en plata - v" . Date('is') . '.xlsx';
-        $fileName = "Termina el año en plata - v" . Date('is') . '.csv';
+        $fileName = "Termina el año en plata - v" . Date('is') . '.xlsx';
+        // $fileName = "Termina el año en plata - v" . Date('is') . '.csv';
 
         // Guardar el archivo temporalmente
         $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
-        // $writer = new Xlsx($spreadsheet);
-        $writer = new Csv($spreadsheet);
+        $writer = new Xlsx($spreadsheet);
+        // $writer = new Csv($spreadsheet);
         $writer->save($tempFilePath);
 
         // Enviar la respuesta para forzar la descarga
