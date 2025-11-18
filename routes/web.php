@@ -55,5 +55,6 @@ Route::get('reporte_fichados', 'otros\otros@ficha2');
 Route::get('fichaCongreso', 'otros\otros@fichaCongreso');
 
 Route::get('/finAnioPlata', 'otros\otros@finAnioPlata');
+Route::get('/getFinAnioPlata', 'otros\otros@getFinAnioPlata');
 Route::get('/cumplimiento', 'reportes\home@cumplimiento');
 Route::get('/getReportCheckBonos', 'reportes\home@getReportCheckBonos');

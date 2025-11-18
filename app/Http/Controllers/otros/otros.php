@@ -1869,9 +1869,13 @@ class otros extends Controller{
         );
     }
 
-    public function finAnioPlata(){
-        $coreCms = new coreApp();
+    function finAnioPlata(){
+        return view('otros.anioPla');
+    }
 
+    public function getFinAnioPlata(){
+        $coreCms = new coreApp();
+        $periodo = request()->periodo;
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
@@ -1890,8 +1894,8 @@ class otros extends Controller{
             $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
             
-            $h = ['Código', 'Nombre', 'País', 'Estado', 'Correo', 'Teléfono', 'Rango Octubre', 'Rango Meta', 'Periodo Icio', 'VP Otubre', 'Cumple VP 100 Octubre', 'VP Noviembre', 'Cumple VP 100 Noviembre', 'VP Diciembre', 'Cumple VP 100 Diciembre', 'VGP Octubre', 'VGP Noviembre', 'VGP Diciembre', 'VOLDP', 'VOLDPYS', 'Total VGP', 'Mes de Avance', 'Cumplio Requisito'];
-            $d = $coreCms->getReportBody("SELECT * FROM EXIGO_PROD.dbo.RANGO_OCT_META;", "SQL173", $h);
+            $h = ['CustomerID', 'NombreCompleto', 'MainCountry', 'Estado', 'Email', 'Telefono', 'RANGO_OCT', 'RANGO_META', 'PERIODO_INI', 'VP_OCT', 'CUMPLE_VP100OCT', 'VP_NOV', 'CUMPLE_VP100NOV', 'VP_DIC', 'CUMPLE_VP100DIC', 'VGP_OCT', 'VGP_NOV', 'VGP_DIC', 'VOLDP', 'VOLDPYS', 'MES_AVANCE', 'CUMPLIO_REQUISITO', 'TOTAL_VGP', 'periodo'];
+            $d = $coreCms->getReportBody("EXEC EXIGO_PROD.dbo.Actualiza_RANGO_OCT_META $periodo;", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A4', true);
         # hoja 1
 
