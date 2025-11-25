@@ -1921,4 +1921,106 @@ class otros extends Controller{
             ]
         );
     }
+
+    public function getUsersTvPasswords(){
+        $coreCms = new coreApp();
+        $spreadsheet = new Spreadsheet();
+
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("CI");
+            for($i=65; $i<=90; $i++) {
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A4:X4')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A4:X4');
+
+            $hoja1->mergeCells('A1:H1');
+            $hoja1->setCellValue('A1', "Usuarios TV y Password");
+            $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
+            $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
+            
+            $h = ['sap_code', 'email', 'nombre', 'Pais', 'password'];
+            $d = $coreCms->execMySQLQuery("SELECT u.sap_code, u.email, CONCAT(u.name, ' ', u.last_name) as nombre, u.secret_nikken as password,
+                                        CASE 
+                                            WHEN u.country_id = 1 THEN 'COL'
+                                            WHEN u.country_id = 2 THEN 'MEX'
+                                            WHEN u.country_id = 3 THEN 'PER'
+                                            WHEN u.country_id = 4 THEN 'ECU'
+                                            WHEN u.country_id = 5 THEN 'PAN'
+                                            WHEN u.country_id = 6 THEN 'GTM'
+                                            WHEN u.country_id = 7 THEN 'SLV'
+                                            WHEN u.country_id = 8 THEN 'CRI'
+                                            WHEN u.country_id = 10 THEN 'CHL'
+                                        END as Pais
+                                        FROM users u
+                                        WHERE 
+                                            u.status = 1 AND
+                                            u.client_type = 'CI' AND 
+                                            u.country_id NOT IN (9) AND 
+                                            u.password != '' AND 
+                                            u.secret_nikken != '' 
+                                        LIMIT 5", "TVMySQL");
+            $datos = [];
+            foreach($d as $row){
+                $passDecripted = $row->password;
+                $passDecripted = $this->decrypt($passDecripted);
+                $row->password = $passDecripted;
+                $datos[] = [
+                    $row->sap_code,
+                    $row->email,
+                    $row->nombre,
+                    $row->Pais,
+                    $passDecripted
+                ];
+            }
+            $hoja1->fromArray($h, null, 'A4', true);
+            $hoja1->getStyle('A4:E4')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A4:E4');
+            $hoja1->fromArray($datos, null, 'A5', true);
+        # hoja 1
+
+        // $fileName = "Usuarios CI - password - v" . Date('is') . '.xlsx';
+        $fileName = "Usuarios CI - password - v" . Date('is') . '.csv';
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        // $writer = new Xlsx($spreadsheet);
+        $writer = new Csv($spreadsheet);
+        $writer->save($tempFilePath);
+
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
+
+    public function decrypt($data, $secret = "13sIS4$2013*?1nF3mPN1KK3N"){
+        if ( version_compare(PHP_VERSION, '7.1', '>=' ) ){ return $this->decrypt_php71($data, $secret); }
+
+        $key = md5(utf8_encode($secret), true);
+        $key .= substr($key, 0, 8);
+        $data = base64_decode($data);
+        $data = mcrypt_decrypt('tripledes', $key, $data, 'ecb');
+        $block = mcrypt_get_block_size('tripledes', 'ecb');
+        $len = strlen($data);
+        $pad = ord($data[$len - 1]);
+
+        return substr($data, 0, strlen($data) - $pad);
+    }
+
+    public function decrypt_php71($string, $secret) {
+        $key = md5(utf8_encode($secret), true);
+        $key .= substr($key, 0, 8);
+        $data = base64_decode($string);
+
+        return openssl_decrypt($data , 'des-ede3' , $key, OPENSSL_RAW_DATA); 
+    }
 }
