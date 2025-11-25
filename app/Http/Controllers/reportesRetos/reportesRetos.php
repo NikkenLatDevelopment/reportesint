@@ -5,6 +5,7 @@ namespace App\Http\Controllers\reportesRetos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\coreApp;
+
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\reportCVEmprendedor;
 use App\Exports\volumenGlobal;
@@ -1140,123 +1141,28 @@ class reportesRetos extends Controller{
     public function depuracion_lat_2025(){
         $coreCms = new coreApp();
         $anio = Date('Y');
-        
         $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setTitle("Listado");
-
-        $sheet->mergeCells('A1:C1');
-        $sheet->setCellValue('A1', "NIKKEN Latinoamérica");
-        $sheet->getStyle('A1')->getFont()->setBold(true);
-
-        $sheet->mergeCells('A2:E2');
-        $sheet->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
-        $sheet->getStyle('A2')->getFont()->setBold(true);
         
-        $sheet->mergeCells('B3:E3');
-        $sheet->setCellValue('A3', "Fecha de consulta");
-        $sheet->setCellValue('B3', Date('Y-m-d H:i:s'));
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
 
-        $sheet->getColumnDimension('A')->setAutoSize(true);
-        $sheet->getColumnDimension('B')->setAutoSize(true);
-        $sheet->getColumnDimension('C')->setAutoSize(true);
-        $sheet->getColumnDimension('D')->setAutoSize(true);
-        $sheet->getColumnDimension('E')->setAutoSize(true);
-        $sheet->getColumnDimension('F')->setAutoSize(true);
-        $sheet->getColumnDimension('G')->setAutoSize(true);
-        $sheet->getColumnDimension('H')->setAutoSize(true);
-        $sheet->getColumnDimension('I')->setAutoSize(true);
-        $sheet->getColumnDimension('J')->setAutoSize(true);
-        $sheet->getColumnDimension('K')->setAutoSize(true);
-        $sheet->getColumnDimension('L')->setAutoSize(true);
-        $sheet->getColumnDimension('M')->setAutoSize(true);
-        $sheet->getColumnDimension('N')->setAutoSize(true);
-        $sheet->getColumnDimension('O')->setAutoSize(true);
-        $sheet->getColumnDimension('P')->setAutoSize(true);
-        $sheet->getColumnDimension('Q')->setAutoSize(true);
-        $sheet->getColumnDimension('R')->setAutoSize(true);
-        $sheet->getColumnDimension('S')->setAutoSize(true);
-        $sheet->getColumnDimension('T')->setAutoSize(true);
-        $sheet->getColumnDimension('U')->setAutoSize(true);
-        $sheet->getColumnDimension('V')->setAutoSize(true);
-        $sheet->getColumnDimension('W')->setAutoSize(true);
-        $sheet->getColumnDimension('X')->setAutoSize(true);
-        $sheet->getColumnDimension('Y')->setAutoSize(true);
-        $sheet->getColumnDimension('Z')->setAutoSize(true);
-        $sheet->getColumnDimension('AA')->setAutoSize(true);
-        $sheet->getColumnDimension('AB')->setAutoSize(true);
+            $hoja1->setTitle("lista");
+            for($i=65; $i<=90; $i++) {
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            }
+            $hoja1->getStyle('A4:X4')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A4:X4');
 
-        $sheet->getStyle('A5:AB5')->getFont()->setBold(true);
-        $sheet->setCellValue('A5', "Codigo de Socio");
-        $sheet->setCellValue('B5', "Tipo Distribuidor");
-        $sheet->setCellValue('C5', "Nombre del Socio");
-        $sheet->setCellValue('D5', "Rango");
-        $sheet->setCellValue('E5', "Fecha Ingreso");
-        $sheet->setCellValue('F5', "Codigo del Patrocinador");
-        $sheet->setCellValue('G5', "Nombre del Patrocinador");
-        $sheet->setCellValue('H5', "Estado");
-        $sheet->setCellValue('I5', "Correo");
-        $sheet->setCellValue('J5', "Telefono");
-        $sheet->setCellValue('K5', "Pais");
-        $sheet->setCellValue('L5', "vp_ene_24");
-        $sheet->setCellValue('M5', "vp_feb_24");
-        $sheet->setCellValue('N5', "vp_mar_24");
-        $sheet->setCellValue('O5', "vp_abr_24");
-        $sheet->setCellValue('P5', "vp_may_24");
-        $sheet->setCellValue('Q5', "vp_jun_24");
-        $sheet->setCellValue('R5', "vp_jul_24");
-        $sheet->setCellValue('S5', "vp_ago_24");
-        $sheet->setCellValue('T5', "vp_sep_24");
-        $sheet->setCellValue('U5', "vp_oct_24");
-        $sheet->setCellValue('V5', "vp_nov_24");
-        $sheet->setCellValue('W5', "vp_dic_24");
-        $sheet->setCellValue('W5', "vp_dic_24");
-        $sheet->setCellValue('X5', "VP_ene_25");
-        $sheet->setCellValue('Y5', "VP_ene_25_USA");
-        $sheet->setCellValue('Z5', "Requisito Faltante");
-        $sheet->setCellValue('AA5', "Estatus SAP");
-        $sheet->setCellValue('AB5', "Salvado");
-
-        $color = '006600';
-        $range = "A5:AB5";
-        $sheet->getStyle("$range")->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-        $sheet->getStyle("$range")->getFill()->getStartColor()->setRGB($color);
-        $sheet->getStyle("$range")->getFont()->getColor()->setRGB ('ffffff');
-        $sheet->setAutoFilter("$range");
-
-        $data = $coreCms->execMySQLQuery("EXEC LAT_MyNIKKEN.dbo.depuracionLatam2024_interno ", "SQL73");
-        $row = 6;
-        foreach ($data as $item) {
-            $sheet->setCellValue("A$row", $item->codigoSocio);
-            $sheet->setCellValue("B$row", $item->tipoDistribuidor);
-            $sheet->setCellValue("C$row", $item->nombreSocio);
-            $sheet->setCellValue("D$row", $item->rango);
-            $sheet->setCellValue("E$row", $item->fechaIngreso);
-            $sheet->setCellValue("F$row", $item->codigoPatrocinador);
-            $sheet->setCellValue("G$row", $item->nombrePatrocinador);
-            $sheet->setCellValue("H$row", $item->estado);
-            $sheet->setCellValue("I$row", $item->correo);
-            $sheet->setCellValue("J$row", $item->telefono);
-            $sheet->setCellValue("K$row", $item->pais);
-            $sheet->setCellValue("L$row", $item->vp_ene_24);
-            $sheet->setCellValue("M$row", $item->vp_feb_24);
-            $sheet->setCellValue("N$row", $item->vp_mar_24);
-            $sheet->setCellValue("O$row", $item->vp_abr_24);
-            $sheet->setCellValue("P$row", $item->vp_may_24);
-            $sheet->setCellValue("Q$row", $item->vp_jun_24);
-            $sheet->setCellValue("R$row", $item->vp_jul_24);
-            $sheet->setCellValue("S$row", $item->vp_ago_24);
-            $sheet->setCellValue("T$row", $item->vp_sep_24);
-            $sheet->setCellValue("U$row", $item->vp_oct_24);
-            $sheet->setCellValue("V$row", $item->vp_nov_24);
-            $sheet->setCellValue("W$row", $item->vp_dic_24);
-            $sheet->setCellValue("X$row", $item->vp_enero_25);
-            $sheet->setCellValue("Y$row", $item->vp_enero_25_USA);
-            $sheet->setCellValue("Z$row", $item->requisitoFaltante);
-            $sheet->setCellValue("AA$row", $item->estatus_SAP);
-            $sheet->setCellValue("AB$row", $item->salvado);
-            $row++;
-        }
+            $hoja1->mergeCells('A1:H1');
+            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica - Cierra el año en rango Plata en 3 meses");
+            $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
+            $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
+            
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'vp_dic_24', 'VP_ene_25', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $d = $coreCms->getReportBody("EXEC EXIGO_PROD.dbo.depuracionLatam_interno", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A4', true);
+        # hoja 1
 
         $fileName = "Listado Renovación 2025 para fidelizaciones_" . Date('Y_m_d_H_i_s') . '.xlsx';
 

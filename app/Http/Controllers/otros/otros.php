@@ -1882,7 +1882,7 @@ class otros extends Controller{
             $hoja1 = $spreadsheet->getActiveSheet();
 
             $hoja1->setTitle("Participantes");
-            for($i=65; $i<=90; $i++) {  
+            for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
                 // $hoja1->getColumnDimension($letter)->setAutoSize(true);
             }
