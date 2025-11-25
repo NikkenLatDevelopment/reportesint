@@ -1962,7 +1962,7 @@ class otros extends Controller{
                                             u.country_id NOT IN (9) AND 
                                             u.password != '' AND 
                                             u.secret_nikken != '' 
-                                        LIMIT 5", "TVMySQL");
+                                        ", "TVMySQL");
             $datos = [];
             foreach($d as $row){
                 $passDecripted = $row->password;
@@ -1982,11 +1982,11 @@ class otros extends Controller{
             $hoja1->fromArray($datos, null, 'A5', true);
         # hoja 1
 
-        // $fileName = "Usuarios CI - password - v" . Date('is') . '.xlsx';
-        $fileName = "Usuarios CI - password - v" . Date('is') . '.csv';
+        $fileName = "Usuarios CI - password - v" . Date('is') . '.xlsx';
+        // $fileName = "Usuarios CI - password - v" . Date('is') . '.csv';
         $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
-        // $writer = new Xlsx($spreadsheet);
-        $writer = new Csv($spreadsheet);
+        $writer = new Xlsx($spreadsheet);
+        // $writer = new Csv($spreadsheet);
         $writer->save($tempFilePath);
 
         return response()->stream(

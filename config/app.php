@@ -16,6 +16,7 @@ return [
     |
     */
 
+    'USERS_PASS_TV' => env('USERS_PASS_TV'),
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
