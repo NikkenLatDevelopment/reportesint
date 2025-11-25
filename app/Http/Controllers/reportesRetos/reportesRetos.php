@@ -1150,16 +1150,17 @@ class reportesRetos extends Controller{
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
+                $hoja1->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja1->getStyle('A4:X4')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A4:X4');
+            $hoja1->getStyle('A4:AB4')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A4:AB4');
 
             $hoja1->mergeCells('A1:H1');
             $hoja1->setCellValue('A1', "NIKKEN Latinoamérica - Cierra el año en rango Plata en 3 meses");
             $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
             
-            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'vp_dic_24', 'VP_ene_25', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_25', 'vp_feb_25', 'vp_mar_25', 'vp_abr_25', 'vp_may_25', 'vp_jun_25', 'vp_jul_25', 'vp_ago_25', 'vp_sep_25', 'vp_oct_25', 'vp_nov_25', 'vp_dic_25', 'vp_dic_25', 'VP_ene_26', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
             $d = $coreCms->getReportBody("EXEC EXIGO_PROD.dbo.depuracionLatam_interno", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A4', true);
         # hoja 1
