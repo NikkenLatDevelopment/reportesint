@@ -1219,19 +1219,18 @@ class reportesRetos extends Controller{
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
                 $hoja4->getColumnDimension($letter)->setAutoSize(true);
-                $hoja4->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja4->getStyle('A5:AB5')->getFont()->setBold(true);
-            $hoja4->setAutoFilter('A5:AB5');
+            $hoja4->getStyle('A5:I5')->getFont()->setBold(true);
+            $hoja4->setAutoFilter('A5:I5');
 
-            $hoja4->mergeCells('A1:H1');
+            $hoja4->mergeCells('A1:I1');
             $hoja4->setCellValue('A1', "NIKKEN Latinoamérica");
             $hoja4->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
             $hoja4->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja4->getStyle('A1:A3')->getFont()->setBold(true);
             
             $h = ['Pais', 'cardCode', 'NumAtCard', 'U_orden_vista', 'U_Garantia', 'ItemCode', 'Dscription', 'Fecha_Creacion', 'Fecha_Contabilizacion'];
-            $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno", "SQL173", $h);
+            $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno_garantias", "SQL173", $h);
             $hoja4->fromArray($d, null, 'A5', true);
         # hoja 4
 
