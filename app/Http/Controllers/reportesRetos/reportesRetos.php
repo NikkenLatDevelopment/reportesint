@@ -1146,24 +1146,94 @@ class reportesRetos extends Controller{
         # hoja 1
             $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("lista");
+            $hoja1->setTitle("Listado");
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
                 $hoja1->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja1->getStyle('A4:AB4')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A4:AB4');
+            $hoja1->getStyle('A5:AB5')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A5:AB5');
 
             $hoja1->mergeCells('A1:H1');
-            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica - Cierra el año en rango Plata en 3 meses");
-            $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
-            $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
+            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja1->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
+            $hoja1->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
+            $hoja1->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_25', 'vp_feb_25', 'vp_mar_25', 'vp_abr_25', 'vp_may_25', 'vp_jun_25', 'vp_jul_25', 'vp_ago_25', 'vp_sep_25', 'vp_oct_25', 'vp_nov_25', 'vp_dic_25', 'vp_dic_25', 'VP_ene_26', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
-            $d = $coreCms->getReportBody("EXEC EXIGO_PROD.dbo.depuracionLatam_interno", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A4', true);
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'VP_ene_25', 'VP_ene_25_USA', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A5', true);
         # hoja 1
+        
+        # hoja 2
+            $hoja2 = $spreadsheet->createSheet();
+
+            $hoja2->setTitle("Terminar 15 Ene");
+            for($i=65; $i<=90; $i++) {
+                $letter = chr($i);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
+                $hoja2->getColumnDimension("A$letter")->setAutoSize(true);
+            }
+            $hoja2->getStyle('A5:AB5')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A5:AB5');
+
+            $hoja2->mergeCells('A1:H1');
+            $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja2->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
+            $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
+            $hoja2->getStyle('A1:A3')->getFont()->setBold(true);
+            
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'VP_ene_25', 'VP_ene_25_USA', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno_depurarEnero", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A5', true);
+        # hoja 2
+        
+        # hoja 3
+            $hoja3 = $spreadsheet->createSheet();
+
+            $hoja3->setTitle("Terminar 15 Feb");
+            for($i=65; $i<=90; $i++) {
+                $letter = chr($i);
+                $hoja3->getColumnDimension($letter)->setAutoSize(true);
+                $hoja3->getColumnDimension("A$letter")->setAutoSize(true);
+            }
+            $hoja3->getStyle('A5:AB5')->getFont()->setBold(true);
+            $hoja3->setAutoFilter('A5:AB5');
+
+            $hoja3->mergeCells('A1:H1');
+            $hoja3->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja3->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
+            $hoja3->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
+            $hoja3->getStyle('A1:A3')->getFont()->setBold(true);
+            
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'VP_ene_25', 'VP_ene_25_USA', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno_depurarFebrero", "SQL173", $h);
+            $hoja3->fromArray($d, null, 'A5', true);
+        # hoja 3
+        
+        # hoja 4
+            $hoja4 = $spreadsheet->createSheet();
+
+            $hoja4->setTitle("Facturación Colchones");
+            for($i=65; $i<=90; $i++) {
+                $letter = chr($i);
+                $hoja4->getColumnDimension($letter)->setAutoSize(true);
+                $hoja4->getColumnDimension("A$letter")->setAutoSize(true);
+            }
+            $hoja4->getStyle('A5:AB5')->getFont()->setBold(true);
+            $hoja4->setAutoFilter('A5:AB5');
+
+            $hoja4->mergeCells('A1:H1');
+            $hoja4->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja4->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
+            $hoja4->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
+            $hoja4->getStyle('A1:A3')->getFont()->setBold(true);
+            
+            $h = ['Pais', 'cardCode', 'NumAtCard', 'U_orden_vista', 'U_Garantia', 'ItemCode', 'Dscription', 'Fecha_Creacion', 'Fecha_Contabilizacion'];
+            $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno", "SQL173", $h);
+            $hoja4->fromArray($d, null, 'A5', true);
+        # hoja 4
 
         $fileName = "Listado Renovación 2025 para fidelizaciones_" . Date('Y_m_d_H_i_s') . '.xlsx';
 
