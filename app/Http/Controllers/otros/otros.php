@@ -320,7 +320,6 @@ class otros extends Controller
             'tipo_cambio',
             'moneda',
             'profundidad',
-            'associateid',
             'order_Num',
             'fecha_Orden',
             'total_Orden',
@@ -352,7 +351,7 @@ class otros extends Controller
 
         // $h = ['Ownerid', 'vc_orden', 'porcentaje', 'rebate', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
         $h = [
-            'associateid',
+             'associateid',
             'associateNAME',
             'NumFactura',
             'vp_Orden',
@@ -364,7 +363,6 @@ class otros extends Controller
             'tipo_cambio',
             'moneda',
             'profundidad',
-            'associateid',
             'order_Num',
             'fecha_Orden',
             'total_Orden',
@@ -408,7 +406,6 @@ class otros extends Controller
             'tipo_cambio',
             'moneda',
             'profundidad',
-            'associateid',
             'order_Num',
             'fecha_Orden',
             'total_Orden',
@@ -452,7 +449,6 @@ class otros extends Controller
             'tipo_cambio',
             'moneda',
             'profundidad',
-            'associateid',
             'order_Num',
             'fecha_Orden',
             'total_Orden',
@@ -495,7 +491,6 @@ class otros extends Controller
             'tipo_cambio',
             'moneda',
             'profundidad',
-            'associateid',
             'order_Num',
             'fecha_Orden',
             'total_Orden',
