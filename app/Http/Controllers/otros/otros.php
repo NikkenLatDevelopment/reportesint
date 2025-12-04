@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\otros;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\coreApp;
 
@@ -17,48 +18,50 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class otros extends Controller{
-    public function estCHLexe(){
+class otros extends Controller
+{
+    public function estCHLexe()
+    {
         $core = new coreApp();
 
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("2024");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+        $hoja1->setTitle("2024");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A1:N1');
-            $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:N1');
+        $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE_ganadores_chl_gtm (202401,202412);", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE_ganadores_chl_gtm (202401,202412);", "SQL173", $h);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->createSheet();
-            $hoja2->setTitle("2025");
+        $hoja2 = $spreadsheet->createSheet();
+        $hoja2->setTitle("2025");
 
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja2->mergeCells('A1:M1');
-            $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
-            $hoja2->getStyle('A1')->getFont()->setBold(true);
+        $hoja2->mergeCells('A1:M1');
+        $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE_ganadores_chl_gtm (202501,202512);", "SQL173", $h);
-            $hoja2->fromArray($d, null, 'A3', true);
+        $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE_ganadores_chl_gtm (202501,202512);", "SQL173", $h);
+        $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
 
         // Guardar el archivo temporalmente
@@ -81,47 +84,48 @@ class otros extends Controller{
         );
     }
 
-    public function estVHLideres(){
+    public function estVHLideres()
+    {
         $core = new coreApp();
 
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("2024");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+        $hoja1->setTitle("2024");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Estrategia CHL Lideres | Fecha de actualización: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:M1');
+        $hoja1->setCellValue('A1', "Estrategia CHL Lideres | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = [ 'Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202401,202412);", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $h = ['Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202401,202412);", "SQL173", $h);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->createSheet();
-            $hoja2->setTitle("2025");
+        $hoja2 = $spreadsheet->createSheet();
+        $hoja2->setTitle("2025");
 
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja2->mergeCells('A1:M1');
-            $hoja2->setCellValue('A1', "Estrategia CHL Lideres | Fecha de actualización: " . Date("Y-m-d H:i:s"));
-            $hoja2->getStyle('A1')->getFont()->setBold(true);
+        $hoja2->mergeCells('A1:M1');
+        $hoja2->setCellValue('A1', "Estrategia CHL Lideres | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = [ 'Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202501,202512);", "SQL173", $h);
-            $hoja2->fromArray($d, null, 'A3', true);
+        $h = ['Código de Influencer', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Total de incorporaciones', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple Incorporaciones', 'Código Patrocinador', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres_ganadores_CHL_GTM (202501,202512);", "SQL173", $h);
+        $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
 
         // Guardar el archivo temporalmente
@@ -144,47 +148,48 @@ class otros extends Controller{
         );
     }
 
-    public function estGTMSLVexe(){
+    public function estGTMSLVexe()
+    {
         $core = new coreApp();
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("2024");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+        $hoja1->setTitle("2024");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A1:N1');
-            $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:N1');
+        $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE(202401,202412) ORDER BY periodo ASC", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE(202401,202412) ORDER BY periodo ASC", "SQL173", $h);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->createSheet();
-            $hoja2->setTitle("2025");
+        $hoja2 = $spreadsheet->createSheet();
+        $hoja2->setTitle("2025");
 
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja2->mergeCells('A1:M1');
-            $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
-            $hoja2->getStyle('A1')->getFont()->setBold(true);
+        $hoja2->mergeCells('A1:M1');
+        $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE(202501,202512) ORDER BY periodo ASC;", "SQL173", $h);
-            $hoja2->fromArray($d, null, 'A3', true);
+
+        $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE(202501,202512) ORDER BY periodo ASC;", "SQL173", $h);
+        $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
 
         // Guardar el archivo temporalmente
@@ -207,47 +212,48 @@ class otros extends Controller{
         );
     }
 
-    public function estGTMSLVLideres(){
+    public function estGTMSLVLideres()
+    {
         $core = new coreApp();
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("2024");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+        $hoja1->setTitle("2024");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A1:N1');
-            $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:N1');
+        $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202401,202412) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202401,202412) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->createSheet();
-            $hoja2->setTitle("2025");
+        $hoja2 = $spreadsheet->createSheet();
+        $hoja2->setTitle("2025");
 
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja2->getStyle('A3:N3')->getFont()->setBold(true);
 
-            $hoja2->mergeCells('A1:M1');
-            $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
-            $hoja2->getStyle('A1')->getFont()->setBold(true);
+        $hoja2->mergeCells('A1:M1');
+        $hoja2->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202501,202512) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
-            $hoja2->fromArray($d, null, 'A3', true);
+
+        $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202501,202512) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
+        $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
 
         // Guardar el archivo temporalmente
@@ -270,11 +276,13 @@ class otros extends Controller{
         );
     }
 
-    public function homeCheckBonos(){
+    public function homeCheckBonos()
+    {
         return view('otros.homeCheckBonos');
     }
 
-    public function reportCheckBonos(){
+    public function reportCheckBonos()
+    {
         $code = request()->code;
         $period = request()->period;
 
@@ -283,221 +291,221 @@ class otros extends Controller{
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("fn_retail_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A3:N3');
+        $hoja1->setTitle("fn_retail_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:N3')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A3:N3');
 
-            $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja1->setCellValue('A2', "id socio: $code");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
-            
-            // $h = ['Ownerid', 'total_orden', 'retail', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'vp_Orden', 'vc_Orden', 'Periodo_Orden', 'numAtCardSAP', 'NumFacturaSAP'];
-            $h = [
-                'Ownerid',
-                'OwnerName',
-                'vc_Orden',
-                'porcentaje',
-                'total_comision',
-                'tipo_cambio',
-                'rango_Socio',
-                'moneda',
-                'profundidad',
-                'associateid',
-                'order_Num',
-                'fecha_Orden',
-                'pais_Orden',
-                'total_Orden',
-                'vp_Orden',
-                'Periodo_Orden',
-                'numAtCard',
-                'NumFactura',
-                'SponsorID',
-                'SponsorName'
-            ];
-        
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_retail_exigo $code, '$period';", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $hoja1->mergeCells('A1:M1');
+        $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja1->setCellValue('A2', "id socio: $code");
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+        // $h = ['Ownerid', 'total_orden', 'retail', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'vp_Orden', 'vc_Orden', 'Periodo_Orden', 'numAtCardSAP', 'NumFacturaSAP'];
+        $h = [
+            'Ownerid',
+            'OwnerName',
+            'NumFactura',
+            'vp_Orden',
+            'rango_Socio',
+            'pais_Orden',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'total_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'SponsorID',
+            'SponsorName'
+        ];
+
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_retail_exigo $code, '$period';", "SQL173", $h);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->createSheet();
+        $hoja2 = $spreadsheet->createSheet();
 
-            $hoja2->setTitle("fn_rebate_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja2->getStyle('A3:O3')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A3:O3');
+        $hoja2->setTitle("fn_rebate_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja2->getStyle('A3:O3')->getFont()->setBold(true);
+        $hoja2->setAutoFilter('A3:O3');
 
-            $hoja2->mergeCells('A1:M1');
-            $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja2->setCellValue('A2', "id socio: $code");
-            $hoja2->getStyle('A1')->getFont()->setBold(true);
+        $hoja2->mergeCells('A1:M1');
+        $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja2->setCellValue('A2', "id socio: $code");
+        $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-           // $h = ['Ownerid', 'vc_orden', 'porcentaje', 'rebate', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
-            $h = [
-                'Ownerid',
-                'OwnerName',
-                'vc_Orden',
-                'porcentaje',
-                'total_comision',
-                'tipo_cambio',
-                'rango_Socio',
-                'moneda',
-                'profundidad',
-                'associateid',
-                'order_Num',
-                'fecha_Orden',
-                'pais_Orden',
-                'total_Orden',
-                'vp_Orden',
-                'Periodo_Orden',
-                'numAtCard',
-                'NumFactura',
-                'SponsorID',
-                'SponsorName'
-            ];
-            
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_rebate_exigo $code, '$period';", "SQL173", $h);
-            $hoja2->fromArray($d, null, 'A3', true);
+        // $h = ['Ownerid', 'vc_orden', 'porcentaje', 'rebate', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
+        $h = [
+            'Ownerid',
+            'OwnerName',
+            'NumFactura',
+            'vp_Orden',
+            'rango_Socio',
+            'pais_Orden',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'total_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'SponsorID',
+            'SponsorName'
+        ];
+
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_rebate_exigo $code, '$period';", "SQL173", $h);
+        $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
-        
+
         # hoja 3
-            $hoja3 = $spreadsheet->createSheet();
+        $hoja3 = $spreadsheet->createSheet();
 
-            $hoja3->setTitle("fn_override_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja3->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja3->getStyle('A3:P3')->getFont()->setBold(true);
-            $hoja3->setAutoFilter('A3:P3');
+        $hoja3->setTitle("fn_override_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja3->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja3->getStyle('A3:P3')->getFont()->setBold(true);
+        $hoja3->setAutoFilter('A3:P3');
 
-            $hoja3->mergeCells('A1:M1');
-            $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja3->setCellValue('A2', "id socio: $code");
-            $hoja3->getStyle('A1')->getFont()->setBold(true);
+        $hoja3->mergeCells('A1:M1');
+        $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja3->setCellValue('A2', "id socio: $code");
+        $hoja3->getStyle('A1')->getFont()->setBold(true);
 
-            // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
-            $h = [
-                'Ownerid',
-                'OwnerName',
-                'vc_Orden',
-                'porcentaje',
-                'total_comision',
-                'tipo_cambio',
-                'rango_Socio',
-                'moneda',
-                'profundidad',
-                'associateid',
-                'order_Num',
-                'fecha_Orden',
-                'pais_Orden',
-                'total_Orden',
-                'vp_Orden',
-                'Periodo_Orden',
-                'numAtCard',
-                'NumFactura',
-                'SponsorID',
-                'SponsorName'
-            ];
-            
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_override_exigo $code, '$period';", "SQL173", $h);
-            $hoja3->fromArray($d, null, 'A3', true);
+        // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
+        $h = [
+            'Ownerid',
+            'OwnerName',
+            'NumFactura',
+            'vp_Orden',
+            'rango_Socio',
+            'pais_Orden',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'total_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'SponsorID',
+            'SponsorName'
+        ];
+
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_override_exigo $code, '$period';", "SQL173", $h);
+        $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
 
         # hoja 4
-            $hoja4 = $spreadsheet->createSheet();
+        $hoja4 = $spreadsheet->createSheet();
 
-            $hoja4->setTitle("fn_leadrship_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja4->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja4->getStyle('A3:P3')->getFont()->setBold(true);
-            $hoja4->setAutoFilter('A3:P3');
+        $hoja4->setTitle("fn_leadrship_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja4->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja4->getStyle('A3:P3')->getFont()->setBold(true);
+        $hoja4->setAutoFilter('A3:P3');
 
-            $hoja4->mergeCells('A1:M1');
-            $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja4->setCellValue('A2', "id socio: $code");
-            $hoja4->getStyle('A1')->getFont()->setBold(true);
+        $hoja4->mergeCells('A1:M1');
+        $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja4->setCellValue('A2', "id socio: $code");
+        $hoja4->getStyle('A1')->getFont()->setBold(true);
 
-            // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
-            $h = [
-                'Ownerid',
-                'OwnerName',
-                'vc_Orden',
-                'porcentaje',
-                'total_comision',
-                'tipo_cambio',
-                'rango_Socio',
-                'moneda',
-                'profundidad',
-                'associateid',
-                'order_Num',
-                'fecha_Orden',
-                'pais_Orden',
-                'total_Orden',
-                'vp_Orden',
-                'Periodo_Orden',
-                'numAtCard',
-                'NumFactura',
-                'SponsorID',
-                'SponsorName'
-            ];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_leadership_exigo $code, '$period';", "SQL173", $h);
-            $hoja4->fromArray($d, null, 'A3', true);
+        // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
+        $h = [
+            'Ownerid',
+            'OwnerName',
+            'NumFactura',
+            'vp_Orden',
+            'rango_Socio',
+            'pais_Orden',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'total_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'SponsorID',
+            'SponsorName'
+        ];
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_leadership_exigo $code, '$period';", "SQL173", $h);
+        $hoja4->fromArray($d, null, 'A3', true);
         # hoja 4
-        
+
         # hoja 5
-            $hoja5 = $spreadsheet->createSheet();
+        $hoja5 = $spreadsheet->createSheet();
 
-            $hoja5->setTitle("fn_lifestyleBonus_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja5->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja5->getStyle('A3:O3')->getFont()->setBold(true);
-            $hoja5->setAutoFilter('A3:O3');
+        $hoja5->setTitle("fn_lifestyleBonus_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja5->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja5->getStyle('A3:O3')->getFont()->setBold(true);
+        $hoja5->setAutoFilter('A3:O3');
 
-            $hoja5->mergeCells('A1:M1');
-            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja5->setCellValue('A2', "id socio: $code");
-            $hoja5->getStyle('A1')->getFont()->setBold(true);
+        $hoja5->mergeCells('A1:M1');
+        $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja5->setCellValue('A2', "id socio: $code");
+        $hoja5->getStyle('A1')->getFont()->setBold(true);
 
-            // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
-            $h = [
-                'Ownerid',
-                'OwnerName',
-                'vc_Orden',
-                'porcentaje',
-                'total_comision',
-                'tipo_cambio',
-                'rango_Socio',
-                'moneda',
-                'profundidad',
-                'associateid',
-                'order_Num',
-                'fecha_Orden',
-                'pais_Orden',
-                'total_Orden',
-                'vp_Orden',
-                'Periodo_Orden',
-                'numAtCard',
-                'NumFactura',
-                'SponsorID',
-                'SponsorName'
-            ];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_lifestyleBonus_exigo $code, '$period';", "SQL173", $h);
-            $hoja5->fromArray($d, null, 'A3', true);
+        // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
+        $h = [
+            'Ownerid',
+            'OwnerName',
+            'NumFactura',
+            'vp_Orden',
+            'rango_Socio',
+            'pais_Orden',
+            'vc_Orden',
+            'porcentaje',
+            'total_comision',
+            'tipo_cambio',
+            'moneda',
+            'profundidad',
+            'associateid',
+            'order_Num',
+            'fecha_Orden',
+            'total_Orden',
+            'Periodo_Orden',
+            'numAtCard',
+            'SponsorID',
+            'SponsorName'
+        ];
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_lifestyleBonus_exigo $code, '$period';", "SQL173", $h);
+        $hoja5->fromArray($d, null, 'A3', true);
         # hoja 5
 
         // Guardar el archivo temporalmente
@@ -520,27 +528,61 @@ class otros extends Controller{
         );
     }
 
-    public function getReportSalesTvKueski(){
+    public function GetMonths()
+    {
+        $core = new coreApp();
+        try {
+            $data = $core->execSQLQuery("exec diccionarioExigo.dbo.SP_CheckBonos_ExtraccionMeses", "SQL173");
+
+            if (str_contains($data[0]->MesesActuales, "TEST")) {
+                $data[0]->Fechas .= ' Preeliminar';
+            }
+            $result = [];
+            foreach ($data as $fila) {
+                $fecha = mb_convert_case($fila->Fechas, MB_CASE_TITLE, "UTF-8");
+
+                $result[] = [
+                    'Fechas' => $fecha,
+                    'Id' => $fila->Id,
+                ];
+            }
+
+            return response()->json($result);
+        } catch (Exception $e) {
+            $error = [
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile(),
+                'trace' => $e->getTraceAsString(),
+            ];
+
+            return response()->json($error,500);
+        }
+
+    }
+
+    public function getReportSalesTvKueski()
+    {
         $core = new coreApp();
 
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("Kueski");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+        $hoja1->setTitle("Kueski");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Ventas rechazadas por Kueski TV | Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:M1');
+        $hoja1->setCellValue('A1', "Ventas rechazadas por Kueski TV | Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['codigo_usuario', 'nombre_usuario', 'id_venta', 'referencia_venta', 'metodo_de_pago', 'proveedor_de_pago', 'estatus_compra', 'total_compra', 'fecha_compra'];
-            $d = $core->getReportBody("SELECT 
+        $h = ['codigo_usuario', 'nombre_usuario', 'id_venta', 'referencia_venta', 'metodo_de_pago', 'proveedor_de_pago', 'estatus_compra', 'total_compra', 'fecha_compra'];
+        $d = $core->getReportBody("SELECT 
                                             CASE
                                                 WHEN u.sap_code IS NULL THEN 'CLIENTE'
                                                 ELSE u.sap_code
@@ -559,7 +601,7 @@ class otros extends Controller{
                                         WHERE 
                                             sp.payment_provider = 'Kueski' AND 
                                             sp.status IN ('cancelada', 'standby', 'abierta');", "TVMySQL", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         // Guardar el archivo temporalmente
@@ -582,27 +624,28 @@ class otros extends Controller{
         );
     }
 
-    public function getReportSalesTv3DS(){
+    public function getReportSalesTv3DS()
+    {
         $core = new coreApp();
 
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("Banorte 3d Secure");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+        $hoja1->setTitle("Banorte 3d Secure");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Ventas rechazadas Banorte 3DS TV | Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:M1');
+        $hoja1->setCellValue('A1', "Ventas rechazadas Banorte 3DS TV | Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['codigo_usuario', 'nombre_usuario', 'id_venta', 'referencia_venta', 'metodo_de_pago', 'proveedor_de_pago', 'estatus_compra', 'total_compra', 'fecha_compra'];
-            $d = $core->getReportBody("SELECT 
+        $h = ['codigo_usuario', 'nombre_usuario', 'id_venta', 'referencia_venta', 'metodo_de_pago', 'proveedor_de_pago', 'estatus_compra', 'total_compra', 'fecha_compra'];
+        $d = $core->getReportBody("SELECT 
                                             CASE
                                                 WHEN u.sap_code IS NULL THEN 'CLIENTE'
                                                 ELSE u.sap_code
@@ -622,7 +665,7 @@ class otros extends Controller{
                                             sp.payment_provider = 'Banorte 3d Secure' AND 
                                             sp.status IN ('cancelada', 'standby', 'abierta') AND
                                             sp.created_at >= '2025-01-01';", "TVMySQL", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         // Guardar el archivo temporalmente
@@ -645,11 +688,13 @@ class otros extends Controller{
         );
     }
 
-    public function homeCheckBonos_vcplus(){
+    public function homeCheckBonos_vcplus()
+    {
         return view('otros.homeCheckBonos_vcplus');
     }
 
-    public function reportCheckBonos_vcplus(){
+    public function reportCheckBonos_vcplus()
+    {
         $code = request()->code;
         $period = request()->period;
 
@@ -658,108 +703,108 @@ class otros extends Controller{
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("fn_retail_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A3:M3');
+        $hoja1->setTitle("fn_retail_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A3:M3');
 
-            $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja1->setCellValue('A2', "id socio: $code");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
-            
-            $h = ['OWNERID', 'TOTAL_ORDEN', 'RETAIL', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'VP_ORDEN', 'VC_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_retail_exigo $code, '$period';", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $hoja1->mergeCells('A1:M1');
+        $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja1->setCellValue('A2', "id socio: $code");
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+        $h = ['OWNERID', 'TOTAL_ORDEN', 'RETAIL', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'VP_ORDEN', 'VC_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_retail_exigo $code, '$period';", "SQL173", $h);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->createSheet();
+        $hoja2 = $spreadsheet->createSheet();
 
-            $hoja2->setTitle("fn_rebate_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja2->getStyle('A3:P3')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A3:P3');
+        $hoja2->setTitle("fn_rebate_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja2->getStyle('A3:P3')->getFont()->setBold(true);
+        $hoja2->setAutoFilter('A3:P3');
 
-            $hoja2->mergeCells('A1:M1');
-            $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja2->setCellValue('A2', "id socio: $code");
-            $hoja2->getStyle('A1')->getFont()->setBold(true);
+        $hoja2->mergeCells('A1:M1');
+        $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja2->setCellValue('A2', "id socio: $code");
+        $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'REBATE', 'REBATE_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_rebate_exigo $code, '$period';", "SQL173", $h);
-            $hoja2->fromArray($d, null, 'A3', true);
+        $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'REBATE', 'REBATE_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_rebate_exigo $code, '$period';", "SQL173", $h);
+        $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
-        
+
         # hoja 3
-            $hoja3 = $spreadsheet->createSheet();
+        $hoja3 = $spreadsheet->createSheet();
 
-            $hoja3->setTitle("fn_override_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja3->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja3->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja3->setAutoFilter('A3:Q3');
+        $hoja3->setTitle("fn_override_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja3->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja3->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja3->setAutoFilter('A3:Q3');
 
-            $hoja3->mergeCells('A1:M1');
-            $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja3->setCellValue('A2', "id socio: $code");
-            $hoja3->getStyle('A1')->getFont()->setBold(true);
+        $hoja3->mergeCells('A1:M1');
+        $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja3->setCellValue('A2', "id socio: $code");
+        $hoja3->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_override_exigo $code, '$period';", "SQL173", $h);
-            $hoja3->fromArray($d, null, 'A3', true);
+        $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_override_exigo $code, '$period';", "SQL173", $h);
+        $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
 
         # hoja 4
-            $hoja4 = $spreadsheet->createSheet();
+        $hoja4 = $spreadsheet->createSheet();
 
-            $hoja4->setTitle("fn_leadrship_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja4->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja4->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja4->setAutoFilter('A3:Q3');
+        $hoja4->setTitle("fn_leadrship_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja4->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja4->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja4->setAutoFilter('A3:Q3');
 
-            $hoja4->mergeCells('A1:M1');
-            $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
-            $hoja4->setCellValue('A2', "id socio: $code");
-            $hoja4->getStyle('A1')->getFont()->setBold(true);
+        $hoja4->mergeCells('A1:M1');
+        $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s") . "id socio: $code");
+        $hoja4->setCellValue('A2', "id socio: $code");
+        $hoja4->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_leadership_exigo $code, '$period';", "SQL173", $h);
-            $hoja4->fromArray($d, null, 'A3', true);
+        $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_leadership_exigo $code, '$period';", "SQL173", $h);
+        $hoja4->fromArray($d, null, 'A3', true);
         # hoja 4
-        
+
         # hoja 5
-            $hoja5 = $spreadsheet->createSheet();
+        $hoja5 = $spreadsheet->createSheet();
 
-            $hoja5->setTitle("fn_lifestyleBonus_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja5->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja5->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja5->setAutoFilter('A3:Q3');
+        $hoja5->setTitle("fn_lifestyleBonus_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja5->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja5->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja5->setAutoFilter('A3:Q3');
 
-            $hoja5->mergeCells('A1:M1');
-            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja5->setCellValue('A2', "id socio: $code");
-            $hoja5->getStyle('A1')->getFont()->setBold(true);
+        $hoja5->mergeCells('A1:M1');
+        $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja5->setCellValue('A2', "id socio: $code");
+        $hoja5->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
-            $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_lifestyleBonus_exigo $code, '$period';", "SQL173", $h);
-            $hoja5->fromArray($d, null, 'A3', true);
+        $h = ['OWNERID', 'VC_ORDEN', 'VC_PLUS_ORDEN', 'PORCENTAJE', 'TOTAL_COMISION', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'PAIS_ORDEN', 'TOTAL_ORDEN', 'VP_ORDEN', 'PERIODO_ORDEN', 'NUMATCARD'];
+        $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_simulador_lifestyleBonus_exigo $code, '$period';", "SQL173", $h);
+        $hoja5->fromArray($d, null, 'A3', true);
         # hoja 5
 
         // Guardar el archivo temporalmente
@@ -782,11 +827,13 @@ class otros extends Controller{
         );
     }
 
-    public function homeReportVolum(){
+    public function homeReportVolum()
+    {
         return view('otros.homeReportVolum');
     }
 
-    public function reportVolum(){
+    public function reportVolum()
+    {
         $period = request()->period;
 
         $core = new coreApp();
@@ -794,23 +841,23 @@ class otros extends Controller{
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("fn_retail_exigo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A3:M3');
+        $hoja1->setTitle("fn_retail_exigo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:M3')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A3:M3');
 
-            $hoja1->mergeCells('A1:M1');
-            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            // $hoja1->setCellValue('A2', "id socio: $code");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
-            
-            $h = ['PERIODO', 'CODIGO_SOCIO', 'NOMBRE_SOCIO', 'TELEFONO', 'CORREO', 'TIPO_DISTRIBUIDOR', 'ESTATUS', 'RANGO', 'PAIS', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'CODIGO_PATROCINADOR', 'NOMBRE_PATROCINADOR', 'PAIS_PATROCINADOR', 'ULTIMA_ACTUALIZACION'];
-            $d = $core->getReportBody("SELECT 
+        $hoja1->mergeCells('A1:M1');
+        $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        // $hoja1->setCellValue('A2', "id socio: $code");
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+        $h = ['PERIODO', 'CODIGO_SOCIO', 'NOMBRE_SOCIO', 'TELEFONO', 'CORREO', 'TIPO_DISTRIBUIDOR', 'ESTATUS', 'RANGO', 'PAIS', 'VP', 'VGP', 'VO', 'VOLDP', 'VOLDPYS', 'CODIGO_PATROCINADOR', 'NOMBRE_PATROCINADOR', 'PAIS_PATROCINADOR', 'ULTIMA_ACTUALIZACION'];
+        $d = $core->getReportBody("SELECT 
                                             a.Period,
                                             a.Associateid AS CodigoSocio,
                                             b.AssociateName AS NombreDelSocio,
@@ -837,7 +884,7 @@ class otros extends Controller{
                                         LEFT JOIN diccionarioExigo.dbo.Distributors_MD d WITH(NOLOCK) on b.Sponsor_id = d.Associateid
                                         LEFT JOIN diccionarioExigo.dbo.CardCodeInfoDeSAP e WITH(NOLOCK) on a.Associateid = e.CardCode
                                         WHERE a.Period = $period;", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         // Guardar el archivo temporalmente
@@ -860,7 +907,8 @@ class otros extends Controller{
         );
     }
 
-    public function ficha2(){
+    public function ficha2()
+    {
         $code = request()->code;
         $period = request()->period;
         ini_set('max_execution_time', 500);
@@ -878,9 +926,9 @@ class otros extends Controller{
                 'startColor' => ['rgb' => '800080'] // Morado
             ]
         ];
-        
 
-     // # hoja 1
+
+        // # hoja 1
         /*
         $hoja1 = $spreadsheet->getActiveSheet();
 
@@ -945,8 +993,19 @@ class otros extends Controller{
 
         // CABECERAS (personalizadas)
         $headers = [
-            'Distribuidor', 'Tipo', 'Nombre', 'Telefono', 'Rango', 'Ciudad', 'Estado',
-            'E_mail', 'pais', 'VP_LATAM_Marzo', 'VP_GLOBAL_Marzo', 'numero_Ascensos', 'Ficha_No2'
+            'Distribuidor',
+            'Tipo',
+            'Nombre',
+            'Telefono',
+            'Rango',
+            'Ciudad',
+            'Estado',
+            'E_mail',
+            'pais',
+            'VP_LATAM_Marzo',
+            'VP_GLOBAL_Marzo',
+            'numero_Ascensos',
+            'Ficha_No2'
         ];
 
         // Pintar cabeceras en la fila 6
@@ -962,24 +1021,24 @@ class otros extends Controller{
         $hoja2->fromArray($d, null, 'A6', true);
         # hoja 2
         // Hoja 3
-                $hoja3 = $spreadsheet->createSheet();
-                $hoja3->setTitle("Data_Socios");
+        $hoja3 = $spreadsheet->createSheet();
+        $hoja3->setTitle("Data_Socios");
 
-                // Estilo morado con texto blanco
-                $styleMorado = [
-                    'font' => [
-                        'bold' => true,
-                        'color' => ['rgb' => 'FFFFFF']
-                    ],
-                    'fill' => [
-                        'fillType' => Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => '800080']
-                    ]
-                ];
+        // Estilo morado con texto blanco
+        $styleMorado = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF']
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '800080']
+            ]
+        ];
 
-                // Autoajustar columnas de A a Z
-                for ($i = 65; $i <= 90; $i++) {
-                    $hoja3->getColumnDimension(chr($i))->setAutoSize(true);
+        // Autoajustar columnas de A a Z
+        for ($i = 65; $i <= 90; $i++) {
+            $hoja3->getColumnDimension(chr($i))->setAutoSize(true);
         }
 
         // Títulos institucionales en la parte superior
@@ -1000,9 +1059,28 @@ class otros extends Controller{
 
         // CABECERAS de columna
         $headers3 = [
-            'Distribuidor', 'Tipo', 'Estatus_SAP', 'Nombre', 'Telefono', 'Rango_inicial', 'Ciudad', 'Estado',
-            'E_mail', 'pais', 'VP_LATAM_Marzo', 'Falta_VP', 'VP_GLOBAL_Marzo', 'numero_Ascensos', 'Falta_Ascensos',
-            'Ficha_No2', 'VPde_1a100', 'VPde_101a200', 'VPde_201a299', 'VPde_300a400', 'VPde_401a499', 'VPde_500omás'
+            'Distribuidor',
+            'Tipo',
+            'Estatus_SAP',
+            'Nombre',
+            'Telefono',
+            'Rango_inicial',
+            'Ciudad',
+            'Estado',
+            'E_mail',
+            'pais',
+            'VP_LATAM_Marzo',
+            'Falta_VP',
+            'VP_GLOBAL_Marzo',
+            'numero_Ascensos',
+            'Falta_Ascensos',
+            'Ficha_No2',
+            'VPde_1a100',
+            'VPde_101a200',
+            'VPde_201a299',
+            'VPde_300a400',
+            'VPde_401a499',
+            'VPde_500omás'
         ];
 
         // Escribir encabezados en fila 6
@@ -1020,7 +1098,7 @@ class otros extends Controller{
         # hoja 4
         $hoja4 = $spreadsheet->createSheet();
         $hoja4->setTitle("Detalle_de_Ascensos");
-        
+
         // Estilo morado con texto blanco
         $styleMorado = [
             'font' => [
@@ -1032,52 +1110,68 @@ class otros extends Controller{
                 'startColor' => ['rgb' => '800080']
             ]
         ];
-        
+
         // Autoajustar columnas A-Z
         for ($i = 65; $i <= 90; $i++) {
             $hoja4->getColumnDimension(chr($i))->setAutoSize(true);
         }
-        
+
         // Títulos superiores institucionales
         $hoja4->mergeCells('A1:S1');
         $hoja4->setCellValue('A1', "NIKKEN LATINOAMERICA");
-        
+
         $hoja4->mergeCells('A2:S2');
         $hoja4->setCellValue('A2', "LISTA DEFINITIVA PARA RECONOCIMIENTOS - FICHA # 2");
-        
+
         $hoja4->mergeCells('A3:S3');
         $hoja4->setCellValue('A3', "MES DE MEDICIÓN: MARZO DE 2025");
-        
+
         $hoja4->mergeCells('A4:S4');
         $hoja4->setCellValue('A4', "Elaborado por Procesos Comerciales : " . date("Y-m-d H:i:s"));
-        
+
         // Aplicar fondo morado a los títulos institucionales
         $hoja4->getStyle('A1:S4')->applyFromArray($styleMorado);
-        
+
         // Cabeceras personalizadas
         $headers4 = [
-            'Distribuidor', 'Tipo', 'Nombre', 'Telefono', 'Rango_Inicial', 'Rango_Final', 'Ciudad', 'Estado',
-            'E_mail', 'pais', 'codigo_Patrocinador', 'nombre_patrocinador', 'ciudad_patrocinador',
-            'estado_patrocinador', 'E_mail_patrocinador', 'Pais_Patrocinador', 'VP', 'VGP_Cumple', 'avance'
+            'Distribuidor',
+            'Tipo',
+            'Nombre',
+            'Telefono',
+            'Rango_Inicial',
+            'Rango_Final',
+            'Ciudad',
+            'Estado',
+            'E_mail',
+            'pais',
+            'codigo_Patrocinador',
+            'nombre_patrocinador',
+            'ciudad_patrocinador',
+            'estado_patrocinador',
+            'E_mail_patrocinador',
+            'Pais_Patrocinador',
+            'VP',
+            'VGP_Cumple',
+            'avance'
         ];
-        
+
         // Escribir cabeceras en la fila 6
         $hoja4->fromArray($headers4, null, 'A6');
         $hoja4->getStyle('A6:S6')->applyFromArray($styleMorado);
         $hoja4->setAutoFilter('A6:S6');
-        
+
         // Ejecutar SP y traer los datos
         $h4 = []; // sin columnas forzadas
         $d4 = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_detalleAscensos]", "SQL73", $h4);
-        
+
         // Insertar los datos a partir de fila 7
         $hoja4->fromArray($d4, null, 'A6', true);
         # hoja 4
-        
+
         # hoja 5
         $hoja5 = $spreadsheet->createSheet();
         $hoja5->setTitle("OrdenesNA");
-        
+
         // Estilo morado con letras blancas
         $styleMorado = [
             'font' => [
@@ -1089,48 +1183,54 @@ class otros extends Controller{
                 'startColor' => ['rgb' => '800080']
             ]
         ];
-        
+
         // Autoajustar columnas A-Z
         for ($i = 65; $i <= 90; $i++) {
             $hoja5->getColumnDimension(chr($i))->setAutoSize(true);
         }
-        
+
         // Títulos institucionales superiores
         $hoja5->mergeCells('A1:G1');
         $hoja5->setCellValue('A1', "NIKKEN LATINOAMERICA");
-        
+
         $hoja5->mergeCells('A2:G2');
         $hoja5->setCellValue('A2', "LISTA DEFINITIVA PARA RECONOCIMIENTOS - FICHA # 2");
-        
+
         $hoja5->mergeCells('A3:G3');
         $hoja5->setCellValue('A3', "MES DE MEDICIÓN: MARZO DE 2025");
-        
+
         $hoja5->mergeCells('A4:G4');
         $hoja5->setCellValue('A4', "Elaborado por Procesos Comerciales : " . date("Y-m-d H:i:s"));
-        
+
         // Aplicar fondo morado a los títulos institucionales
         $hoja5->getStyle('A1:G4')->applyFromArray($styleMorado);
-        
+
         // Cabeceras específicas de la hoja
         $headers5 = [
-            'Distribuidor', 'numero_Orden', 'fecha_Orden', 'pais', 'valorOrden', 'puntos', 'sponsor'
+            'Distribuidor',
+            'numero_Orden',
+            'fecha_Orden',
+            'pais',
+            'valorOrden',
+            'puntos',
+            'sponsor'
         ];
-        
+
         // Escribir cabeceras en la fila 6
         $hoja5->fromArray($headers5, null, 'A6');
         $hoja5->getStyle('A6:G6')->applyFromArray($styleMorado);
         $hoja5->setAutoFilter('A6:G6');
-        
+
         // Obtener los datos desde el SP
         $h5 = [];
         $d5 = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_Ficha2_ordenNA]", "SQL73", $h5);
-        
+
         // Insertar datos desde la fila 7
         $hoja5->fromArray($d5, null, 'A6', true);
         # hoja 5
 
 
-         // Hoja 6
+        // Hoja 6
         $hoja6 = $spreadsheet->createSheet();
         $hoja6->setTitle("requisitos");
 
@@ -1182,8 +1282,9 @@ class otros extends Controller{
             ]
         );
     }
-    
-    public function downloadReportvc300(){
+
+    public function downloadReportvc300()
+    {
         $coreCms = new coreApp();
         $sap_code_user = request()->sap_code_user;
         $periodSelect = request()->periodSelect;
@@ -1191,23 +1292,23 @@ class otros extends Controller{
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("Grupo Personal");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A3:Q3');
+        $hoja1->setTitle("Grupo Personal");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A3:Q3');
 
-            $hoja1->mergeCells('A1:Q1');
-            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            // $hoja1->setCellValue('A2', "id socio: $code");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
-            
-            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
-            $d = $coreCms->getReportBody("SELECT 
+        $hoja1->mergeCells('A1:Q1');
+        $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        // $hoja1->setCellValue('A2', "id socio: $code");
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+        $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+        $d = $coreCms->getReportBody("SELECT 
                                         OWNERID,
                                         VC_REGULAR,
                                         VC_PLUS,
@@ -1230,26 +1331,26 @@ class otros extends Controller{
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
                                         AND Tipo_Bonus IN (2, 3)", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->createSheet();
+        $hoja2 = $spreadsheet->createSheet();
 
-            $hoja2->setTitle("Liderazgo");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja2->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A3:Q3');
+        $hoja2->setTitle("Liderazgo");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja2->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja2->setAutoFilter('A3:Q3');
 
-            $hoja2->mergeCells('A1:Q1');
-            $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja2->getStyle('A1')->getFont()->setBold(true);
+        $hoja2->mergeCells('A1:Q1');
+        $hoja2->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
-            $d = $coreCms->getReportBody("SELECT 
+        $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+        $d = $coreCms->getReportBody("SELECT 
                                         OWNERID,
                                         VC_REGULAR,
                                         VC_PLUS,
@@ -1272,26 +1373,26 @@ class otros extends Controller{
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
                                         AND Tipo_Bonus = 7;", "SQL173", $h);
-            $hoja2->fromArray($d, null, 'A3', true);
+        $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
-        
+
         # hoja 3
-            $hoja3 = $spreadsheet->createSheet();
+        $hoja3 = $spreadsheet->createSheet();
 
-            $hoja3->setTitle("Sugerido");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja3->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja3->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja3->setAutoFilter('A3:Q3');
+        $hoja3->setTitle("Sugerido");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja3->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja3->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja3->setAutoFilter('A3:Q3');
 
-            $hoja3->mergeCells('A1:Q1');
-            $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja3->getStyle('A1')->getFont()->setBold(true);
+        $hoja3->mergeCells('A1:Q1');
+        $hoja3->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja3->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
-            $d = $coreCms->getReportBody("SELECT 
+        $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+        $d = $coreCms->getReportBody("SELECT 
                                         OWNERID,
                                         VC_REGULAR,
                                         VC_PLUS,
@@ -1314,26 +1415,26 @@ class otros extends Controller{
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
                                         AND Tipo_Bonus = 6;", "SQL173", $h);
-            $hoja3->fromArray($d, null, 'A3', true);
+        $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
-        
+
         # hoja 4
-            $hoja4 = $spreadsheet->createSheet();
+        $hoja4 = $spreadsheet->createSheet();
 
-            $hoja4->setTitle("Club De Compras");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja4->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja4->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja4->setAutoFilter('A3:Q3');
+        $hoja4->setTitle("Club De Compras");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja4->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja4->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja4->setAutoFilter('A3:Q3');
 
-            $hoja4->mergeCells('A1:Q1');
-            $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja4->getStyle('A1')->getFont()->setBold(true);
+        $hoja4->mergeCells('A1:Q1');
+        $hoja4->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja4->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
-            $d = $coreCms->getReportBody("SELECT 
+        $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+        $d = $coreCms->getReportBody("SELECT 
                                         OWNERID,
                                         VC_REGULAR,
                                         VC_PLUS,
@@ -1356,26 +1457,26 @@ class otros extends Controller{
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
                                         AND Tipo_Bonus = 111;", "SQL173", $h);
-            $hoja4->fromArray($d, null, 'A3', true);
+        $hoja4->fromArray($d, null, 'A3', true);
         # hoja 4
 
         # hoja 5
-            $hoja5 = $spreadsheet->createSheet();
+        $hoja5 = $spreadsheet->createSheet();
 
-            $hoja5->setTitle("Estilo de Vida");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja5->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja5->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja5->setAutoFilter('A3:Q3');
+        $hoja5->setTitle("Estilo de Vida");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja5->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja5->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja5->setAutoFilter('A3:Q3');
 
-            $hoja5->mergeCells('A1:Q1');
-            $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja5->getStyle('A1')->getFont()->setBold(true);
+        $hoja5->mergeCells('A1:Q1');
+        $hoja5->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja5->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
-            $d = $coreCms->getReportBody("SELECT 
+        $h = ['OWNERID', 'VC_REGULAR', 'VC_PLUS', 'PORCENTAJE', 'TOTAL_COMISION_REGULAR', 'TOTAL_COMISION_VC_PLUS', 'RANGO_SOCIO', 'MONEDA', 'PROFUNDIDAD', 'ASSOCIATEID', 'ORDER_NUM', 'FECHA_ORDEN', 'TOTAL_ORDEN', 'PERIODO_ORDEN', 'OWNERID_NOMBRE', 'ASSOCIATEID_NOMBRE', 'TIPO_BONUS'];
+        $d = $coreCms->getReportBody("SELECT 
                                         OWNERID,
                                         VC_REGULAR,
                                         VC_PLUS,
@@ -1398,7 +1499,7 @@ class otros extends Controller{
                                         PERIODO_ORDEN = '$periodSelect'
                                         AND OWNERID = $sap_code_user
                                         AND Tipo_Bonus = 8;", "SQL173", $h);
-            $hoja5->fromArray($d, null, 'A3', true);
+        $hoja5->fromArray($d, null, 'A3', true);
         # hoja 5
 
         $fileName = "VC 300 $sap_code_user - $periodSelect - v" . Date('is') . '.xlsx';
@@ -1421,30 +1522,31 @@ class otros extends Controller{
             ]
         );
     }
-    
-    public function download_rep_volumenes_rec(){
+
+    public function download_rep_volumenes_rec()
+    {
         $coreCms = new coreApp();
 
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("VOL");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A3:Q3')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A3:Q3');
+        $hoja1->setTitle("VOL");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A3:Q3')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A3:Q3');
 
-            $hoja1->mergeCells('A1:Q1');
-            $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
-            
-            $h = ['ASSOCIATEID', 'VP_ENERO', 'VGP_ENERO', 'VO_ENERO', 'VP_FEBRERO', 'VGP_FEBRERO', 'VO_FEBRERO', 'VP_MARZO', 'VGP_MARZO', 'VO_MARZO', 'VP_ABRIL', 'VGP_ABRIL', 'VO_ABRIL', 'VP_MAYO', 'VGP_MAYO', 'VO_MAYO', 'VP_JUNIO', 'VGP_JUNIO', 'VO_JUNIO', 'VP_JULIO', 'VGP_JULIO', 'VO_JULIO', 'VP_AGOSTO', 'VGP_AGOSTO', 'VO_AGOSTO', 'VP_SEPTIEMBRE', 'VGP_SEPTIEMBRE', 'VO_SEPTIEMBRE', 'VP_OCTUBRE', 'VGP_OCTUBRE', 'VO_OCTUBRE', 'VP_NOVIEMBRE', 'VGP_NOVIEMBRE', 'VO_NOVIEMBRE', 'VP_DICIEMBRE', 'VGP_DICIEMBRE', 'VO_DICIEMBRE', 'PAIS'];
-            $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.rep_volumenes_nikkenReconocimientos", "SQL73", $h);
-            $hoja1->fromArray($d, null, 'A3', true);
+        $hoja1->mergeCells('A1:Q1');
+        $hoja1->setCellValue('A1', "Fecha de descarga: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
+
+        $h = ['ASSOCIATEID', 'VP_ENERO', 'VGP_ENERO', 'VO_ENERO', 'VP_FEBRERO', 'VGP_FEBRERO', 'VO_FEBRERO', 'VP_MARZO', 'VGP_MARZO', 'VO_MARZO', 'VP_ABRIL', 'VGP_ABRIL', 'VO_ABRIL', 'VP_MAYO', 'VGP_MAYO', 'VO_MAYO', 'VP_JUNIO', 'VGP_JUNIO', 'VO_JUNIO', 'VP_JULIO', 'VGP_JULIO', 'VO_JULIO', 'VP_AGOSTO', 'VGP_AGOSTO', 'VO_AGOSTO', 'VP_SEPTIEMBRE', 'VGP_SEPTIEMBRE', 'VO_SEPTIEMBRE', 'VP_OCTUBRE', 'VGP_OCTUBRE', 'VO_OCTUBRE', 'VP_NOVIEMBRE', 'VGP_NOVIEMBRE', 'VO_NOVIEMBRE', 'VP_DICIEMBRE', 'VGP_DICIEMBRE', 'VO_DICIEMBRE', 'PAIS'];
+        $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.rep_volumenes_nikkenReconocimientos", "SQL73", $h);
+        $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
         $fileName = "VOL Reconocimientos - v" . Date('is') . '.csv';
@@ -1467,48 +1569,49 @@ class otros extends Controller{
             ]
         );
     }
-    
-    public function regresa_casa_report(){
+
+    public function regresa_casa_report()
+    {
         $coreCms = new coreApp();
 
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("VOL");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A7:Q7')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A7:V7');
+        $hoja1->setTitle("VOL");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A7:Q7')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A7:V7');
 
-            $hoja1->mergeCells('A1:E1');
-            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:E1');
+        $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A2:E2');
-            $hoja1->setCellValue('A2', "Vuelve a casa");
-            $hoja1->getStyle('A2')->getFont()->setBold(true);
+        $hoja1->mergeCells('A2:E2');
+        $hoja1->setCellValue('A2', "Vuelve a casa");
+        $hoja1->getStyle('A2')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A3:E3');
-            $hoja1->setCellValue('A3', "Estrategia de Julio y Agosto de 2025");
-            $hoja1->getStyle('A3')->getFont()->setBold(true);
+        $hoja1->mergeCells('A3:E3');
+        $hoja1->setCellValue('A3', "Estrategia de Julio y Agosto de 2025");
+        $hoja1->getStyle('A3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A4:E4');
-            $hoja1->setCellValue('A4', "Socios que se depuraron en el mes de Enero de 2025");
-            $hoja1->getStyle('A4')->getFont()->setBold(true);
+        $hoja1->mergeCells('A4:E4');
+        $hoja1->setCellValue('A4', "Socios que se depuraron en el mes de Enero de 2025");
+        $hoja1->getStyle('A4')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A5:E5');
-            $hoja1->setCellValue('A5', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A5')->getFont()->setBold(true);
-            
-            $h = ['Codigo de Socio', 'Estatus SAP', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'Código nuevo', 'Nombre del socio - nuevo', 'Código del Kit de vuelve a casa', 'Mes que vuelve a casa', 'VP Julio', 'VP Agosto', 'Salvado para Septiembre/2025', 'Codigo patrocinador actual', 'Nombre Patrocinador actual', 'Pais Patrocinador actual'];
-            $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.RegresaACasa_genealogia_2025_interno", "SQL73", $h);
-            $hoja1->fromArray($d, null, 'A7', true);
-            $hoja1->getStyle('A7:V7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('1F497D');
-            $hoja1->getStyle('A7:V7')->getFont()->getColor()->setRGB ('ffffff');
+        $hoja1->mergeCells('A5:E5');
+        $hoja1->setCellValue('A5', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A5')->getFont()->setBold(true);
+
+        $h = ['Codigo de Socio', 'Estatus SAP', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'Código nuevo', 'Nombre del socio - nuevo', 'Código del Kit de vuelve a casa', 'Mes que vuelve a casa', 'VP Julio', 'VP Agosto', 'Salvado para Septiembre/2025', 'Codigo patrocinador actual', 'Nombre Patrocinador actual', 'Pais Patrocinador actual'];
+        $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.RegresaACasa_genealogia_2025_interno", "SQL73", $h);
+        $hoja1->fromArray($d, null, 'A7', true);
+        $hoja1->getStyle('A7:V7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('1F497D');
+        $hoja1->getStyle('A7:V7')->getFont()->getColor()->setRGB('ffffff');
 
         # hoja 1
 
@@ -1533,75 +1636,76 @@ class otros extends Controller{
         );
     }
 
-    public function impulsa_bd(){
+    public function impulsa_bd()
+    {
         $coreCms = new coreApp();
 
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("Impulsa la base");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A5:T5')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A5:T5');
+        $hoja1->setTitle("Impulsa la base");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A5:T5')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A5:T5');
 
-            $hoja1->mergeCells('A1:E1');
-            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:E1');
+        $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A2:E2');
-            $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
-            $hoja1->getStyle('A2')->getFont()->setBold(true);
+        $hoja1->mergeCells('A2:E2');
+        $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
+        $hoja1->getStyle('A2')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A3:E3');
-            $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
-            $hoja1->getStyle('A3')->getFont()->setBold(true);
-            
-            $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
-            $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.impulsaLaBase_2025_reporte_Interno", "SQL73", $h);
-            $hoja1->fromArray($d, null, 'A5', true);
+        $hoja1->mergeCells('A3:E3');
+        $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+        $hoja1->getStyle('A3')->getFont()->setBold(true);
 
-            $hoja1->getStyle('A5:T5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
-            $hoja1->getStyle('A1:T3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
-            $hoja1->getStyle('A5:T5')->getFont()->getColor()->setRGB ('ffffff');
-            $hoja1->getStyle('A1:T5')->getFont()->getColor()->setRGB ('ffffff');
+        $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
+        $d = $coreCms->getReportBody("EXEC LAT_MyNIKKEN.dbo.impulsaLaBase_2025_reporte_Interno", "SQL73", $h);
+        $hoja1->fromArray($d, null, 'A5', true);
+
+        $hoja1->getStyle('A5:T5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+        $hoja1->getStyle('A1:T3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+        $hoja1->getStyle('A5:T5')->getFont()->getColor()->setRGB('ffffff');
+        $hoja1->getStyle('A1:T5')->getFont()->getColor()->setRGB('ffffff');
         # hoja 1
 
         # hoja 2
-            // $hoja2 = $spreadsheet->createSheet();
+        // $hoja2 = $spreadsheet->createSheet();
 
-            // $hoja2->setTitle("Incorporaciones");
-            // for($i=65; $i<=90; $i++) {  
-            //     $letter = chr($i);
-            //     $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            // }
-            // $hoja2->getStyle('A5:Z5')->getFont()->setBold(true);
-            // $hoja2->setAutoFilter('A5:Z5');
+        // $hoja2->setTitle("Incorporaciones");
+        // for($i=65; $i<=90; $i++) {  
+        //     $letter = chr($i);
+        //     $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        // }
+        // $hoja2->getStyle('A5:Z5')->getFont()->setBold(true);
+        // $hoja2->setAutoFilter('A5:Z5');
 
-            // $hoja2->mergeCells('A1:E1');
-            // $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
-            // $hoja2->getStyle('A1')->getFont()->setBold(true);
+        // $hoja2->mergeCells('A1:E1');
+        // $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
+        // $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            // $hoja2->mergeCells('A2:E2');
-            // $hoja2->setCellValue('A2', "Impulsa la base- Julio de 2025");
-            // $hoja2->getStyle('A2')->getFont()->setBold(true);
+        // $hoja2->mergeCells('A2:E2');
+        // $hoja2->setCellValue('A2', "Impulsa la base- Julio de 2025");
+        // $hoja2->getStyle('A2')->getFont()->setBold(true);
 
-            // $hoja2->mergeCells('A3:E3');
-            // $hoja2->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
-            // $hoja2->getStyle('A3')->getFont()->setBold(true);
+        // $hoja2->mergeCells('A3:E3');
+        // $hoja2->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+        // $hoja2->getStyle('A3')->getFont()->setBold(true);
 
-            // $h = ["Tipo", "Codigo", "Nombre", "Kit", "Nombre Kit", "Fecha", "Periodo", "Mes de incorporacion", "Pais", "Departamento", "Celular", "Correo electronico", "Cod. patrocinador", "Nombre patrocinador", "Rango patrocinador", "Telefeno patrocinador", "Celular patrocinador", "Pais patrocinador", "Status", "Usuario", "Segmentacion", "Factura SAP", "Valor", "VP julio ", "VP adicionales", "Cumple requisito"];
-            // $d = $coreCms->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
-            // $hoja2->fromArray($d, null, 'A5', true);
+        // $h = ["Tipo", "Codigo", "Nombre", "Kit", "Nombre Kit", "Fecha", "Periodo", "Mes de incorporacion", "Pais", "Departamento", "Celular", "Correo electronico", "Cod. patrocinador", "Nombre patrocinador", "Rango patrocinador", "Telefeno patrocinador", "Celular patrocinador", "Pais patrocinador", "Status", "Usuario", "Segmentacion", "Factura SAP", "Valor", "VP julio ", "VP adicionales", "Cumple requisito"];
+        // $d = $coreCms->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
+        // $hoja2->fromArray($d, null, 'A5', true);
 
-            // $hoja2->getStyle('A5:Z5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
-            // $hoja2->getStyle('A1:Z3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
-            // $hoja2->getStyle('A5:Z5')->getFont()->getColor()->setRGB ('ffffff');
-            // $hoja2->getStyle('A1:Z5')->getFont()->getColor()->setRGB ('ffffff');
+        // $hoja2->getStyle('A5:Z5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+        // $hoja2->getStyle('A1:Z3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+        // $hoja2->getStyle('A5:Z5')->getFont()->getColor()->setRGB ('ffffff');
+        // $hoja2->getStyle('A1:Z5')->getFont()->getColor()->setRGB ('ffffff');
         # hoja 2
 
         $fileName = "Impulsa la base - v" . Date('is') . '.xlsx';
@@ -1627,32 +1731,33 @@ class otros extends Controller{
         );
     }
 
-    public function impulsa_bd_h1_csv(){
+    public function impulsa_bd_h1_csv()
+    {
         $core = new coreApp();
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("Impulsa la base");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->setAutoFilter('A5:T5');
+        $hoja1->setTitle("Impulsa la base");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->setAutoFilter('A5:T5');
 
-            $hoja1->mergeCells('A1:E1');
-            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+        $hoja1->mergeCells('A1:E1');
+        $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
 
-            $hoja1->mergeCells('A2:E2');
-            $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
+        $hoja1->mergeCells('A2:E2');
+        $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
 
-            $hoja1->mergeCells('A3:E3');
-            $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
-            
-            $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
-            $d = $core->getReportBody("EXEC LAT_MyNIKKEN.dbo.impulsaLaBase_2025_reporte_Interno", "SQL73", $h);
-            $hoja1->fromArray($d, null, 'A5', true);
+        $hoja1->mergeCells('A3:E3');
+        $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+
+        $h = ['Código', 'Tipo de Distribuidor', 'Estado', 'Nombre Titular', 'Nombre Cotitular', 'Fecha de incorporación', 'Periodo de Incorporación', 'Rango', 'Correo', 'Estado', 'País', 'Periodo', 'VP Julio', 'Cantidad de Incorporaciones', 'Códigos de incorporación', 'Nombre Item', 'VP adicionales al kit', 'Patrocinador gana bono', 'Incorporado gana bono', 'Cumple estrategia base'];
+        $d = $core->getReportBody("EXEC LAT_MyNIKKEN.dbo.impulsaLaBase_2025_reporte_Interno", "SQL73", $h);
+        $hoja1->fromArray($d, null, 'A5', true);
         # hoja 1
 
         // Guardar el archivo temporalmente
@@ -1675,32 +1780,33 @@ class otros extends Controller{
         );
     }
 
-    public function impulsa_bd_h2_csv(){
+    public function impulsa_bd_h2_csv()
+    {
         $core = new coreApp();
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("Incorporaciones");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->setAutoFilter('A5:T5');
+        $hoja1->setTitle("Incorporaciones");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->setAutoFilter('A5:T5');
 
-            $hoja1->mergeCells('A1:E1');
-            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+        $hoja1->mergeCells('A1:E1');
+        $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
 
-            $hoja1->mergeCells('A2:E2');
-            $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
+        $hoja1->mergeCells('A2:E2');
+        $hoja1->setCellValue('A2', "Impulsa la base- Julio de 2025");
 
-            $hoja1->mergeCells('A3:E3');
-            $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
-            
-            $h = ["Tipo", "Codigo", "Nombre", "Kit", "Nombre Kit", "Fecha", "Periodo", "Mes de incorporacion", "Pais", "Departamento", "Celular", "Correo electronico", "Cod. patrocinador", "Nombre patrocinador", "Rango patrocinador", "Telefeno patrocinador", "Celular patrocinador", "Pais patrocinador", "Status", "Usuario", "Segmentacion", "Factura SAP", "Valor", "VP julio ", "VP adicionales", "Cumple requisito"];
-            $d = $core->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A5', true);
+        $hoja1->mergeCells('A3:E3');
+        $hoja1->setCellValue('A3', "Fecha de consulta: " . Date("Y-m-d H:i:s"));
+
+        $h = ["Tipo", "Codigo", "Nombre", "Kit", "Nombre Kit", "Fecha", "Periodo", "Mes de incorporacion", "Pais", "Departamento", "Celular", "Correo electronico", "Cod. patrocinador", "Nombre patrocinador", "Rango patrocinador", "Telefeno patrocinador", "Celular patrocinador", "Pais patrocinador", "Status", "Usuario", "Segmentacion", "Factura SAP", "Valor", "VP julio ", "VP adicionales", "Cumple requisito"];
+        $d = $core->getReportBody("SELECT GETDATE() as hora", "SQL173", $h);
+        $hoja1->fromArray($d, null, 'A5', true);
         # hoja 1
 
         // Guardar el archivo temporalmente
@@ -1723,131 +1829,132 @@ class otros extends Controller{
         );
     }
 
-    public function fichaCongreso(){
+    public function fichaCongreso()
+    {
         $core = new coreApp();
         $spreadsheet = new Spreadsheet();
-        
+
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("1. Consolidado 3 fichas o menos");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-                $hoja1->getColumnDimension('A'.$letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A7:AB7')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A7:AB7');
+        $hoja1->setTitle("1. Consolidado 3 fichas o menos");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+            $hoja1->getColumnDimension('A' . $letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A7:AB7')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A7:AB7');
 
-            $hoja1->mergeCells('A1:D1');
-            $hoja1->setCellValue('A1', "NIKKEN LATINOAMERICA");
-            $hoja1->getStyle('A1')->getFont()->setBold(true);
+        $hoja1->mergeCells('A1:D1');
+        $hoja1->setCellValue('A1', "NIKKEN LATINOAMERICA");
+        $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A2:D2');
-            $hoja1->setCellValue('A2', "Control de fichas congreso mes de Septiembre de 2025");
-            $hoja1->getStyle('A2')->getFont()->setBold(true);
+        $hoja1->mergeCells('A2:D2');
+        $hoja1->setCellValue('A2', "Control de fichas congreso mes de Septiembre de 2025");
+        $hoja1->getStyle('A2')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A3:D3');
-            $hoja1->setCellValue('A3', "Elaborado por Procesos Comerciales ");
-            $hoja1->getStyle('A3')->getFont()->setBold(true);
+        $hoja1->mergeCells('A3:D3');
+        $hoja1->setCellValue('A3', "Elaborado por Procesos Comerciales ");
+        $hoja1->getStyle('A3')->getFont()->setBold(true);
 
-            $hoja1->mergeCells('A4:D4');
-            $hoja1->setCellValue('A4', "3 de septiembre de 2025 ");
-            $hoja1->getStyle('A4')->getFont()->setBold(true);
+        $hoja1->mergeCells('A4:D4');
+        $hoja1->setCellValue('A4', "3 de septiembre de 2025 ");
+        $hoja1->getStyle('A4')->getFont()->setBold(true);
 
-            $hoja1->setCellValue('M6', "Enero VP >=500");
-            $hoja1->setCellValue('N6', "Marzo 3 SUP y VP >=500");
-            $hoja1->setCellValue('O6', "Abril: VP 500, 3450 VG y 1 Kinya");
-            $hoja1->setCellValue('P6', "Cumplimiento de las 4 semanas Junio/25");
-            $hoja1->setCellValue('R6', "1 = Si y 0 =No");
-            $hoja1->setCellValue('S6', "Fiesta de Celebración ");
-            $hoja1->setCellValue('U6', "Entrada al congreso ");
-            $hoja1->setCellValue('X6', "Hospedaje ");
-            
-            $h = ['codigo', 'grupo', 'Estatus', 'nombre', 'direccion3', 'telefono', 'telefono1', 'rango', 'ciudad', 'estado', 'correo', 'pais', 'Ficha #1 Ene', 'Fichas #2 Marz', 'Ficha # 3 Abril', 'Ficha # 4 Prox..', 'Ficha congreso ganadas', 'Recuperate', 'Compra Ficha # 1', 'Valor pagado Ficha #1 ML', 'Compra Ficha # 2 ', 'Recupera Ficha # 2', 'Valor pagado Ficha #2 ML', 'Recupera Ficha # 3', 'Valor canjeable Ficha # 4', 'Saldo Valor canejable ficha # 4', 'Paquete Completo', 'Valor pagado Paquete Completo ML'];
-            $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h1]", "SQL73", $h);
-            $hoja1->fromArray($d, null, 'A7', true);
-            $hoja1->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
-            $hoja1->getStyle('A1:D2')->getFont()->getColor()->setRGB ('ffffff');
-            $hoja1->getStyle('A7:Q7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
-            $hoja1->getStyle('R7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('F2CEEF');
-            $hoja1->getStyle('S7:AB7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
-            $hoja1->getStyle('A7:AB7')->getFont()->getColor()->setRGB ('ffffff');
+        $hoja1->setCellValue('M6', "Enero VP >=500");
+        $hoja1->setCellValue('N6', "Marzo 3 SUP y VP >=500");
+        $hoja1->setCellValue('O6', "Abril: VP 500, 3450 VG y 1 Kinya");
+        $hoja1->setCellValue('P6', "Cumplimiento de las 4 semanas Junio/25");
+        $hoja1->setCellValue('R6', "1 = Si y 0 =No");
+        $hoja1->setCellValue('S6', "Fiesta de Celebración ");
+        $hoja1->setCellValue('U6', "Entrada al congreso ");
+        $hoja1->setCellValue('X6', "Hospedaje ");
+
+        $h = ['codigo', 'grupo', 'Estatus', 'nombre', 'direccion3', 'telefono', 'telefono1', 'rango', 'ciudad', 'estado', 'correo', 'pais', 'Ficha #1 Ene', 'Fichas #2 Marz', 'Ficha # 3 Abril', 'Ficha # 4 Prox..', 'Ficha congreso ganadas', 'Recuperate', 'Compra Ficha # 1', 'Valor pagado Ficha #1 ML', 'Compra Ficha # 2 ', 'Recupera Ficha # 2', 'Valor pagado Ficha #2 ML', 'Recupera Ficha # 3', 'Valor canjeable Ficha # 4', 'Saldo Valor canejable ficha # 4', 'Paquete Completo', 'Valor pagado Paquete Completo ML'];
+        $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h1]", "SQL73", $h);
+        $hoja1->fromArray($d, null, 'A7', true);
+        $hoja1->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+        $hoja1->getStyle('A1:D2')->getFont()->getColor()->setRGB('ffffff');
+        $hoja1->getStyle('A7:Q7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+        $hoja1->getStyle('R7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('F2CEEF');
+        $hoja1->getStyle('S7:AB7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('7030A0');
+        $hoja1->getStyle('A7:AB7')->getFont()->getColor()->setRGB('ffffff');
         # hoja 1
 
         # hoja 2
-            $hoja2 = $spreadsheet->createSheet();
+        $hoja2 = $spreadsheet->createSheet();
 
-            $hoja2->setTitle("2. Recuperate Ficha #2 o 3");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja2->getStyle('A12:Z12')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A12:Z12');
+        $hoja2->setTitle("2. Recuperate Ficha #2 o 3");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja2->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja2->getStyle('A12:Z12')->getFont()->setBold(true);
+        $hoja2->setAutoFilter('A12:Z12');
 
-            $hoja2->mergeCells('A1:E1');
-            $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
-            $hoja2->getStyle('A1')->getFont()->setBold(true);
+        $hoja2->mergeCells('A1:E1');
+        $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
+        $hoja2->getStyle('A1')->getFont()->setBold(true);
 
-            $hoja2->mergeCells('A2:E2');
-            $hoja2->setCellValue('A2', "Recuperate Ficha # 2 o 3 ");
-            $hoja2->getStyle('A2')->getFont()->setBold(true);
+        $hoja2->mergeCells('A2:E2');
+        $hoja2->setCellValue('A2', "Recuperate Ficha # 2 o 3 ");
+        $hoja2->getStyle('A2')->getFont()->setBold(true);
 
-            $hoja2->mergeCells('A3:D3');
-            $hoja2->setCellValue('A3', "Elaborado por Procesos Comerciales ");
-            $hoja2->getStyle('A3')->getFont()->setBold(true);
-            
-            $hoja2->mergeCells('A4:D4');
-            $hoja2->setCellValue('A4', "3 de septiembre de 2025 ");
-            $hoja2->getStyle('A4')->getFont()->setBold(true);
+        $hoja2->mergeCells('A3:D3');
+        $hoja2->setCellValue('A3', "Elaborado por Procesos Comerciales ");
+        $hoja2->getStyle('A3')->getFont()->setBold(true);
 
-            $h = ['codigo', 'grupo', 'Estatus', 'nombre', 'direccion3', 'telefono', 'telefono1', 'rango', 'ciudad', 'estado', 'correo', 'pais', 'Fichas #2 Marz', 'Ficha # 3 Abril', 'VP  Sep', 'VG  Sep', 'Avances Frontales', 'Unidades de agua', 'VP500 ', 'VG4500', '1 Sup Frontal ', '3 Unidades de agua', 'Gana que ficha ', ];
-            $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h2]", "SQL73", $h);
-            $hoja2->fromArray($d, null, 'A12', true);
+        $hoja2->mergeCells('A4:D4');
+        $hoja2->setCellValue('A4', "3 de septiembre de 2025 ");
+        $hoja2->getStyle('A4')->getFont()->setBold(true);
 
-            $hoja2->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
-            $hoja2->getStyle('A1:D2')->getFont()->getColor()->setRGB ('ffffff');
-            $hoja2->getStyle('A12:W12')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
-            $hoja2->getStyle('A12:W12')->getFont()->getColor()->setRGB ('ffffff');
+        $h = ['codigo', 'grupo', 'Estatus', 'nombre', 'direccion3', 'telefono', 'telefono1', 'rango', 'ciudad', 'estado', 'correo', 'pais', 'Fichas #2 Marz', 'Ficha # 3 Abril', 'VP  Sep', 'VG  Sep', 'Avances Frontales', 'Unidades de agua', 'VP500 ', 'VG4500', '1 Sup Frontal ', '3 Unidades de agua', 'Gana que ficha ',];
+        $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h2]", "SQL73", $h);
+        $hoja2->fromArray($d, null, 'A12', true);
+
+        $hoja2->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+        $hoja2->getStyle('A1:D2')->getFont()->getColor()->setRGB('ffffff');
+        $hoja2->getStyle('A12:W12')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+        $hoja2->getStyle('A12:W12')->getFont()->getColor()->setRGB('ffffff');
         # hoja 2
 
         # hoja 3
-            $hoja3 = $spreadsheet->createSheet();
+        $hoja3 = $spreadsheet->createSheet();
 
-            $hoja3->setTitle("3. Facturación y NC ");
-            for($i=65; $i<=90; $i++) {  
-                $letter = chr($i);
-                $hoja3->getColumnDimension($letter)->setAutoSize(true);
-                $hoja3->getColumnDimension('A'.$letter)->setAutoSize(true);
-            }
-            $hoja3->getStyle('A7:AB7')->getFont()->setBold(true);
-            $hoja3->setAutoFilter('A7:AB7');
+        $hoja3->setTitle("3. Facturación y NC ");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja3->getColumnDimension($letter)->setAutoSize(true);
+            $hoja3->getColumnDimension('A' . $letter)->setAutoSize(true);
+        }
+        $hoja3->getStyle('A7:AB7')->getFont()->setBold(true);
+        $hoja3->setAutoFilter('A7:AB7');
 
-            $hoja3->mergeCells('A1:E1');
-            $hoja3->setCellValue('A1', "NIKKEN Latinoamérica");
-            $hoja3->getStyle('A1')->getFont()->setBold(true);
+        $hoja3->mergeCells('A1:E1');
+        $hoja3->setCellValue('A1', "NIKKEN Latinoamérica");
+        $hoja3->getStyle('A1')->getFont()->setBold(true);
 
-            $hoja3->mergeCells('A2:E2');
-            $hoja3->setCellValue('A2', "Facturación y NC ");
-            $hoja3->getStyle('A2')->getFont()->setBold(true);
+        $hoja3->mergeCells('A2:E2');
+        $hoja3->setCellValue('A2', "Facturación y NC ");
+        $hoja3->getStyle('A2')->getFont()->setBold(true);
 
-            $hoja3->mergeCells('A3:D3');
-            $hoja3->setCellValue('A3', "Elaborado por Procesos Comerciales ");
-            $hoja3->getStyle('A3')->getFont()->setBold(true);
-            
-            $hoja3->mergeCells('A4:D4');
-            $hoja3->setCellValue('A4', "3 de septiembre de 2025 ");
-            $hoja3->getStyle('A4')->getFont()->setBold(true);
+        $hoja3->mergeCells('A3:D3');
+        $hoja3->setCellValue('A3', "Elaborado por Procesos Comerciales ");
+        $hoja3->getStyle('A3')->getFont()->setBold(true);
 
-            $h = ['PAIS', 'U_NAME', 'DocDate', 'DocNum', 'CardCode', 'CardName', 'U_ran_CI', 'U_Precio', 'VisOrder', 'Codigo', 'ItemName', 'ItmsGrpNam', 'Cantidad', 'LineTotal', 'U_menudeo_comis', 'U_vol_calc', 'U_Puntos', 'U_Flete_incluido', 'U_autoship', 'NumAtCard', 'Grupo', 'U_Marca', 'U_Periodo', 'InvntItem', 'U_Num_Patrocinador', 'tipo_CI', 'CI_Activo', 'Usuario', ];
-            $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h3]", "SQL73", $h);
-            $hoja3->fromArray($d, null, 'A7', true);
+        $hoja3->mergeCells('A4:D4');
+        $hoja3->setCellValue('A4', "3 de septiembre de 2025 ");
+        $hoja3->getStyle('A4')->getFont()->setBold(true);
 
-            $hoja3->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
-            $hoja3->getStyle('A1:D2')->getFont()->getColor()->setRGB ('ffffff');
-            $hoja3->getStyle('A7:AB7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
-            $hoja3->getStyle('A7:AB7')->getFont()->getColor()->setRGB ('ffffff');
+        $h = ['PAIS', 'U_NAME', 'DocDate', 'DocNum', 'CardCode', 'CardName', 'U_ran_CI', 'U_Precio', 'VisOrder', 'Codigo', 'ItemName', 'ItmsGrpNam', 'Cantidad', 'LineTotal', 'U_menudeo_comis', 'U_vol_calc', 'U_Puntos', 'U_Flete_incluido', 'U_autoship', 'NumAtCard', 'Grupo', 'U_Marca', 'U_Periodo', 'InvntItem', 'U_Num_Patrocinador', 'tipo_CI', 'CI_Activo', 'Usuario',];
+        $d = $core->getReportBody("EXEC [LAT_MyNIKKEN].[dbo].[conEmp_reporteria_recuperaFichas_h3]", "SQL73", $h);
+        $hoja3->fromArray($d, null, 'A7', true);
+
+        $hoja3->getStyle('A1:D2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+        $hoja3->getStyle('A1:D2')->getFont()->getColor()->setRGB('ffffff');
+        $hoja3->getStyle('A7:AB7')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('074F69');
+        $hoja3->getStyle('A7:AB7')->getFont()->getColor()->setRGB('ffffff');
         # hoja 3
 
         $fileName = "Recupera Fichas - v" . Date('is') . '.xlsx';
@@ -1869,34 +1976,36 @@ class otros extends Controller{
         );
     }
 
-    function finAnioPlata(){
+    function finAnioPlata()
+    {
         return view('otros.anioPla');
     }
 
-    public function getFinAnioPlata(){
+    public function getFinAnioPlata()
+    {
         $coreCms = new coreApp();
         $periodo = request()->periodo;
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("Participantes");
-            for($i=65; $i<=90; $i++) {
-                $letter = chr($i);
-                // $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A4:X4')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A4:X4');
+        $hoja1->setTitle("Participantes");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            // $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A4:X4')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A4:X4');
 
-            $hoja1->mergeCells('A1:H1');
-            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica - Cierra el año en rango Plata en 3 meses");
-            $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
-            $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
-            
-            $h = ['CustomerID', 'NombreCompleto', 'MainCountry', 'Estado', 'Email', 'Telefono', 'RANGO_OCT', 'RANGO_META', 'PERIODO_INI', 'VP_OCT', 'CUMPLE_VP100OCT', 'VP_NOV', 'CUMPLE_VP100NOV', 'VP_DIC', 'CUMPLE_VP100DIC', 'VGP_OCT', 'VGP_NOV', 'VGP_DIC', 'VOLDP', 'VOLDPYS', 'MES_AVANCE', 'CUMPLIO_REQUISITO', 'TOTAL_VGP', 'periodo'];
-            $d = $coreCms->getReportBody("EXEC EXIGO_PROD.dbo.Actualiza_RANGO_OCT_META $periodo;", "SQL173", $h);
-            $hoja1->fromArray($d, null, 'A4', true);
+        $hoja1->mergeCells('A1:H1');
+        $hoja1->setCellValue('A1', "NIKKEN Latinoamérica - Cierra el año en rango Plata en 3 meses");
+        $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
+        $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
+
+        $h = ['CustomerID', 'NombreCompleto', 'MainCountry', 'Estado', 'Email', 'Telefono', 'RANGO_OCT', 'RANGO_META', 'PERIODO_INI', 'VP_OCT', 'CUMPLE_VP100OCT', 'VP_NOV', 'CUMPLE_VP100NOV', 'VP_DIC', 'CUMPLE_VP100DIC', 'VGP_OCT', 'VGP_NOV', 'VGP_DIC', 'VOLDP', 'VOLDPYS', 'MES_AVANCE', 'CUMPLIO_REQUISITO', 'TOTAL_VGP', 'periodo'];
+        $d = $coreCms->getReportBody("EXEC EXIGO_PROD.dbo.Actualiza_RANGO_OCT_META $periodo;", "SQL173", $h);
+        $hoja1->fromArray($d, null, 'A4', true);
         # hoja 1
 
         $fileName = "Termina el año en plata - v" . Date('is') . '.xlsx';
@@ -1922,28 +2031,29 @@ class otros extends Controller{
         );
     }
 
-    public function getUsersTvPasswords(){
+    public function getUsersTvPasswords()
+    {
         $coreCms = new coreApp();
         $spreadsheet = new Spreadsheet();
 
         # hoja 1
-            $hoja1 = $spreadsheet->getActiveSheet();
+        $hoja1 = $spreadsheet->getActiveSheet();
 
-            $hoja1->setTitle("CI");
-            for($i=65; $i<=90; $i++) {
-                $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-            }
-            $hoja1->getStyle('A4:X4')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A4:X4');
+        $hoja1->setTitle("CI");
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja1->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja1->getStyle('A4:X4')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A4:X4');
 
-            $hoja1->mergeCells('A1:H1');
-            $hoja1->setCellValue('A1', "Usuarios TV y Password");
-            $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
-            $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
-            
-            $h = ['sap_code', 'email', 'nombre', 'Pais', 'password'];
-            $d = $coreCms->execMySQLQuery("SELECT u.sap_code, u.email, CONCAT(u.name, ' ', u.last_name) as nombre, u.secret_nikken as password,
+        $hoja1->mergeCells('A1:H1');
+        $hoja1->setCellValue('A1', "Usuarios TV y Password");
+        $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
+        $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
+
+        $h = ['sap_code', 'email', 'nombre', 'Pais', 'password'];
+        $d = $coreCms->execMySQLQuery("SELECT u.sap_code, u.email, CONCAT(u.name, ' ', u.last_name) as nombre, u.secret_nikken as password,
                                         CASE 
                                             WHEN u.country_id = 1 THEN 'COL'
                                             WHEN u.country_id = 2 THEN 'MEX'
@@ -1963,23 +2073,23 @@ class otros extends Controller{
                                             u.password != '' AND 
                                             u.secret_nikken != '' 
                                         ", "TVMySQL");
-            $datos = [];
-            foreach($d as $row){
-                $passDecripted = $row->password;
-                $passDecripted = $this->decrypt($passDecripted);
-                $row->password = $passDecripted;
-                $datos[] = [
-                    $row->sap_code,
-                    $row->email,
-                    $row->nombre,
-                    $row->Pais,
-                    $passDecripted
-                ];
-            }
-            $hoja1->fromArray($h, null, 'A4', true);
-            $hoja1->getStyle('A4:E4')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A4:E4');
-            $hoja1->fromArray($datos, null, 'A5', true);
+        $datos = [];
+        foreach ($d as $row) {
+            $passDecripted = $row->password;
+            $passDecripted = $this->decrypt($passDecripted);
+            $row->password = $passDecripted;
+            $datos[] = [
+                $row->sap_code,
+                $row->email,
+                $row->nombre,
+                $row->Pais,
+                $passDecripted
+            ];
+        }
+        $hoja1->fromArray($h, null, 'A4', true);
+        $hoja1->getStyle('A4:E4')->getFont()->setBold(true);
+        $hoja1->setAutoFilter('A4:E4');
+        $hoja1->fromArray($datos, null, 'A5', true);
         # hoja 1
 
         $fileName = "Usuarios CI - password - v" . Date('is') . '.xlsx';
@@ -2002,8 +2112,11 @@ class otros extends Controller{
         );
     }
 
-    public function decrypt($data, $secret = "13sIS4$2013*?1nF3mPN1KK3N"){
-        if ( version_compare(PHP_VERSION, '7.1', '>=' ) ){ return $this->decrypt_php71($data, $secret); }
+    public function decrypt($data, $secret = "13sIS4$2013*?1nF3mPN1KK3N")
+    {
+        if (version_compare(PHP_VERSION, '7.1', '>=')) {
+            return $this->decrypt_php71($data, $secret);
+        }
 
         $key = md5(utf8_encode($secret), true);
         $key .= substr($key, 0, 8);
@@ -2016,11 +2129,12 @@ class otros extends Controller{
         return substr($data, 0, strlen($data) - $pad);
     }
 
-    public function decrypt_php71($string, $secret) {
+    public function decrypt_php71($string, $secret)
+    {
         $key = md5(utf8_encode($secret), true);
         $key .= substr($key, 0, 8);
         $data = base64_decode($string);
 
-        return openssl_decrypt($data , 'des-ede3' , $key, OPENSSL_RAW_DATA); 
+        return openssl_decrypt($data, 'des-ede3', $key, OPENSSL_RAW_DATA);
     }
 }

@@ -37,6 +37,7 @@ Route::get('estGTMSLVexe', 'otros\otros@estGTMSLVexe');
 Route::get('estGTMSLVLideres', 'otros\otros@estGTMSLVLideres');
 
 Route::get('homeCheckBonos', 'otros\otros@homeCheckBonos');
+Route::get('GetMonths','otros\otros@GetMonths');
 Route::get('reportCheckBonos', 'otros\otros@reportCheckBonos');
 Route::get('homeCheckBonos_vcplus', 'otros\otros@homeCheckBonos_vcplus');
 Route::get('reportCheckBonos_vcplus', 'otros\otros@reportCheckBonos_vcplus');

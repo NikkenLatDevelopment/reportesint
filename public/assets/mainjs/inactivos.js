@@ -1,21 +1,21 @@
-function getReportInactivos(){
-    validateDomElement($("#inactivosTable"), function() {
+function getReportInactivos() {
+    validateDomElement($("#inactivosTable"), function () {
         $("#inactivosDiv").empty();
         var html = '<table class="table align-items-center mb-0 text-center" id="inactivosTable">' +
             '<thead>' +
-                '<tr>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Código</th>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Nombre</th>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Rango</th>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">País</th>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Telefono</th>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Correo</th>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">VP Noviembre</th>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Código Patrocinador</th>' +
-                    '<th class="text-uppercase text-xxs font-weight-bolder text-black">Nombre Patrocinador</th>' +
-                '</tr>' +
+            '<tr>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">Código</th>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">Nombre</th>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">Rango</th>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">País</th>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">Telefono</th>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">Correo</th>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">VP Noviembre</th>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">Código Patrocinador</th>' +
+            '<th class="text-uppercase text-xxs font-weight-bolder text-black">Nombre Patrocinador</th>' +
+            '</tr>' +
             '</thead>' +
-        '</table>';
+            '</table>';
         $("#inactivosDiv").html(html);
         $("#inactivosTable").DataTable({
             destroy: true,
@@ -30,10 +30,10 @@ function getReportInactivos(){
                 { data: 'pais', className: 'text-xxs' },
                 { data: 'telefono', className: 'text-xxs' },
                 { data: 'E_mail', className: 'text-xxs' },
-                {  
+                {
                     data: 'vpNoviembre2023',
                     className: 'text-xxs',
-                    render: function(data, type, row){
+                    render: function (data, type, row) {
                         var vpNoviembre2023 = row.vpNoviembre2023;
                         return formatMoney(vpNoviembre2023, 0);
                     }
@@ -46,10 +46,10 @@ function getReportInactivos(){
             },
             buttons: {
                 buttons: [
-                    { 
-                        extend: 'excel', 
-                        className: 'btn bg-gradient-primary', 
-                        text:"<img src='https://services.nikken.com.mx/retos/img/excel.png' width='15px'></img> Exportar a Excel",
+                    {
+                        extend: 'excel',
+                        className: 'btn bg-gradient-primary',
+                        text: "<img src='https://services.nikken.com.mx/retos/img/excel.png' width='15px'></img> Exportar a Excel",
                         title: 'Inactivos 2023',
                     },
                 ]
@@ -58,13 +58,13 @@ function getReportInactivos(){
     });
 }
 
-function getMplinksData(){
+function getMplinksData() {
     var date_ini = $("#date_ini").val();
     var date_end = $("#date_end").val();
-    if(date_end.trim() == "" || date_ini.trim() == ""){
-    alert('Ups', 'Fechas requeridas', 'error');
+    if (date_end.trim() == "" || date_ini.trim() == "") {
+        alert('Ups', 'Fechas requeridas', 'error');
     }
-    else{
+    else {
         $("#getMplinksTable").DataTable({
             destroy: true,
             lengthChange: false,
@@ -77,10 +77,10 @@ function getMplinksData(){
                 { data: 'pais', className: 'text-xxs' },
                 { data: 'payment_method', className: 'text-xxs' },
                 { data: 'payment_provider', className: 'text-xxs' },
-                {  
+                {
                     data: 'payment_amount',
                     className: 'text-xxs',
-                    render: function(data, type, row){
+                    render: function (data, type, row) {
                         var payment_amount = row.payment_amount;
                         return 's./ ' + formatMoney(payment_amount, 0);
                     }
@@ -94,10 +94,10 @@ function getMplinksData(){
             },
             buttons: {
                 buttons: [
-                    { 
-                        extend: 'excel', 
-                        className: 'btn bg-gradient-primary', 
-                        text:"<img src='https://services.nikken.com.mx/retos/img/excel.png' width='15px'></img> Exportar a Excel",
+                    {
+                        extend: 'excel',
+                        className: 'btn bg-gradient-primary',
+                        text: "<img src='https://services.nikken.com.mx/retos/img/excel.png' width='15px'></img> Exportar a Excel",
                         title: 'Links de Pago Generados con Mercado Pago Perú',
                     },
                 ]
@@ -107,7 +107,7 @@ function getMplinksData(){
 }
 
 
-function setMonthsSlct(slct, anios){
+function setMonthsSlct(slct, anios) {
     var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
     $('#' + slct).empty(); // Asegúrate de que el select esté vacío antes de agregar opciones.
@@ -138,4 +138,31 @@ function setMonthsSlct(slct, anios){
             }
         }
     }
+}
+
+function setMonthsSelect() {
+    var select = $("#periodSlct");
+    $.ajax({
+        url: '/GetMonths',
+        method: 'GET',
+        beforeSend: function () {
+
+        },
+        success: function (data) {
+            select.empty();
+
+            data.forEach(function (item) {
+                select.append(
+                    `<option value="${item.Id}">${item.Fechas}</option>`
+                );
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        },
+        complete: function () {
+            $("#loader").hide();
+
+        }
+    })
 }
