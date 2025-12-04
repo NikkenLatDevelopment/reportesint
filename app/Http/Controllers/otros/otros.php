@@ -308,8 +308,8 @@ class otros extends Controller
 
         // $h = ['Ownerid', 'total_orden', 'retail', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'vp_Orden', 'vc_Orden', 'Periodo_Orden', 'numAtCardSAP', 'NumFacturaSAP'];
         $h = [
-            'Ownerid',
-            'OwnerName',
+            'associateid',
+            'associateNAME',
             'NumFactura',
             'vp_Orden',
             'rango_Socio',
@@ -326,8 +326,8 @@ class otros extends Controller
             'total_Orden',
             'Periodo_Orden',
             'numAtCard',
-            'SponsorID',
-            'SponsorName'
+            'Ownerid',
+            'OwnerName'
         ];
 
         $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_retail_exigo $code, '$period';", "SQL173", $h);
@@ -352,8 +352,8 @@ class otros extends Controller
 
         // $h = ['Ownerid', 'vc_orden', 'porcentaje', 'rebate', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
         $h = [
-            'Ownerid',
-            'OwnerName',
+            'associateid',
+            'associateNAME',
             'NumFactura',
             'vp_Orden',
             'rango_Socio',
@@ -370,8 +370,8 @@ class otros extends Controller
             'total_Orden',
             'Periodo_Orden',
             'numAtCard',
-            'SponsorID',
-            'SponsorName'
+            'Ownerid',
+            'OwnerName'
         ];
 
         $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_rebate_exigo $code, '$period';", "SQL173", $h);
@@ -396,8 +396,8 @@ class otros extends Controller
 
         // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
         $h = [
-            'Ownerid',
-            'OwnerName',
+            'associateid',
+            'associateNAME',
             'NumFactura',
             'vp_Orden',
             'rango_Socio',
@@ -414,8 +414,8 @@ class otros extends Controller
             'total_Orden',
             'Periodo_Orden',
             'numAtCard',
-            'SponsorID',
-            'SponsorName'
+            'Ownerid',
+            'OwnerName'
         ];
 
         $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_override_exigo $code, '$period';", "SQL173", $h);
@@ -440,8 +440,8 @@ class otros extends Controller
 
         // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'profundidad', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
         $h = [
-            'Ownerid',
-            'OwnerName',
+            'associateid',
+            'associateNAME',
             'NumFactura',
             'vp_Orden',
             'rango_Socio',
@@ -458,8 +458,8 @@ class otros extends Controller
             'total_Orden',
             'Periodo_Orden',
             'numAtCard',
-            'SponsorID',
-            'SponsorName'
+            'Ownerid',
+            'OwnerName'
         ];
         $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_leadership_exigo $code, '$period';", "SQL173", $h);
         $hoja4->fromArray($d, null, 'A3', true);
@@ -483,8 +483,8 @@ class otros extends Controller
 
         // $h = ['Ownerid', 'vc_Orden', 'porcentaje', 'total_comision', 'rango_Socio', 'moneda', 'associateid', 'order_Num', 'fecha_Orden', 'pais_Orden', 'total_Orden', 'vp_Orden', 'Periodo_Orden', 'numAtCard', 'NumFactura'];
         $h = [
-            'Ownerid',
-            'OwnerName',
+            'associateid',
+            'associateNAME',
             'NumFactura',
             'vp_Orden',
             'rango_Socio',
@@ -501,8 +501,8 @@ class otros extends Controller
             'total_Orden',
             'Periodo_Orden',
             'numAtCard',
-            'SponsorID',
-            'SponsorName'
+            'Ownerid',
+            'OwnerName'
         ];
         $d = $core->getReportBody("EXEC diccionarioExigo.dbo.vcplus_lifestyleBonus_exigo $code, '$period';", "SQL173", $h);
         $hoja5->fromArray($d, null, 'A3', true);
@@ -556,7 +556,7 @@ class otros extends Controller
                 'trace' => $e->getTraceAsString(),
             ];
 
-            return response()->json($error,500);
+            return response()->json($error, 500);
         }
 
     }
