@@ -1254,4 +1254,156 @@ class reportesRetos extends Controller{
             ]
         );
     }
+
+    public function reportSimuladorV5(){
+        $coreCms = new coreApp();
+        $sap_code = request()->sap_code;
+        $periodo = request()->periodo;
+        $spreadsheet = new Spreadsheet();
+        # hoja 1
+            $hoja1 = $spreadsheet->getActiveSheet();
+
+            $hoja1->setTitle("Grupo Personal");
+            for($i=65; $i<=90; $i++) {
+                $letter = chr($i);
+                $hoja1->getColumnDimension($letter)->setAutoSize(true);
+                $hoja1->getColumnDimension("A$letter")->setAutoSize(true);
+            }
+            $hoja1->getStyle('A5:AB5')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A5:AB5');
+
+            $hoja1->mergeCells('A1:H1');
+            $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja1->setCellValue('A2', "Simulador plan de compensación");
+            $hoja1->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
+            $hoja1->getStyle('A1:A3')->getFont()->setBold(true);
+            
+            $h = ['Código', 'Nombre', 'Orden', 'Puntos', 'Rango', 'País', 'Vol.Calc.', '%', 'Bonificación', '% nuevo', 'Total orden', 'Bono recalculado', 'Conv.', 'Total Ganado', 'Total Ganado Recalculado'];
+            $d = $coreCms->getReportBody("SELECT 
+                                            OWNERID AS associateId,
+                                            IIF(TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName))) = '',b.Company,TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName)))) as associateName,
+                                            ORDER_NUM as orderNum,
+                                            businessVolumeTotal as puntos,
+                                            CASE 
+                                                WHEN RANGO_SOCIO = 9 THEN 'DRL'
+                                                WHEN RANGO_SOCIO = 8 THEN 'DIA'
+                                                WHEN RANGO_SOCIO = 7 THEN 'PLO'
+                                                WHEN RANGO_SOCIO = 6 THEN 'ORO'
+                                                WHEN RANGO_SOCIO = 5 THEN 'PLA'
+                                                WHEN RANGO_SOCIO = 3 THEN 'EJE'
+                                                WHEN RANGO_SOCIO = 2 THEN 'SUP'
+                                                ELSE 'DIR' 
+                                            END AS rangoPago,
+                                            c.paisorden as paisOrden,
+                                            VC_PLUS as Vol_calculo,
+                                            20 as porcentajeRembolso,
+                                            SUBTOTAL_ORDEN,
+                                            PORCENTAJE as porcentajeNuevo,
+                                            TOTAL_COMISION_VC_PLUS as Bonificacion,
+                                            SUBTOTAL_ORDEN*(PORCENTAJE/100) as bono_recalc,
+                                            TIPO_CAMBIO AS Conv,
+                                            TOTAL_COMISION_VC_PLUS as Total,
+                                            SUBTOTAL_ORDEN*(PORCENTAJE/100)/tipo_cambio as TotalRecalculado
+                                        FROM [VCplus].[dbo].[vcplus_calculo_todos_simulador] a
+                                        LEFT JOIN EXIGO_prod.dbo.Customers b ON a.ASSOCIATEID = b.CustomerID
+                                        LEFT JOIN EXIGO_prod.dbo.orders c ON a.ORDER_NUM = c.orderid AND a.OWNERID = c.customerid
+                                        WHERE a.ASSOCIATEID = $sap_code_user
+                                        AND a.PERIODO_ORDEN = $periodSelect
+                                        AND a.Tipo_Bonus = 2
+                                            UNION ALL
+                                        SELECT
+                                            a.OWNERID AS associateId,
+                                            IIF(TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName))) = '',b.Company,TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName)))) as associateName,
+                                            a.ORDER_NUM as orderNum,
+                                            businessVolumeTotal as puntos,
+                                            CASE 
+                                                WHEN a.RANGO_SOCIO = 9 THEN 'DRL'
+                                                WHEN a.RANGO_SOCIO = 8 THEN 'DIA'
+                                                WHEN a.RANGO_SOCIO = 7 THEN 'PLO'
+                                                WHEN a.RANGO_SOCIO = 6 THEN 'ORO'
+                                                WHEN a.RANGO_SOCIO = 5 THEN 'PLA'
+                                                WHEN a.RANGO_SOCIO = 3 THEN 'EJE'
+                                                WHEN a.RANGO_SOCIO = 2 THEN 'SUP'
+                                                ELSE 'DIR' 
+                                            END AS rangoPago,
+                                            c.paisorden as paisOrden,
+                                            a.VC_PLUS as Vol_calculo,
+                                            d.PORCENTAJE as porcentajeRembolso,
+                                            a.SUBTOTAL_ORDEN,
+                                            a.PORCENTAJE as porcentajeNuevo,
+                                            a.TOTAL_COMISION_VC_PLUS as Bonificacion,
+                                            a.SUBTOTAL_ORDEN*(a.PORCENTAJE/100) as bono_recalc,
+                                            a.TIPO_CAMBIO AS Conv,
+                                            a.TOTAL_COMISION_VC_PLUS as Total,
+                                            a.SUBTOTAL_ORDEN*(a.PORCENTAJE/100)/a.tipo_cambio as TotalRecalculado
+                                        FROM [VCplus].[dbo].[vcplus_calculo_todos_simulador] a
+                                        LEFT JOIN EXIGO_prod.dbo.Customers b ON a.ASSOCIATEID = b.CustomerID
+                                        LEFT JOIN EXIGO_prod.dbo.orders c ON a.ORDER_NUM = c.orderid AND a.ASSOCIATEID = c.customerid
+                                        LEFT JOIN [VCplus].[dbo].[vcplus_calculo] d ON a.OWNERID = d.OWNERID AND d.Tipo_Bonus = 3 AND a.ORDER_NUM = d.ORDER_NUM
+                                        WHERE a.OWNERID = $sap_code_user
+                                        AND a.PERIODO_ORDEN = $periodSelect
+                                        AND a.Tipo_Bonus = 3", "SQL173", $h);
+            $hoja1->fromArray($d, null, 'A5', true);
+        # hoja 1
+        # hoja 2
+            $hoja2 = $spreadsheet->createSheet();
+
+            $hoja2->setTitle("Liderazgo");
+            for($i=65; $i<=90; $i++) {
+                $letter = chr($i);
+                $hoja2->getColumnDimension($letter)->setAutoSize(true);
+                $hoja2->getColumnDimension("A$letter")->setAutoSize(true);
+            }
+            $hoja2->getStyle('A5:AB5')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A5:AB5');
+
+            $hoja2->mergeCells('A1:H1');
+            $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
+            $hoja2->setCellValue('A2', "Simulador plan de compensación");
+            $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
+            $hoja2->getStyle('A1:A3')->getFont()->setBold(true);
+            
+            $h = ['Código', 'Nombre', 'Profundidad', 'País', 'Vol.Calc.', '%', '% Recalculo', 'Bonificación', 'Bono Recalculo', 'Conv', 'Total_Ganado', 'Total_Ganado_nuevo'];
+            $d = $coreCms->getReportBody("SELECT
+                                            a.ASSOCIATEID AS associateId,
+                                            IIF(TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName))) = '',b.Company,TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName)))) as associateName,
+                                            a.PROFUNDIDAD as Profundidad,
+                                            c.paisorden as paisOrden,
+                                            d.vcFinal as Vol_calculo,
+                                            d.PORCENTAJE as porcentajeRembolso,
+                                            a.PORCENTAJE as porcentajeNuevo,
+                                            d.TotalFinal as Bonificacion,
+                                            a.VC_PLUS*(a.PORCENTAJE/100) as bono_recalc,
+                                            a.TIPO_CAMBIO AS Conv,
+                                            d.TotalFinal as Total,
+                                            a.VC_PLUS*(a.PORCENTAJE/100)/a.tipo_cambio as TotalRecalculado
+                                        FROM [VCplus].[dbo].[vcplus_calculo_todos_simulador] a
+                                        LEFT JOIN EXIGO_prod.dbo.Customers b ON a.ASSOCIATEID = b.CustomerID
+                                        LEFT JOIN EXIGO_prod.dbo.orders c ON a.ORDER_NUM = c.orderid AND a.ASSOCIATEID = c.customerid
+                                        LEFT JOIN [167].NIKKENDWH.dbo.NKN_Bonificacion_ProgramaDetalle d ON a.OWNERID = d.CodigoAsesor 
+                                        AND d.Id_ConceptoGanancia = 7 
+                                        AND a.ORDER_NUM = d.NumeroOrden
+                                        WHERE a.OWNERID = $sap_code_user
+                                        AND a.PERIODO_ORDEN = $periodSelect
+                                        AND a.Tipo_Bonus = 7", "SQL173", $h);
+            $hoja2->fromArray($d, null, 'A5', true);
+        # hoja 2
+
+        $fileName = "Simulador plan de compensación - v" . Date('i_s') . '.xlsx';
+
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFilePath);
+        return response()->stream(
+            function () use ($tempFilePath) {
+                readfile($tempFilePath);
+                unlink($tempFilePath);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename=' . $fileName,
+            ]
+        );
+    }
 }
