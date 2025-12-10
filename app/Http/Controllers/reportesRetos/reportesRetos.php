@@ -1269,10 +1269,12 @@ class reportesRetos extends Controller{
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
                 $hoja1->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja1->getStyle('A5:AB5')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A5:AB5');
+            $hoja1->getStyle('A5:O5')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A5:O5');
 
             $hoja1->mergeCells('A1:H1');
+            $hoja1->mergeCells('A2:H2');
+            $hoja1->mergeCells('A3:H3');
             $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
             $hoja1->setCellValue('A2', "Simulador plan de compensación");
             $hoja1->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
@@ -1354,10 +1356,12 @@ class reportesRetos extends Controller{
                 $hoja2->getColumnDimension($letter)->setAutoSize(true);
                 $hoja2->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja2->getStyle('A5:AB5')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A5:AB5');
+            $hoja2->getStyle('A5:L5')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A5:L5');
 
             $hoja2->mergeCells('A1:H1');
+            $hoja2->mergeCells('A2:H2');
+            $hoja2->mergeCells('A3:H3');
             $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
             $hoja2->setCellValue('A2', "Simulador plan de compensación");
             $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
