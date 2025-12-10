@@ -1257,8 +1257,8 @@ class reportesRetos extends Controller{
 
     public function reportSimuladorV5(){
         $coreCms = new coreApp();
-        $sap_code = request()->sap_code;
-        $periodo = request()->periodo;
+        $sap_code_user = request()->sap_code;
+        $periodSelect = request()->periodo;
         $spreadsheet = new Spreadsheet();
         # hoja 1
             $hoja1 = $spreadsheet->getActiveSheet();
