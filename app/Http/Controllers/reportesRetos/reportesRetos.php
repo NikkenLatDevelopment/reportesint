@@ -1149,19 +1149,21 @@ class reportesRetos extends Controller{
             $hoja1->setTitle("Listado");
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
-                $hoja1->getColumnDimension($letter)->setAutoSize(true);
-                $hoja1->getColumnDimension("A$letter")->setAutoSize(true);
+                // $hoja1->getColumnDimension($letter)->setAutoSize(true);
+                // $hoja1->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja1->getStyle('A5:AB5')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A5:AB5');
+            $hoja1->getStyle('A5:AA5')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A5:AA5');
 
             $hoja1->mergeCells('A1:H1');
+            $hoja1->mergeCells('A2:H2');
+            $hoja1->mergeCells('A3:H3');
             $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
             $hoja1->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
             $hoja1->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'VP_ene_25', 'VP_ene_25_USA', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_2025', 'vp_feb_2025', 'vp_mar_2025', 'vp_abr_2025', 'vp_may_2025', 'vp_jun_2025', 'vp_jul_2025', 'vp_ago_2025', 'vp_sep_2025', 'vp_oct_2025', 'vp_nov_2025', 'vp_dic_2025', 'VP_ene_2026', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
             $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A5', true);
         # hoja 1
@@ -1172,11 +1174,11 @@ class reportesRetos extends Controller{
             $hoja2->setTitle("Terminar 15 Ene");
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
-                $hoja2->getColumnDimension($letter)->setAutoSize(true);
-                $hoja2->getColumnDimension("A$letter")->setAutoSize(true);
+                // $hoja2->getColumnDimension($letter)->setAutoSize(true);
+                // $hoja2->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja2->getStyle('A5:AB5')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A5:AB5');
+            $hoja2->getStyle('A5:AA5')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A5:AA5');
 
             $hoja2->mergeCells('A1:H1');
             $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
@@ -1184,7 +1186,7 @@ class reportesRetos extends Controller{
             $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja2->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'VP_ene_25', 'VP_ene_25_USA', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_2025', 'vp_feb_2025', 'vp_mar_2025', 'vp_abr_2025', 'vp_may_2025', 'vp_jun_2025', 'vp_jul_2025', 'vp_ago_2025', 'vp_sep_2025', 'vp_oct_2025', 'vp_nov_2025', 'vp_dic_2025', 'VP_ene_2026', 'VP_ene_25_USA', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
             $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno_depurarEnero", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A5', true);
         # hoja 2
@@ -1195,11 +1197,11 @@ class reportesRetos extends Controller{
             $hoja3->setTitle("Terminar 15 Feb");
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
-                $hoja3->getColumnDimension($letter)->setAutoSize(true);
-                $hoja3->getColumnDimension("A$letter")->setAutoSize(true);
+                // $hoja3->getColumnDimension($letter)->setAutoSize(true);
+                // $hoja3->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja3->getStyle('A5:AB5')->getFont()->setBold(true);
-            $hoja3->setAutoFilter('A5:AB5');
+            $hoja3->getStyle('A5:AA5')->getFont()->setBold(true);
+            $hoja3->setAutoFilter('A5:AA5');
 
             $hoja3->mergeCells('A1:H1');
             $hoja3->setCellValue('A1', "NIKKEN Latinoamérica");
@@ -1207,7 +1209,7 @@ class reportesRetos extends Controller{
             $hoja3->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja3->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'VP_ene_25', 'VP_ene_25_USA', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_24', 'vp_feb_24', 'vp_mar_24', 'vp_abr_24', 'vp_may_24', 'vp_jun_24', 'vp_jul_24', 'vp_ago_24', 'vp_sep_24', 'vp_oct_24', 'vp_nov_24', 'vp_dic_24', 'VP_ene_25', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
             $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno_depurarFebrero", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A5', true);
         # hoja 3
@@ -1229,7 +1231,7 @@ class reportesRetos extends Controller{
             $hoja4->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja4->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Pais', 'cardCode', 'NumAtCard', 'U_orden_vista', 'U_Garantia', 'ItemCode', 'Dscription', 'Fecha_Creacion', 'Fecha_Contabilizacion'];
+            $h = ['Pais', 'Tipo de Cliente', 'cardCode', 'NumAtCard', 'U_puntos', 'U_vol_calc', 'U_orden_vista', 'U_Garantia', 'Fecha_Creacion', 'Fecha_Contabilizacion'];
             $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno_garantias", "SQL173", $h);
             $hoja4->fromArray($d, null, 'A5', true);
         # hoja 4
