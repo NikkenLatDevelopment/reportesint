@@ -1269,6 +1269,7 @@ class reportesRetos extends Controller{
         $coreCms = new coreApp();
         $sap_code_user = request()->sap_code;
         $periodSelect = request()->periodo;
+        $v = request()->v;
         $spreadsheet = new Spreadsheet();
         # hoja 1
             $hoja1 = $spreadsheet->getActiveSheet();
@@ -1290,73 +1291,11 @@ class reportesRetos extends Controller{
             $hoja1->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Código', 'Nombre', 'Orden', 'Puntos', 'Rango', 'País', 'Vol.Calc.', '%', 'Bonificación', '% nuevo', 'Total orden', 'Bono recalculado', 'Conv.', 'Total Ganado', 'Total Ganado Recalculado'];
-            $d = $coreCms->getReportBody("SELECT 
-                                            OWNERID AS associateId,
-                                            IIF(TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName))) = '',b.Company,TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName)))) as associateName,
-                                            ORDER_NUM as orderNum,
-                                            businessVolumeTotal as puntos,
-                                            CASE 
-                                                WHEN RANGO_SOCIO = 9 THEN 'DRL'
-                                                WHEN RANGO_SOCIO = 8 THEN 'DIA'
-                                                WHEN RANGO_SOCIO = 7 THEN 'PLO'
-                                                WHEN RANGO_SOCIO = 6 THEN 'ORO'
-                                                WHEN RANGO_SOCIO = 5 THEN 'PLA'
-                                                WHEN RANGO_SOCIO = 3 THEN 'EJE'
-                                                WHEN RANGO_SOCIO = 2 THEN 'SUP'
-                                                ELSE 'DIR' 
-                                            END AS rangoPago,
-                                            c.paisorden as paisOrden,
-                                            VC_PLUS as Vol_calculo,
-                                            20 as porcentajeRembolso,
-                                            SUBTOTAL_ORDEN,
-                                            PORCENTAJE as porcentajeNuevo,
-                                            TOTAL_COMISION_VC_PLUS as Bonificacion,
-                                            SUBTOTAL_ORDEN*(PORCENTAJE/100) as bono_recalc,
-                                            TIPO_CAMBIO AS Conv,
-                                            TOTAL_COMISION_VC_PLUS as Total,
-                                            SUBTOTAL_ORDEN*(PORCENTAJE/100)/tipo_cambio as TotalRecalculado
-                                        FROM [VCplus].[dbo].[vcplus_calculo_todos_simulador] a
-                                        LEFT JOIN EXIGO_prod.dbo.Customers b ON a.ASSOCIATEID = b.CustomerID
-                                        LEFT JOIN EXIGO_prod.dbo.orders c ON a.ORDER_NUM = c.orderid AND a.OWNERID = c.customerid
-                                        WHERE a.ASSOCIATEID = $sap_code_user
-                                        AND a.PERIODO_ORDEN = $periodSelect
-                                        AND a.Tipo_Bonus = 2
-                                            UNION ALL
-                                        SELECT
-                                            a.OWNERID AS associateId,
-                                            IIF(TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName))) = '',b.Company,TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName)))) as associateName,
-                                            a.ORDER_NUM as orderNum,
-                                            businessVolumeTotal as puntos,
-                                            CASE 
-                                                WHEN a.RANGO_SOCIO = 9 THEN 'DRL'
-                                                WHEN a.RANGO_SOCIO = 8 THEN 'DIA'
-                                                WHEN a.RANGO_SOCIO = 7 THEN 'PLO'
-                                                WHEN a.RANGO_SOCIO = 6 THEN 'ORO'
-                                                WHEN a.RANGO_SOCIO = 5 THEN 'PLA'
-                                                WHEN a.RANGO_SOCIO = 3 THEN 'EJE'
-                                                WHEN a.RANGO_SOCIO = 2 THEN 'SUP'
-                                                ELSE 'DIR' 
-                                            END AS rangoPago,
-                                            c.paisorden as paisOrden,
-                                            a.VC_PLUS as Vol_calculo,
-                                            d.PORCENTAJE as porcentajeRembolso,
-                                            a.SUBTOTAL_ORDEN,
-                                            a.PORCENTAJE as porcentajeNuevo,
-                                            a.TOTAL_COMISION_VC_PLUS as Bonificacion,
-                                            a.SUBTOTAL_ORDEN*(a.PORCENTAJE/100) as bono_recalc,
-                                            a.TIPO_CAMBIO AS Conv,
-                                            a.TOTAL_COMISION_VC_PLUS as Total,
-                                            a.SUBTOTAL_ORDEN*(a.PORCENTAJE/100)/a.tipo_cambio as TotalRecalculado
-                                        FROM [VCplus].[dbo].[vcplus_calculo_todos_simulador] a
-                                        LEFT JOIN EXIGO_prod.dbo.Customers b ON a.ASSOCIATEID = b.CustomerID
-                                        LEFT JOIN EXIGO_prod.dbo.orders c ON a.ORDER_NUM = c.orderid AND a.ASSOCIATEID = c.customerid
-                                        LEFT JOIN [VCplus].[dbo].[vcplus_calculo] d ON a.OWNERID = d.OWNERID AND d.Tipo_Bonus = 3 AND a.ORDER_NUM = d.ORDER_NUM
-                                        WHERE a.OWNERID = $sap_code_user
-                                        AND a.PERIODO_ORDEN = $periodSelect
-                                        AND a.Tipo_Bonus = 3", "SQL173", $h);
+            $h = ['Código Ganador', 'Nombre Ganador', 'País', 'Rango', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'País Orden', '% actual', 'Bonificación', '% Nuevo', 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado', 'Total ganado nuevo', 'Tipo Bono'];
+            $d = $coreCms->getReportBody("EXEC VCplus.dbo.Comisiones_simulador_consulta $sap_code_user, $periodSelect, 'GP', $v", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A5', true);
         # hoja 1
+
         # hoja 2
             $hoja2 = $spreadsheet->createSheet();
 
@@ -1377,29 +1316,8 @@ class reportesRetos extends Controller{
             $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja2->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Código', 'Nombre', 'Profundidad', 'País', 'Vol.Calc.', '%', '% Recalculo', 'Bonificación', 'Bono Recalculo', 'Conv', 'Total_Ganado', 'Total_Ganado_nuevo'];
-            $d = $coreCms->getReportBody("SELECT
-                                            a.ASSOCIATEID AS associateId,
-                                            IIF(TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName))) = '',b.Company,TRIM(CONCAT(RTRIM(b.FirstName),' ',LTRIM(b.LastName)))) as associateName,
-                                            a.PROFUNDIDAD as Profundidad,
-                                            c.paisorden as paisOrden,
-                                            d.vcFinal as Vol_calculo,
-                                            d.PORCENTAJE as porcentajeRembolso,
-                                            a.PORCENTAJE as porcentajeNuevo,
-                                            d.TotalFinal as Bonificacion,
-                                            a.VC_PLUS*(a.PORCENTAJE/100) as bono_recalc,
-                                            a.TIPO_CAMBIO AS Conv,
-                                            d.TotalFinal as Total,
-                                            a.VC_PLUS*(a.PORCENTAJE/100)/a.tipo_cambio as TotalRecalculado
-                                        FROM [VCplus].[dbo].[vcplus_calculo_todos_simulador] a
-                                        LEFT JOIN EXIGO_prod.dbo.Customers b ON a.ASSOCIATEID = b.CustomerID
-                                        LEFT JOIN EXIGO_prod.dbo.orders c ON a.ORDER_NUM = c.orderid AND a.ASSOCIATEID = c.customerid
-                                        LEFT JOIN [167].NIKKENDWH.dbo.NKN_Bonificacion_ProgramaDetalle d ON a.OWNERID = d.CodigoAsesor 
-                                        AND d.Id_ConceptoGanancia = 7 
-                                        AND a.ORDER_NUM = d.NumeroOrden
-                                        WHERE a.OWNERID = $sap_code_user
-                                        AND a.PERIODO_ORDEN = $periodSelect
-                                        AND a.Tipo_Bonus = 7", "SQL173", $h);
+            $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'País Orden', '% actual', 'Bonificación', '% Nuevo', 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado', 'Total ganado nuevo', 'Tipo Bono'];
+            $d = $coreCms->getReportBody("EXEC VCplus.dbo.Comisiones_simulador_consulta $sap_code_user, $periodSelect, 'LD', $v", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A5', true);
         # hoja 2
 
