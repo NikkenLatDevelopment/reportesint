@@ -1267,9 +1267,9 @@ class reportesRetos extends Controller{
 
     public function reportSimuladorV5(){
         $coreCms = new coreApp();
-        $sap_code_user = request()->sap_code;
-        $periodSelect = request()->periodo;
-        $v = request()->v;
+        $sap_code_user = request()->sap_code ?? 123456;
+        $periodSelect = request()->periodo ?? Date('Ym');
+        $v = request()->v ?? 1;
         $spreadsheet = new Spreadsheet();
         # hoja 1
             $hoja1 = $spreadsheet->getActiveSheet();
@@ -1278,10 +1278,10 @@ class reportesRetos extends Controller{
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
                 $hoja1->getColumnDimension($letter)->setAutoSize(true);
-                $hoja1->getColumnDimension("A$letter")->setAutoSize(true);
+                // $hoja1->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja1->getStyle('A5:O5')->getFont()->setBold(true);
-            $hoja1->setAutoFilter('A5:O5');
+            $hoja1->getStyle('A5:S5')->getFont()->setBold(true);
+            $hoja1->setAutoFilter('A5:S5');
 
             $hoja1->mergeCells('A1:H1');
             $hoja1->mergeCells('A2:H2');
@@ -1291,7 +1291,7 @@ class reportesRetos extends Controller{
             $hoja1->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Código Ganador', 'Nombre Ganador', 'País', 'Rango', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'País Orden', '% actual', 'Bonificación', '% Nuevo', 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado', 'Total ganado nuevo', 'Tipo Bono'];
+            $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', 'Rango', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'País Orden', '% actual', 'Bonificación', '% Nuevo', 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado', 'Total ganado nuevo', 'Tipo Bono'];
             $d = $coreCms->getReportBody("EXEC VCplus.dbo.Comisiones_simulador_consulta $sap_code_user, $periodSelect, 'GP', $v", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A5', true);
         # hoja 1
@@ -1316,7 +1316,7 @@ class reportesRetos extends Controller{
             $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja2->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'País Orden', '% actual', 'Bonificación', '% Nuevo', 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado', 'Total ganado nuevo', 'Tipo Bono'];
+            $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'profundidad', 'País Orden', '% actual', 'Bonificación', '% Nuevo', 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado', 'Total ganado nuevo', 'Tipo Bono'];
             $d = $coreCms->getReportBody("EXEC VCplus.dbo.Comisiones_simulador_consulta $sap_code_user, $periodSelect, 'LD', $v", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A5', true);
         # hoja 2
