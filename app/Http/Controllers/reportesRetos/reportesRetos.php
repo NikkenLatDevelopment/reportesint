@@ -1182,7 +1182,7 @@ class reportesRetos extends Controller{
             $hoja2->getStyle('A5:AA5')->getFont()->setBold(true);
             $hoja2->setAutoFilter('A5:AA5');
 
-            $hoja1->freezePane('K5');
+            $hoja2->freezePane('K5');
 
             $hoja2->mergeCells('A1:H1');
             $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
@@ -1207,7 +1207,7 @@ class reportesRetos extends Controller{
             $hoja3->getStyle('A5:AA5')->getFont()->setBold(true);
             $hoja3->setAutoFilter('A5:AA5');
             
-            $hoja1->freezePane('K5');
+            $hoja3->freezePane('K5');
 
             $hoja3->mergeCells('A1:H1');
             $hoja3->setCellValue('A1', "NIKKEN Latinoamérica");
@@ -1226,12 +1226,14 @@ class reportesRetos extends Controller{
             $hoja4->setTitle("Facturación Colchones");
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
-                $hoja4->getColumnDimension($letter)->setAutoSize(true);
+                // $hoja4->getColumnDimension($letter)->setAutoSize(true);
             }
             $hoja4->getStyle('A5:I5')->getFont()->setBold(true);
             $hoja4->setAutoFilter('A5:I5');
 
-            $hoja4->mergeCells('A1:I1');
+            // $hoja4->mergeCells('A1:I1');
+            // $hoja4->mergeCells('A1:I1');
+            // $hoja4->mergeCells('A1:I1');
             $hoja4->setCellValue('A1', "NIKKEN Latinoamérica");
             $hoja4->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
             $hoja4->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
