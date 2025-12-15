@@ -1287,7 +1287,7 @@ class reportesRetos extends Controller{
             $hoja1->mergeCells('A2:H2');
             $hoja1->mergeCells('A3:H3');
             $hoja1->setCellValue('A1', "NIKKEN Latinoamérica");
-            $hoja1->setCellValue('A2', "Simulador plan de compensación");
+            $hoja1->setCellValue('A2', "Simulador plan de compensación | Plan actual vs Simulación $v");
             $hoja1->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1:A3')->getFont()->setBold(true);
             
@@ -1312,7 +1312,7 @@ class reportesRetos extends Controller{
             $hoja2->mergeCells('A2:H2');
             $hoja2->mergeCells('A3:H3');
             $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
-            $hoja2->setCellValue('A2', "Simulador plan de compensación");
+            $hoja2->setCellValue('A2', "Simulador plan de compensación | Plan actual vs Simulación $v");
             $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja2->getStyle('A1:A3')->getFont()->setBold(true);
             
