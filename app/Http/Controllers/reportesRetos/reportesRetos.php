@@ -1303,10 +1303,10 @@ class reportesRetos extends Controller{
             for($i=65; $i<=90; $i++) {
                 $letter = chr($i);
                 $hoja2->getColumnDimension($letter)->setAutoSize(true);
-                $hoja2->getColumnDimension("A$letter")->setAutoSize(true);
+                // $hoja2->getColumnDimension("A$letter")->setAutoSize(true);
             }
-            $hoja2->getStyle('A5:L5')->getFont()->setBold(true);
-            $hoja2->setAutoFilter('A5:L5');
+            $hoja2->getStyle('A5:S5')->getFont()->setBold(true);
+            $hoja2->setAutoFilter('A5:S5');
 
             $hoja2->mergeCells('A1:H1');
             $hoja2->mergeCells('A2:H2');
