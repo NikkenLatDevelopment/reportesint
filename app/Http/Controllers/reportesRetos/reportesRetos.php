@@ -1155,6 +1155,8 @@ class reportesRetos extends Controller{
             $hoja1->getStyle('A5:AA5')->getFont()->setBold(true);
             $hoja1->setAutoFilter('A5:AA5');
 
+            $hoja1->freezePane('K5');
+
             $hoja1->mergeCells('A1:H1');
             $hoja1->mergeCells('A2:H2');
             $hoja1->mergeCells('A3:H3');
@@ -1180,6 +1182,8 @@ class reportesRetos extends Controller{
             $hoja2->getStyle('A5:AA5')->getFont()->setBold(true);
             $hoja2->setAutoFilter('A5:AA5');
 
+            $hoja1->freezePane('K5');
+
             $hoja2->mergeCells('A1:H1');
             $hoja2->setCellValue('A1', "NIKKEN Latinoamérica");
             $hoja2->setCellValue('A2', "Socios posibles a depurar - Proceso Depuración 2025");
@@ -1202,6 +1206,8 @@ class reportesRetos extends Controller{
             }
             $hoja3->getStyle('A5:AA5')->getFont()->setBold(true);
             $hoja3->setAutoFilter('A5:AA5');
+            
+            $hoja1->freezePane('K5');
 
             $hoja3->mergeCells('A1:H1');
             $hoja3->setCellValue('A1', "NIKKEN Latinoamérica");
