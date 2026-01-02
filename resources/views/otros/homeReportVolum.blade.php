@@ -58,7 +58,7 @@
             <div class="col-md-3 mb-4">
                 <div class="card">
                     <div class="card-header text-center pt-4 pb-3">
-                        <span class="badge rounded-pill bg-light text-dark">Reporte de Volumen Exigo</span>
+                        <span class="badge rounded-pill bg-light text-dark">Reporte de Volumen Exigo**</span>
                     </div>
                     <div class="card-body text-lg-left text-center pt-0">
                         {{-- <div class="form-group text-lg-left justify-content-lg-start justify-content-center">
