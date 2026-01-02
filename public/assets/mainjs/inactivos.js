@@ -106,36 +106,50 @@ function getMplinksData() {
     }
 }
 
+function setMonthsSlct(slct) {
+    var monthNames = [
+        "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+        "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+    ];
 
-function setMonthsSlct(slct, anios) {
-  var monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    var today = new Date();
+    var currentYear = today.getFullYear();
+    var currentMonth = today.getMonth() + 1;
 
-  var today = new Date();
-  var currentYear = today.getFullYear();
-  var currentMonth = today.getMonth() + 1;
+    var currentValue =
+        currentYear.toString() +
+        (currentMonth < 10 ? '0' : '') +
+        currentMonth.toString();
 
-  var startYear = currentYear - parseInt(anios, 10);
-  var currentValue = currentYear.toString() + (currentMonth < 10 ? '0' : '') + currentMonth.toString();
+    $('#' + slct).empty();
 
-  // Limpia siempre (si quieres mantener manual, dime y lo ajusto)
-  $('#' + slct).empty();
+    // 🔁 Año actual y año anterior
+    for (var year = currentYear; year >= currentYear - 1; year--) {
 
-  for (var year = currentYear; year >= startYear; year--) {
-    var startMonth = (year === currentYear) ? currentMonth : 12;
+        var startMonth = (year === currentYear) ? currentMonth : 12;
 
-    // ✅ incluye Enero
-    for (var month = startMonth; month >= 1; month--) {
-      var formattedMonth = month < 10 ? '0' + month : month.toString();
-      var value = year.toString() + formattedMonth;
-      var text = monthNames[month - 1] + ' ' + year;
+        for (var month = startMonth; month >= 1; month--) {
 
-      var option = $('<option>', { value: value, text: text });
-      $('#' + slct).prepend(option);
+            var formattedMonth = month < 10 ? '0' + month : month.toString();
+            var value = year.toString() + formattedMonth;
+            var text = monthNames[month - 1] + ' ' + year;
 
-      if (value === currentValue) option.prop('selected', true);
+            var option = $('<option>', {
+                value: value,
+                text: text
+            });
+
+            // prepend para orden descendente
+            $('#' + slct).prepend(option);
+
+            // Seleccionar mes actual
+            if (value === currentValue) {
+                option.prop('selected', true);
+            }
+        }
     }
-  }
 }
+
 
 
 function setMonthsSelect() {
