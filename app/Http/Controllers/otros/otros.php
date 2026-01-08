@@ -1998,7 +1998,7 @@ class otros extends Controller
         $hoja1->setCellValue('A2', "Fecha de descarga: " . Date('Y-m-d H:i:s'));
         $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
 
-        $h = ['CustomerID', 'NombreCompleto', 'MainCountry', 'Estado', 'Email', 'Telefono', 'RANGO_OCT', 'RANGO_META', 'PERIODO_INI', 'VP_OCT', 'CUMPLE_VP100OCT', 'VP_NOV', 'CUMPLE_VP100NOV', 'VP_DIC', 'CUMPLE_VP100DIC', 'VGP_OCT', 'VGP_NOV', 'VGP_DIC', 'VOLDP', 'VOLDPYS', 'MES_AVANCE', 'CUMPLIO_REQUISITO', 'TOTAL_VGP', 'periodo'];
+        $h = ['CustomerID', 'NombreCompleto', 'MainCountry', 'Estado', 'Email', 'Telefono', 'RANGO_OCT', 'RANGO_META', 'PERIODO_INI', 'VP_OCT', 'CUMPLE_VP100OCT', 'VP_NOV', 'CUMPLE_VP100NOV', 'VP_DIC', 'CUMPLE_VP100DIC', 'VGP_OCT', 'VGP_NOV', 'VGP_DIC', 'VOLDP', 'VOLDPYS', 'MES_AVANCE', 'CUMPLIO_REQUISITO', 'TOTAL_VGP', 'PERIODO', 'sponsorid','nombre_sponsorid','telefono_spondor','email_sponsor'];
         $d = $coreCms->getReportBody("EXEC EXIGO_PROD.dbo.Actualiza_RANGO_OCT_META $periodo;", "SQL173", $h);
         $hoja1->fromArray($d, null, 'A4', true);
         # hoja 1
