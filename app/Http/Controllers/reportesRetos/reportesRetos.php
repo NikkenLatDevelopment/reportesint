@@ -1291,9 +1291,25 @@ class reportesRetos extends Controller{
             $hoja1->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja1->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', 'Rango', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'País Orden', '% actual', 'Bonificación', '% Nuevo', 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado', 'Total ganado nuevo', 'Tipo Bono'];
+            $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', 'Rango', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'País Orden', '% Plan Actual', 'Bonificación', "% Sim. $v", 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado Plan Actual', "Total Ganado Sim. $v", 'Tipo Bono'];
             $d = $coreCms->getReportBody("EXEC VCplus.dbo.Comisiones_simulador_consulta $sap_code_user, $periodSelect, 'GP', $v", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A5', true);
+            $highestRow = $hoja1->getHighestRow();
+            $nextRow = $highestRow + 1;
+            $hoja1->setCellValue("F$nextRow", "=SUM(F6:F$highestRow)");
+            $hoja1->getStyle("F$nextRow")->getFont()->setBold(true);
+            $hoja1->setCellValue("G$nextRow", "=SUM(G6:G$highestRow)");
+            $hoja1->getStyle("G$nextRow")->getFont()->setBold(true);
+            $hoja1->setCellValue("L$nextRow", "=SUM(L6:L$highestRow)");
+            $hoja1->getStyle("L$nextRow")->getFont()->setBold(true);
+            $hoja1->setCellValue("N$nextRow", "=SUM(N6:N$highestRow)");
+            $hoja1->getStyle("N$nextRow")->getFont()->setBold(true);
+            $hoja1->setCellValue("O$nextRow", "=SUM(O6:O$highestRow)");
+            $hoja1->getStyle("O$nextRow")->getFont()->setBold(true);
+            $hoja1->setCellValue("Q$nextRow", "=SUM(Q6:Q$highestRow)");
+            $hoja1->getStyle("Q$nextRow")->getFont()->setBold(true);
+            $hoja1->setCellValue("R$nextRow", "=SUM(R6:R$highestRow)");
+            $hoja1->getStyle("R$nextRow")->getFont()->setBold(true);
         # hoja 1
 
         # hoja 2
@@ -1316,9 +1332,23 @@ class reportesRetos extends Controller{
             $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja2->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'profundidad', 'País Orden', '% actual', 'Bonificación', '% Nuevo', 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado', 'Total ganado nuevo', 'Tipo Bono'];
+            $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'profundidad', 'País Orden', '% Plan Actual', 'Bonificación', "% Sim. $v", 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado Plan Actual', "Total Ganado Sim. $v", 'Tipo Bono'];
             $d = $coreCms->getReportBody("EXEC VCplus.dbo.Comisiones_simulador_consulta $sap_code_user, $periodSelect, 'LD', $v", "SQL173", $h);
+            $highestRow = $hoja2->getHighestRow();
+            $nextRow = $highestRow + 1;
             $hoja2->fromArray($d, null, 'A5', true);
+            $hoja2->setCellValue("E$nextRow", "=SUM(E6:E$highestRow)");
+            $hoja2->getStyle("E$nextRow")->getFont()->setBold(true);
+            $hoja2->setCellValue("F$nextRow", "=SUM(F6:F$highestRow)");
+            $hoja2->getStyle("F$nextRow")->getFont()->setBold(true);
+            $hoja2->setCellValue("L$nextRow", "=SUM(L6:L$highestRow)");
+            $hoja2->getStyle("L$nextRow")->getFont()->setBold(true);
+            $hoja2->setCellValue("N$nextRow", "=SUM(N6:N$highestRow)");
+            $hoja2->getStyle("N$nextRow")->getFont()->setBold(true);
+            $hoja2->setCellValue("Q$nextRow", "=SUM(Q6:Q$highestRow)");
+            $hoja2->getStyle("Q$nextRow")->getFont()->setBold(true);
+            $hoja2->setCellValue("R$nextRow", "=SUM(R6:R$highestRow)");
+            $hoja2->getStyle("R$nextRow")->getFont()->setBold(true);
         # hoja 2
 
         $fileName = "Simulador plan de compensación - v" . Date('i_s') . '.xlsx';
