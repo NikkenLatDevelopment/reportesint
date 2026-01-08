@@ -1312,13 +1312,13 @@ class reportesRetos extends Controller{
             $hoja1->setCellValue("R$nextRow", "=SUM(R6:R$highestRow)");
             $hoja1->getStyle("R$nextRow")->getFont()->setBold(true);
             
-            $hoja1->getStyle("F$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja1->getStyle("G$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja1->getStyle("L$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja1->getStyle("N$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja1->getStyle("O$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja1->getStyle("Q$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja1->getStyle("R$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja1->getStyle("F4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja1->getStyle("G4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja1->getStyle("L4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja1->getStyle("N4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja1->getStyle("O4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja1->getStyle("Q4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja1->getStyle("R4")->getNumberFormat()->setFormatCode('#,##0.00');
         # hoja 1
 
         # hoja 2
@@ -1360,12 +1360,12 @@ class reportesRetos extends Controller{
             $hoja2->setCellValue("R$nextRow2", "=SUM(R6:R$highestRow2)");
             $hoja2->getStyle("R$nextRow2")->getFont()->setBold(true);
             
-            $hoja2->getStyle("E$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja2->getStyle("F$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja2->getStyle("L$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja2->getStyle("N$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja2->getStyle("Q$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
-            $hoja2->getStyle("R$nextRow")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja2->getStyle("E4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja2->getStyle("F4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja2->getStyle("L4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja2->getStyle("N4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja2->getStyle("Q4")->getNumberFormat()->setFormatCode('#,##0.00');
+            $hoja2->getStyle("R4")->getNumberFormat()->setFormatCode('#,##0.00');
         # hoja 2
 
         $fileName = "Simulador plan de compensación - v" . Date('i_s') . '.xlsx';
