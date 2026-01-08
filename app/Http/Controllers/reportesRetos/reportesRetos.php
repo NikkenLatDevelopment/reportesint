@@ -1294,6 +1294,7 @@ class reportesRetos extends Controller{
             $h = ['Código Ganador', 'Nombre Ganador', 'País ganancia', 'Rango', '# Orden', 'Puntos', 'VC', 'Código Socio de Orden', 'Nombre Socio de Orden', 'País Orden', '% Plan Actual', 'Bonificación', "% Sim. $v", 'Subtotal Orden', 'Bonificación Nueva', 'Tipo Cambio', 'Total Ganado Plan Actual', "Total Ganado Sim. $v", 'Tipo Bono'];
             $d = $coreCms->getReportBody("EXEC VCplus.dbo.Comisiones_simulador_consulta $sap_code_user, $periodSelect, 'GP', $v", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A5', true);
+            $highestRow = $hoja1->getHighestRow();
             $nextRow = 4;
             $hoja1->setCellValue("E$nextRow", "Totales");
             $hoja1->setCellValue("F$nextRow", "=SUM(F6:F$highestRow)");
