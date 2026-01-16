@@ -1190,7 +1190,7 @@ class reportesRetos extends Controller{
             $hoja2->setCellValue('A3', "Fecha de consulta: " . Date('Y-m-d H:i:s'));
             $hoja2->getStyle('A1:A3')->getFont()->setBold(true);
             
-            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_2025', 'vp_feb_2025', 'vp_mar_2025', 'vp_abr_2025', 'vp_may_2025', 'vp_jun_2025', 'vp_jul_2025', 'vp_ago_2025', 'vp_sep_2025', 'vp_oct_2025', 'vp_nov_2025', 'vp_dic_2025', 'VP_ene_2026', 'VP_ene_25_USA', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
+            $h = ['Codigo de Socio', 'Tipo Distribuidor', 'Nombre del Socio', 'Rango', 'Fecha Ingreso', 'Codigo del Patrocinador', 'Nombre del Patrocinador', 'Estado', 'Correo', 'Telefono', 'Pais', 'vp_ene_2025', 'vp_feb_2025', 'vp_mar_2025', 'vp_abr_2025', 'vp_may_2025', 'vp_jun_2025', 'vp_jul_2025', 'vp_ago_2025', 'vp_sep_2025', 'vp_oct_2025', 'vp_nov_2025', 'vp_dic_2025', 'VP_ene_2026', 'Requisito Faltante', 'Estatus SAP', 'Salvado'];
             $d = $coreCms->getReportBody("EXEC EXIGO_prod.dbo.depuracionLatam_interno_depurarEnero", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A5', true);
         # hoja 2
