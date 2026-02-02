@@ -255,6 +255,26 @@ class otros extends Controller
         $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202501,202512) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
         $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
+        
+        # hoja 3
+        $hoja3 = $spreadsheet->createSheet();
+        $hoja3->setTitle("2026");
+
+        for ($i = 65; $i <= 90; $i++) {
+            $letter = chr($i);
+            $hoja3->getColumnDimension($letter)->setAutoSize(true);
+        }
+        $hoja3->getStyle('A3:N3')->getFont()->setBold(true);
+
+        $hoja3->mergeCells('A1:M1');
+        $hoja3->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
+        $hoja3->getStyle('A1')->getFont()->setBold(true);
+
+
+        $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
+        $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202601,202612) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
+        $hoja3->fromArray($d, null, 'A3', true);
+        # hoja 3
 
         // Guardar el archivo temporalmente
         $tempFilePath = tempnam(sys_get_temp_dir(), 'export_');
