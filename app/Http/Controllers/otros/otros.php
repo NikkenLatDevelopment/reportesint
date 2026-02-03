@@ -208,7 +208,7 @@ class otros extends Controller
 
 
             $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE(202501,202512) ORDER BY periodo ASC;", "SQL173", $h);
+            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_EXE(202601,202612) ORDER BY periodo ASC;", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
 
