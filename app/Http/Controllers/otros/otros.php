@@ -2144,7 +2144,8 @@ class otros extends Controller
                                             u.client_type = 'CI' AND 
                                             u.country_id NOT IN (9) AND 
                                             u.password != '' AND 
-                                            u.secret_nikken != '' 
+                                            u.secret_nikken != '' AND 
+                                            u.created_at >= '2026-01-30 00:00:00'
                                         ", "TVMySQL");
         $datos = [];
         foreach ($d as $row) {
