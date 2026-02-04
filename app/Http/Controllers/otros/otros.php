@@ -2126,27 +2126,180 @@ class otros extends Controller
         $hoja1->getStyle('A1:A2')->getFont()->setBold(true);
 
         $h = ['sap_code', 'email', 'nombre', 'Pais', 'password'];
-        $d = $coreCms->execMySQLQuery("SELECT u.sap_code, u.email, CONCAT(u.name, ' ', u.last_name) as nombre, u.secret_nikken as password,
+        $d = $coreCms->execMySQLQuery("SELECT 
+                                        u.codigo,
+                                        u.correo,
+                                        u.nombre,
                                         CASE 
-                                            WHEN u.country_id = 1 THEN 'COL'
-                                            WHEN u.country_id = 2 THEN 'MEX'
-                                            WHEN u.country_id = 3 THEN 'PER'
-                                            WHEN u.country_id = 4 THEN 'ECU'
-                                            WHEN u.country_id = 5 THEN 'PAN'
-                                            WHEN u.country_id = 6 THEN 'GTM'
-                                            WHEN u.country_id = 7 THEN 'SLV'
-                                            WHEN u.country_id = 8 THEN 'CRI'
-                                            WHEN u.country_id = 10 THEN 'CHL'
-                                        END as Pais
-                                        FROM users u
-                                        WHERE 
-                                            u.status = 1 AND
-                                            u.client_type = 'CI' AND 
-                                            u.country_id NOT IN (9) AND 
-                                            u.password != '' AND 
-                                            u.secret_nikken != '' AND 
-                                            u.created_at >= '2026-01-30 00:00:00'
-                                        ", "TVMySQL");
+                                        WHEN u.pais = 1 THEN 'COL'
+                                        WHEN u.pais = 2 THEN 'MEX'
+                                        WHEN u.pais = 3 THEN 'PER'
+                                        WHEN u.pais = 4 THEN 'ECU'
+                                        WHEN u.pais = 5 THEN 'PAN'
+                                        WHEN u.pais = 6 THEN 'GTM'
+                                        WHEN u.pais = 7 THEN 'SLV'
+                                        WHEN u.pais = 8 THEN 'CRI'
+                                        WHEN u.pais = 10 THEN 'CHL'
+                                        END as Pais,
+                                        u.clave
+                                    FROM nikkenla_marketing.control_ci u
+                                    WHERE 
+                                    u.estatus = 1 AND
+                                    u.tipo = 'CI' AND 
+                                    u.pais NOT IN (9) AND 
+                                    /*u.clave = '' AND 
+                                    u.secret_nikken != '' AND*/ u.codigo IN (1018103,
+                                    10276603,
+                                    10701003,
+                                    11098903,
+                                    11111003,
+                                    11198503,
+                                    1131603,
+                                    11389203,
+                                    11528703,
+                                    11730103,
+                                    11748303,
+                                    11819303,
+                                    11873703,
+                                    11954303,
+                                    12215203,
+                                    12639703,
+                                    13431403,
+                                    13567003,
+                                    13668903,
+                                    1367203,
+                                    13843403,
+                                    13945703,
+                                    1398603,
+                                    14240203,
+                                    14581203,
+                                    14604703,
+                                    10195103,
+                                    15085703,
+                                    15737503,
+                                    16163303,
+                                    18026503,
+                                    18059003,
+                                    1899403,
+                                    19243303,
+                                    48303,
+                                    357903,
+                                    488803,
+                                    2134503,
+                                    2231703,
+                                    3454303,
+                                    3731903,
+                                    3770703,
+                                    4137103,
+                                    4255903,
+                                    4292703,
+                                    4330203,
+                                    4332703,
+                                    4599103,
+                                    4840603,
+                                    4886003,
+                                    19562503,
+                                    20112803,
+                                    20207603,
+                                    20234803,
+                                    20241403,
+                                    20293003,
+                                    21053303,
+                                    21149903,
+                                    21487903,
+                                    21661303,
+                                    21699703,
+                                    22288903,
+                                    22330903,
+                                    22542103,
+                                    22765703,
+                                    23292703,
+                                    23538903,
+                                    24014903,
+                                    24887103,
+                                    25912703,
+                                    27499703,
+                                    27689303,
+                                    28010503,
+                                    28320503,
+                                    28350703,
+                                    30065503,
+                                    31422103,
+                                    32473703,
+                                    32935103,
+                                    33644103,
+                                    35291403,
+                                    35465403,
+                                    35477603,
+                                    35524703,
+                                    37308303,
+                                    38526103,
+                                    39397403,
+                                    39608403,
+                                    40986203,
+                                    41611503,
+                                    42578103,
+                                    49122703,
+                                    50064303,
+                                    50440403,
+                                    50770103,
+                                    50777903,
+                                    51142003,
+                                    51406303,
+                                    51666303,
+                                    2053003,
+                                    5595903,
+                                    5600903,
+                                    6024203,
+                                    6034403,
+                                    6062503,
+                                    6125103,
+                                    6148403,
+                                    6156203,
+                                    6192203,
+                                    6372503,
+                                    6767203,
+                                    7251503,
+                                    7497303,
+                                    7536503,
+                                    7741903,
+                                    7856103,
+                                    7888103,
+                                    8012103,
+                                    8677803,
+                                    8755703,
+                                    8871703,
+                                    9110803,
+                                    9157803,
+                                    9510003,
+                                    9594803,
+                                    9637503,
+                                    9822003,
+                                    9911803,
+                                    52277103,
+                                    53038303,
+                                    54332103,
+                                    54591903,
+                                    55033503,
+                                    55170103,
+                                    55296503,
+                                    55330503,
+                                    56021703,
+                                    56600703,
+                                    57209903,
+                                    57529103,
+                                    57639903,
+                                    57729903,
+                                    58592103,
+                                    58595103,
+                                    58825303,
+                                    58950903,
+                                    58952503,
+                                    59090903,
+                                    59128503,
+                                    59162103,
+                                    59179903,
+                                    59204503)", "75MySQL");
         $datos = [];
         foreach ($d as $row) {
             $passDecripted = $row->password;
@@ -2160,6 +2313,7 @@ class otros extends Controller
                 $passDecripted
             ];
         }
+        return $datos;
         $hoja1->fromArray($h, null, 'A4', true);
         $hoja1->getStyle('A4:E4')->getFont()->setBold(true);
         $hoja1->setAutoFilter('A4:E4');
