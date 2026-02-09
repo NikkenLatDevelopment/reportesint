@@ -289,8 +289,9 @@ class otros extends Controller
             $hoja1->setCellValue('A1', "Estrategia CHL Rangos Ejecutivos | Fecha de actualización: " . Date("Y-m-d H:i:s"));
             $hoja1->getStyle('A1')->getFont()->setBold(true);
 
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202401,202412) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
+
+            $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Código Patrocinador', 'Nombre patrocinador'];
+            $d = $core->getReportBody("SELECT Associateid,AssociateName,Pais,Rango,Periodo,VP_latam,VGP_latam,Total_incorporaciones,Total_cumplen_estrategia,CumpleVP,CumpleVGP,Cumple_Incorporaciones,Sponsorid,SponsorName FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202401,202412) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
             $hoja1->fromArray($d, null, 'A3', true);
         # hoja 1
 
@@ -309,8 +310,8 @@ class otros extends Controller
             $hoja2->getStyle('A1')->getFont()->setBold(true);
 
 
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202501,202512) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
+            $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Código Patrocinador', 'Nombre patrocinador'];
+            $d = $core->getReportBody("SELECT Associateid,AssociateName,Pais,Rango,Periodo,VP_latam,VGP_latam,Total_incorporaciones,Total_cumplen_estrategia,CumpleVP,CumpleVGP,Cumple_Incorporaciones,Sponsorid,SponsorName FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202501,202512) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
             $hoja2->fromArray($d, null, 'A3', true);
         # hoja 2
         
@@ -329,8 +330,8 @@ class otros extends Controller
             $hoja3->getStyle('A1')->getFont()->setBold(true);
 
 
-            $h = ['Código de Socio', 'Código Patrocinador', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Nombre patrocinador'];
-            $d = $core->getReportBody("SELECT * FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202601,202612) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
+            $h = ['Código de Socio', 'Nombre', 'País', 'Rango', 'Periodo', 'VP Latam', 'VGP Latam', 'Incorporaciones totales', 'Total Cumplen Estrategia', 'Cumple VP', 'Cumple VGP', 'Cumple', 'Código Patrocinador', 'Nombre patrocinador'];
+            $d = $core->getReportBody("SELECT Associateid,AssociateName,Pais,Rango,Periodo,VP_latam,VGP_latam,Total_incorporaciones,Total_cumplen_estrategia,CumpleVP,CumpleVGP,Cumple_Incorporaciones,Sponsorid,SponsorName FROM RETOS_ESPECIALES.dbo.EstrategiaGTM_SLV_Lideres(202601,202612) ORDER BY periodo ASC,total_incorporaciones DESC;", "SQL173", $h);
             $hoja3->fromArray($d, null, 'A3', true);
         # hoja 3
 
