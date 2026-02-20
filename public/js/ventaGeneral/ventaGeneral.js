@@ -183,7 +183,8 @@ function verDetalleOrdenes(fecha, pais) {
                                 ${item.NumAtCard}
                             </td>
                             <td style="font-size: 0.8rem; color: #4a5568;">
-                                ${item.fecha_en_stgin.split('.')[0]} </td>
+                                ${item.fecha_en_stgin ? item.fecha_en_stgin.split('.')[0] : 'Sin fecha'}
+                                </td>
                             <td style="text-align: center;">
                                 <span class="badge bg-light text-dark border" style="font-size: 0.7rem;">${item.CardCountry}</span>
                             </td>
