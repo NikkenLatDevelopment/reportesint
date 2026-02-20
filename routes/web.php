@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\reportes\ventaGeneralController;
 
 Route::get('/', "reportes\home@index");
 Route::get('getDataInactivosTable', "reportes\home@getDataInactivosTable");
@@ -21,15 +22,15 @@ Route::get('reportVolGlobal', 'reportesRetos\reportesRetos@reportVolGlobal');
 Route::get('posibleAvance', 'reportesRetos\reportesRetos@posibleAvanceData');
 Route::get('kinyaHistoric', 'reportesRetos\reportesRetos@kinyaHistoricData');
 
-Route::get('vReporteVEmprendedores','reportesRetos\reportesRetos@vReporteVEmprendedores');
-Route::get('reportCVEmprendedor','reportesRetos\reportesRetos@reportCVEmprendedor');
+Route::get('vReporteVEmprendedores', 'reportesRetos\reportesRetos@vReporteVEmprendedores');
+Route::get('reportCVEmprendedor', 'reportesRetos\reportesRetos@reportCVEmprendedor');
 
-Route::get('depuracion_lat_2025','reportesRetos\reportesRetos@depuracion_lat_2025');
-Route::get('reportSimuladorV5','reportesRetos\reportesRetos@reportSimuladorV5');
+Route::get('depuracion_lat_2025', 'reportesRetos\reportesRetos@depuracion_lat_2025');
+Route::get('reportSimuladorV5', 'reportesRetos\reportesRetos@reportSimuladorV5');
 
-Route::get('reporteEmprendedor25','reportesRetos\retos2025@reporteEmprendedor25');
-Route::get('reporteViajero25','reportesRetos\retos2025@reporteViajero25');
-Route::get('reporteVip25','reportesRetos\retos2025@reporteVip25');
+Route::get('reporteEmprendedor25', 'reportesRetos\retos2025@reporteEmprendedor25');
+Route::get('reporteViajero25', 'reportesRetos\retos2025@reporteViajero25');
+Route::get('reporteVip25', 'reportesRetos\retos2025@reporteVip25');
 
 Route::get('estCHLexefixeed', 'otros\otros@estCHLexe');
 Route::get('estVHLideresfixeed', 'otros\otros@estVHLideres');
@@ -38,7 +39,7 @@ Route::get('estGTMSLVexe', 'otros\otros@estGTMSLVexe');
 Route::get('estGTMSLVLideres', 'otros\otros@estGTMSLVLideres');
 
 Route::get('homeCheckBonos', 'otros\otros@homeCheckBonos');
-Route::get('GetMonths','otros\otros@GetMonths');
+Route::get('GetMonths', 'otros\otros@GetMonths');
 Route::get('reportCheckBonos', 'otros\otros@reportCheckBonos');
 Route::get('homeCheckBonos_vcplus', 'otros\otros@homeCheckBonos_vcplus');
 Route::get('reportCheckBonos_vcplus', 'otros\otros@reportCheckBonos_vcplus');
@@ -61,3 +62,14 @@ Route::get('/finAnioPlata', 'otros\otros@finAnioPlata');
 Route::get('/getFinAnioPlata', 'otros\otros@getFinAnioPlata');
 Route::get('/cumplimiento', 'reportes\home@cumplimiento');
 Route::get('/getReportCheckBonos', 'reportes\home@getReportCheckBonos');
+
+
+Route::get('ventaGeneral', [ventaGeneralController::class, 'index']);
+Route::get('ventaGeneralData', [ventaGeneralController::class, 'getData']);
+Route::get('/clear-cache', function () {
+
+    echo Artisan::call('config:clear');
+    echo Artisan::call('cache:clear');
+    echo Artisan::call('route:clear');
+    echo Artisan::call('view:clear');
+});
