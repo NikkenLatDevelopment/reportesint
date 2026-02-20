@@ -389,6 +389,7 @@ class otros extends Controller
         $h = [
             'associateid',
             'associateNAME',
+            'Tipo',
             'NumFactura',
             'vp_Orden',
             'rango_Socio',
